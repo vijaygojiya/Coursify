@@ -1,6 +1,6 @@
 import {View} from 'react-native';
 import React from 'react';
-import AppNavigator from './src/router/AppNavigator';
+import AppNavigator from '@/router/AppNavigator';
 
 const s = {flex: 1};
 
