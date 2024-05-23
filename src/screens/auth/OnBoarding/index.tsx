@@ -2,12 +2,17 @@ import React from 'react';
 import {AppStackScreensProps} from '@/types/navigation';
 import {ScreenContainer} from '@/components';
 import Animated, {
+  Extrapolation,
+  interpolate,
   useAnimatedScrollHandler,
+  useAnimatedStyle,
   useSharedValue,
 } from 'react-native-reanimated';
 import CarouselItem from './CarouselItem';
 import type {SVGsNames} from '@/types/common';
-import {useWindowDimensions} from 'react-native';
+import {View, useWindowDimensions} from 'react-native';
+import styles from './styles';
+import DotIndicator from './DotIndicator';
 
 const DATA_CONFIG: {
   title: string;
@@ -46,6 +51,10 @@ const DATA_CONFIG: {
   },
 ];
 
+export const DOT_SIZE = 8;
+export const DOT_SPACING = 8;
+export const DOT_INDICATOR_SIZE = DOT_SIZE + DOT_SPACING;
+
 const OnBoarding = ({}: AppStackScreensProps<'OnBoarding'>) => {
   const translateX = useSharedValue(0);
   const {width} = useWindowDimensions();
@@ -53,11 +62,42 @@ const OnBoarding = ({}: AppStackScreensProps<'OnBoarding'>) => {
     onScroll: event => {
       const dividedValue = event.contentOffset.x / width;
       translateX.value = dividedValue;
-      // runOnJS(setLastSlide)(dividedValue > 2.5);
     },
   });
+
+  const translateStyle = useAnimatedStyle(() => {
+    return {
+      transform: [
+        {
+          translateX: interpolate(
+            translateX.value,
+            [0, 4],
+            [0, DOT_INDICATOR_SIZE * 4],
+            Extrapolation.CLAMP,
+          ),
+        },
+      ],
+    };
+  });
+  const indicatorContainer = useAnimatedStyle(() => {
+    return {
+      opacity: interpolate(translateX.value, [2.5, 4], [1, 0]),
+    };
+  });
+
   return (
     <ScreenContainer>
+      <View style={styles.overlayContainer}>
+        <View style={styles.spacer} pointerEvents="box-none" />
+        <Animated.View style={[styles.indicatorContainer, indicatorContainer]}>
+          <Animated.View style={[styles.ringCircle, translateStyle]} />
+          {DATA_CONFIG.map((_, index) => {
+            return (
+              <DotIndicator key={index} animatedX={translateX} index={index} />
+            );
+          })}
+        </Animated.View>
+      </View>
       <Animated.ScrollView
         bounces={false}
         // ref={scrollRef}

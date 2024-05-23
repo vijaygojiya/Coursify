@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, useWindowDimensions} from 'react-native';
+import {Text, View, useWindowDimensions} from 'react-native';
 import React from 'react';
 import * as SVGs from '@/assets';
 import type {SVGsNames} from '@/types/common';
@@ -10,6 +10,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import {textVariants} from '@/styles';
 import {useTheme} from '@react-navigation/native';
+import styles from './styles';
 interface CarouselItemProps {
   vector: SVGsNames;
   animatedX: SharedValue<number>;
@@ -65,16 +66,3 @@ const CarouselItem = ({
 };
 
 export default CarouselItem;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 18,
-  },
-  title: {
-    marginTop: 55,
-    marginBottom: 12,
-  },
-});
