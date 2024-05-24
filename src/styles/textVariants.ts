@@ -10,7 +10,7 @@ const textVariants = StyleSheet.create({
   },
   h2: {
     fontFamily: fonts.semiBold,
-    fontSize: 30,
+    fontSize: 32,
     lineHeight: 42,
     // letterSpacing: -0.021 * 30, // -2.1% of the font size
   },

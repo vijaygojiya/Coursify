@@ -49,10 +49,10 @@ const colors = {
   infoSurface: '#D9DADC',
 
   // Gradient
-  gradientYellow: ['#1D501D', '#88DC88'],
+  gradientYellow: ['#0CA190', '#BDE0D8'],
   gradientBlack: ['#ffffff', '#121212'],
 
-  gradientPrimary: ['#308630', 'transparent'],
+  gradientPrimary: ['#0CA190', 'transparent'],
 
   // Transparent
   transparent70: 'rgba(34, 34, 34, 0.7)',
