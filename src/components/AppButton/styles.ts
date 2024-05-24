@@ -3,7 +3,6 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
-    borderRadius: 10,
     marginVertical: 12,
   },
   title: {

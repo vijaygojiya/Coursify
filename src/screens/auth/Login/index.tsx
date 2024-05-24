@@ -45,7 +45,7 @@ const Login = ({navigation}: AppStackScreensProps<'Login'>) => {
   };
 
   const handleForgotPassword = () => {
-    //TO:DO navigate to forgot password screen
+    navigation.navigate(Routes.ForgotPassword);
   };
 
   const handleOnSubmit = async () => {
@@ -145,7 +145,7 @@ const Login = ({navigation}: AppStackScreensProps<'Login'>) => {
         <AppButton
           isLoading={isLoading}
           onPress={handleOnSubmit}
-          title={t('common:login')}
+          title={t('login')}
         />
         <View style={styles.spacer} />
         <Text style={[textVariants.body, styles.footerText]}>

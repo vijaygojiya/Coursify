@@ -3,7 +3,12 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer, Theme} from '@react-navigation/native';
 import {AppStackParamsList} from '@/types/navigation';
 import Routes from './routes';
-import {LoginScreen, OnBoardingScreen, SignUpScreen} from '@/screens';
+import {
+  ForgotPasswordScreen,
+  LoginScreen,
+  OnBoardingScreen,
+  SignUpScreen,
+} from '@/screens';
 import colors from '@/styles/colors';
 import {StatusBar} from 'react-native';
 
@@ -32,6 +37,10 @@ const AppNavigator = () => {
         />
         <AppStack.Screen name={Routes.Login} component={LoginScreen} />
         <AppStack.Screen name={Routes.SignUp} component={SignUpScreen} />
+        <AppStack.Screen
+          name={Routes.ForgotPassword}
+          component={ForgotPasswordScreen}
+        />
       </AppStack.Navigator>
     </NavigationContainer>
   );

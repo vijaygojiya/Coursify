@@ -5,6 +5,7 @@ export type AppStackParamsList = {
   [Routes.Login]: undefined;
   [Routes.SignUp]: undefined;
   [Routes.OnBoarding]: undefined;
+  [Routes.ForgotPassword]: undefined;
 };
 
 export type AppStackScreensProps<T extends keyof AppStackParamsList> =
