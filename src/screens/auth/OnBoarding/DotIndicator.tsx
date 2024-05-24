@@ -25,7 +25,7 @@ const DotIndicator = ({index, animatedX}: DotIndicatorProps) => {
     const color = interpolateColor(
       animatedX.value,
       [index - 1, index, index + 1],
-      [colors.neutral80, colors.primaryFocus, colors.neutral80],
+      [colors.primaryPressed, colors.primaryMain, colors.primaryPressed],
     );
     return {
       transform: [{scale}],

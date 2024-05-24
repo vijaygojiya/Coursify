@@ -38,12 +38,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
     paddingHorizontal: 18,
   },
   title: {
     marginTop: 55,
+    alignSelf: 'center',
     marginBottom: 12,
+    textAlign: 'center',
   },
+  subTitle: {
+    alignSelf: 'center',
+    textAlign: 'center',
+  },
+  btnContainer: {marginTop: 56},
 });
 export default styles;

@@ -9,8 +9,11 @@ import Animated, {
   useAnimatedStyle,
 } from 'react-native-reanimated';
 import {textVariants} from '@/styles';
-import {useTheme} from '@react-navigation/native';
+import {useNavigation, useTheme} from '@react-navigation/native';
 import styles from './styles';
+import {AppButton} from '@/components';
+import {AppStackScreensProps} from '@/types/navigation';
+import Routes from '@/router/routes';
 interface CarouselItemProps {
   vector: SVGsNames;
   animatedX: SharedValue<number>;
@@ -26,6 +29,8 @@ const CarouselItem = ({
   subTitle,
   title,
 }: CarouselItemProps) => {
+  const navigation =
+    useNavigation<AppStackScreensProps<'Login'>['navigation']>();
   const VectorImage = SVGs[vector];
   const {width} = useWindowDimensions();
   const {colors} = useTheme();
@@ -47,6 +52,13 @@ const CarouselItem = ({
 
     return {
       transform: [{scale}, {translateY}],
+      alignSelf: 'center',
+    };
+  });
+
+  const opacityStyle = useAnimatedStyle(() => {
+    return {
+      opacity: interpolate(animatedX.value, [3, 4], [0, 1]),
     };
   });
 
@@ -58,9 +70,26 @@ const CarouselItem = ({
       <Text style={[textVariants.h3, {color: colors.neutral100}, styles.title]}>
         {title}
       </Text>
-      <Text style={[textVariants.caption, {color: colors.neutral70}]}>
+      <Text
+        numberOfLines={3}
+        style={[
+          textVariants.caption,
+          {color: colors.neutral70},
+          styles.subTitle,
+        ]}>
         {subTitle}
       </Text>
+      {index === 4 ? (
+        <Animated.View style={opacityStyle}>
+          <AppButton
+            onPress={() => {
+              navigation.replace(Routes.Login);
+            }}
+            title={'Get Started'}
+            containerStyle={styles.btnContainer}
+          />
+        </Animated.View>
+      ) : null}
     </View>
   );
 };

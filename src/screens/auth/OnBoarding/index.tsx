@@ -13,7 +13,7 @@ import type {SVGsNames} from '@/types/common';
 import {View, useWindowDimensions} from 'react-native';
 import styles from './styles';
 import DotIndicator from './DotIndicator';
-
+import {useTheme} from '@react-navigation/native';
 const DATA_CONFIG: {
   title: string;
   subTitle: string;
@@ -56,6 +56,9 @@ export const DOT_SPACING = 8;
 export const DOT_INDICATOR_SIZE = DOT_SIZE + DOT_SPACING;
 
 const OnBoarding = ({}: AppStackScreensProps<'OnBoarding'>) => {
+  //
+
+  const {colors} = useTheme();
   const translateX = useSharedValue(0);
   const {width} = useWindowDimensions();
   const scrollHandler = useAnimatedScrollHandler({
@@ -81,7 +84,7 @@ const OnBoarding = ({}: AppStackScreensProps<'OnBoarding'>) => {
   });
   const indicatorContainer = useAnimatedStyle(() => {
     return {
-      opacity: interpolate(translateX.value, [2.5, 4], [1, 0]),
+      opacity: interpolate(translateX.value, [3, 4], [1, 0]),
     };
   });
 
@@ -90,7 +93,13 @@ const OnBoarding = ({}: AppStackScreensProps<'OnBoarding'>) => {
       <View style={styles.overlayContainer}>
         <View style={styles.spacer} pointerEvents="box-none" />
         <Animated.View style={[styles.indicatorContainer, indicatorContainer]}>
-          <Animated.View style={[styles.ringCircle, translateStyle]} />
+          <Animated.View
+            style={[
+              styles.ringCircle,
+              {borderColor: colors.primaryBorder},
+              translateStyle,
+            ]}
+          />
           {DATA_CONFIG.map((_, index) => {
             return (
               <DotIndicator key={index} animatedX={translateX} index={index} />
@@ -99,7 +108,6 @@ const OnBoarding = ({}: AppStackScreensProps<'OnBoarding'>) => {
         </Animated.View>
       </View>
       <Animated.ScrollView
-        // ref={scrollRef}
         onScroll={scrollHandler}
         horizontal={true}
         showsHorizontalScrollIndicator={false}

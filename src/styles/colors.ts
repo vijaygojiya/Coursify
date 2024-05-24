@@ -13,12 +13,12 @@ const colors = {
   neutral100: '#212221',
 
   // Primary
-  primaryMain: '#3AA13A',
-  primaryPressed: '#1D501D',
-  primaryHover: '#308630',
-  primaryFocus: '#3AA13A',
-  primaryBorder: '#BDE0BD',
-  primarySurface: '#E9FFE9',
+  primaryMain: '#0CA190',
+  primaryPressed: '#1D4D50',
+  primaryHover: '#308681',
+  primaryFocus: '#D8ECEB',
+  primaryBorder: '#BDE0D8',
+  primarySurface: '#E9FFFB',
 
   // Semantic - Success
   successMain: '#3CA6B9',
