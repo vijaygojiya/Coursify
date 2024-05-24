@@ -1,0 +1,29 @@
+import {BookOpenFill} from '@/assets';
+import React from 'react';
+import Animated, {
+  useAnimatedStyle,
+  useDerivedValue,
+  withSpring,
+} from 'react-native-reanimated';
+
+interface Props {
+  focused: boolean;
+  color?: string;
+}
+
+function BookIcon({color = '#001A72', focused, ...rest}: Props) {
+  const sv = useDerivedValue(() => {
+    return focused ? withSpring(360, {damping: 190}) : 0;
+  });
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [{rotateY: `${sv.value}deg`}],
+  }));
+
+  return (
+    <Animated.View style={animatedStyle} {...rest}>
+      <BookOpenFill fill={color} />
+    </Animated.View>
+  );
+}
+export default BookIcon;

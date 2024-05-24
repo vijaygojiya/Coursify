@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@os-team/i18next-react-native-language-detector": "^1.0.33",
+    "@react-navigation/bottom-tabs": "^6.5.20",
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/native-stack": "^6.9.26",
     "i18next": "^23.11.5",

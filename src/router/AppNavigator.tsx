@@ -1,6 +1,10 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {NavigationContainer, Theme} from '@react-navigation/native';
+import {
+  DefaultTheme,
+  NavigationContainer,
+  Theme,
+} from '@react-navigation/native';
 import {AppStackParamsList} from '@/types/navigation';
 import Routes from './routes';
 import {
@@ -11,6 +15,7 @@ import {
 } from '@/screens';
 import colors from '@/styles/colors';
 import {StatusBar} from 'react-native';
+import TabNavigator from './TabNavigator';
 
 const AppStack = createNativeStackNavigator<AppStackParamsList>();
 
@@ -18,9 +23,12 @@ const AppStack = createNativeStackNavigator<AppStackParamsList>();
 //TO:DO resolve type error on navigation version 7
 //solution:https://github.com/react-navigation/react-navigation/issues/9161#issuecomment-2014957063
 
-const appTheme = {colors: colors, dark: false} as Theme;
+const appTheme = {
+  colors: {...DefaultTheme.colors, ...colors},
+  dark: false,
+} as Theme;
 const AppNavigator = () => {
-  const isLoggedIn = false;
+  const isLoggedIn = true;
   return (
     <NavigationContainer theme={appTheme}>
       <StatusBar
@@ -31,16 +39,25 @@ const AppNavigator = () => {
       <AppStack.Navigator
         screenOptions={{headerShown: false}}
         initialRouteName={isLoggedIn ? Routes.Login : Routes.OnBoarding}>
-        <AppStack.Screen
-          name={Routes.OnBoarding}
-          component={OnBoardingScreen}
-        />
-        <AppStack.Screen name={Routes.Login} component={LoginScreen} />
-        <AppStack.Screen name={Routes.SignUp} component={SignUpScreen} />
-        <AppStack.Screen
-          name={Routes.ForgotPassword}
-          component={ForgotPasswordScreen}
-        />
+        {isLoggedIn ? (
+          <AppStack.Screen
+            name={Routes.TabNavigator}
+            component={TabNavigator}
+          />
+        ) : (
+          <>
+            <AppStack.Screen
+              name={Routes.OnBoarding}
+              component={OnBoardingScreen}
+            />
+            <AppStack.Screen name={Routes.Login} component={LoginScreen} />
+            <AppStack.Screen name={Routes.SignUp} component={SignUpScreen} />
+            <AppStack.Screen
+              name={Routes.ForgotPassword}
+              component={ForgotPasswordScreen}
+            />
+          </>
+        )}
       </AppStack.Navigator>
     </NavigationContainer>
   );
