@@ -99,7 +99,6 @@ const OnBoarding = ({}: AppStackScreensProps<'OnBoarding'>) => {
         </Animated.View>
       </View>
       <Animated.ScrollView
-        bounces={false}
         // ref={scrollRef}
         onScroll={scrollHandler}
         horizontal={true}
