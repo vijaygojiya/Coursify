@@ -14,12 +14,11 @@ interface Props {
 
 const SearchIcon = ({color = '#001A72', focused}: Props) => {
   const sv = useDerivedValue(() => {
-    return focused ? withSpring(0, {duration: 6e4}) : 360;
+    return focused ? withSpring(360) : 0;
   }, [focused]);
-  //{rotateZ: `${sv.value}deg`},
+
   const animatedStyle = useAnimatedStyle(() => ({
-    transform: [{rotateY: `${sv.value}deg`}, {rotate: '-45deg'}],
-    transformOrigin: ['100%', '30%', 0],
+    transform: [{rotate: '-45deg'}, {rotateY: `${sv.value}deg`}],
   }));
 
   return (
