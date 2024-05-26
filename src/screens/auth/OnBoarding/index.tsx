@@ -4,9 +4,10 @@ import {ScreenContainer} from '@/components';
 import Animated, {
   Extrapolation,
   interpolate,
-  useAnimatedScrollHandler,
+  useAnimatedRef,
   useAnimatedStyle,
-  useSharedValue,
+  useDerivedValue,
+  useScrollViewOffset,
 } from 'react-native-reanimated';
 import CarouselItem from './CarouselItem';
 import type {SVGsNames} from '@/types/common';
@@ -59,13 +60,13 @@ const OnBoarding = ({}: AppStackScreensProps<'OnBoarding'>) => {
   //
 
   const {colors} = useTheme();
-  const translateX = useSharedValue(0);
+
   const {width} = useWindowDimensions();
-  const scrollHandler = useAnimatedScrollHandler({
-    onScroll: event => {
-      const dividedValue = event.contentOffset.x / width;
-      translateX.value = dividedValue;
-    },
+
+  const animatedRef = useAnimatedRef<Animated.ScrollView>();
+  const scrollOffset = useScrollViewOffset(animatedRef);
+  const translateX = useDerivedValue(() => {
+    return scrollOffset.value / width;
   });
 
   const translateStyle = useAnimatedStyle(() => {
@@ -108,7 +109,7 @@ const OnBoarding = ({}: AppStackScreensProps<'OnBoarding'>) => {
         </Animated.View>
       </View>
       <Animated.ScrollView
-        onScroll={scrollHandler}
+        ref={animatedRef}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         decelerationRate="normal"

@@ -17,6 +17,7 @@ const defaultValue = {
   email: '',
   password: '',
 };
+
 type inputKeys = keyof typeof defaultValue;
 
 const inputConfigs: inputKeys[] = Object.keys(defaultValue) as inputKeys[];
@@ -153,11 +154,15 @@ const SignUp = ({navigation}: AppStackScreensProps<'SignUp'>) => {
         overScrollMode="never"
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}>
-        <Text style={styles.title}>
+        <Text style={[styles.title, {color: colors.neutral100}]}>
           {t('signUpScreen.subTitle')}{' '}
-          <Text style={styles.coursify}>{t('common:appName')}</Text>
+          <Text style={[styles.coursify, {color: colors.primaryMain}]}>
+            {t('common:appName')}
+          </Text>
         </Text>
-        <Text style={styles.loginTitle}>{t('signUpScreen.title')}</Text>
+        <Text style={[styles.loginTitle, {color: colors.neutral80}]}>
+          {t('signUpScreen.title')}
+        </Text>
         {renderInputs()}
         <AppButton
           isLoading={isLoading}
@@ -165,9 +170,11 @@ const SignUp = ({navigation}: AppStackScreensProps<'SignUp'>) => {
           title={t('signUp')}
         />
         <View style={styles.spacer} />
-        <Text style={styles.footerText}>
+        <Text style={[styles.footerText, {color: colors.neutral100}]}>
           {t('signUpScreen.footerTitle')}{' '}
-          <Text onPress={handleAlreadyHaveAccount} style={styles.createNewText}>
+          <Text
+            onPress={handleAlreadyHaveAccount}
+            style={[styles.createNewText, {color: colors.primaryMain}]}>
             {t('login')}
           </Text>
         </Text>

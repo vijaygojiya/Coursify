@@ -8,12 +8,7 @@ const styles = StyleSheet.create({
     paddingTop: 9,
     elevation: undefined,
   },
-  tabBarLabelStyle: {
-    fontSize: 123,
-    marginStart: 6,
-    fontFamily: fonts.bold,
-    marginBottom: 4,
-  },
+
   title: {
     textAlign: 'center',
     fontFamily: fonts.bold,

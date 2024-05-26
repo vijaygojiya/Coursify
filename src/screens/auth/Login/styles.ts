@@ -30,7 +30,6 @@ const styles = StyleSheet.create({
   },
   createNewText: {
     textDecorationLine: 'underline',
-    // color: colors.primary,
     fontFamily: fonts.bold,
   },
   spacer: {flex: 1},

@@ -129,17 +129,29 @@ const Login = ({navigation}: AppStackScreensProps<'Login'>) => {
         overScrollMode="never"
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}>
-        <Text style={[styles.title, textVariants.h2]}>
+        <Text
+          style={[styles.title, {color: colors.neutral100}, textVariants.h2]}>
           {t('loginScreen.title')}{' '}
-          <Text style={styles.coursify}>{t('common:appName')}</Text>
+          <Text style={[styles.coursify, {color: colors.primaryMain}]}>
+            {t('common:appName')}
+          </Text>
         </Text>
-        <Text style={[textVariants.h3, styles.loginTitle]}>
+        <Text
+          style={[
+            textVariants.h3,
+            {color: colors.neutral80},
+            styles.loginTitle,
+          ]}>
           {t('loginScreen.subTitle')}
         </Text>
         {renderInputs()}
         <Text
           onPress={handleForgotPassword}
-          style={[textVariants.body, styles.forgotPasswordText]}>
+          style={[
+            textVariants.body,
+            {color: colors.neutral80},
+            styles.forgotPasswordText,
+          ]}>
           {t('forgotPassword')}
         </Text>
         <AppButton
@@ -148,9 +160,16 @@ const Login = ({navigation}: AppStackScreensProps<'Login'>) => {
           title={t('login')}
         />
         <View style={styles.spacer} />
-        <Text style={[textVariants.body, styles.footerText]}>
+        <Text
+          style={[
+            textVariants.body,
+            styles.footerText,
+            {color: colors.neutral100},
+          ]}>
           {t('loginScreen.footerTitle')}{' '}
-          <Text onPress={handleCreateAccount} style={styles.createNewText}>
+          <Text
+            onPress={handleCreateAccount}
+            style={[styles.createNewText, {color: colors.primaryMain}]}>
             {t('signUp')}
           </Text>
         </Text>
