@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {
   DefaultTheme,
@@ -16,6 +16,7 @@ import {
 import colors from '@/styles/colors';
 import {StatusBar} from 'react-native';
 import TabNavigator from './TabNavigator';
+import SystemNavigationBar from 'react-native-system-navigation-bar';
 
 const AppStack = createNativeStackNavigator<AppStackParamsList>();
 
@@ -29,15 +30,20 @@ const appTheme = {
 } as Theme;
 const AppNavigator = () => {
   const isLoggedIn = true;
+
+  useEffect(() => {
+    SystemNavigationBar.setNavigationColor(colors.neutral10);
+  }, []);
+
   return (
     <NavigationContainer theme={appTheme}>
       <StatusBar
         //@ts-ignore
-        backgroundColor={appTheme.colors.neutral10}
-        barStyle={'dark-content'}
+        backgroundColor={appTheme.colors.primaryMain}
+        barStyle={'light-content'}
       />
       <AppStack.Navigator
-        screenOptions={{headerShown: false}}
+        screenOptions={{headerShown: false, animation: 'slide_from_left'}}
         initialRouteName={isLoggedIn ? Routes.Login : Routes.OnBoarding}>
         {isLoggedIn ? (
           <AppStack.Screen

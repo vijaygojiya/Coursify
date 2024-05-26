@@ -1,15 +1,17 @@
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0_19_2)">
-<mask id="mask0_19_2" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
-<path d="M0 0H24V24H0V0Z" fill="white"/>
-</mask>
-<g mask="url(#mask0_19_2)">
-<path d="M13.1568 19.4642L13.1575 25.5206H11.1564L11.1571 19.4642C9.1274 19.2408 7.23488 18.3307 5.79302 16.8847C2.28012 13.3718 2.28012 7.66971 5.79302 4.1568C9.30593 0.643894 15.008 0.643894 18.5209 4.1568C22.0338 7.66971 22.0338 13.3718 18.5209 16.8847C17.0791 18.3307 15.1866 19.2408 13.1568 19.4642ZM12.263 17.5211C14.0833 17.4957 15.8215 16.7598 17.1067 15.4705C19.8418 12.7354 19.8411 8.3054 17.1067 5.57101C14.3716 2.83592 9.94232 2.83592 7.20724 5.57101C4.47285 8.3054 4.47215 12.7354 7.20724 15.4705C8.49245 16.7598 10.2307 17.4957 12.0509 17.5211H12.263Z" fill="#7B8C8A"/>
-</g>
-</g>
-<defs>
-<clipPath id="clip0_19_2">
-<rect width="24" height="24" fill="white"/>
-</clipPath>
-</defs>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#7B8C8A">
+    <g clip-path="url(#a)">
+        <mask id="b" width="24" height="24" x="0" y="0" maskUnits="userSpaceOnUse"
+            style="mask-type:luminance">
+            <path fill="#fff" d="M0 0h24v24H0V0Z" />
+        </mask>
+        <g mask="url(#b)">
+            <path
+                d="M13 18.115V24h-2v-5.885a8.96 8.96 0 0 1-5.364-2.58c-3.513-3.512-3.513-9.214 0-12.727s9.215-3.513 12.728 0 3.513 9.215 0 12.728A8.96 8.96 0 0 1 13 18.116Zm-.894-1.943a6.976 6.976 0 0 0 4.844-2.05 6.998 6.998 0 0 0 0-9.9 6.997 6.997 0 0 0-9.9 0 6.998 6.998 0 0 0 0 9.9 6.977 6.977 0 0 0 4.844 2.05h.212Z" />
+        </g>
+    </g>
+    <defs>
+        <clipPath id="a">
+            <path fill="#fff" d="M0 0h24v24H0z" />
+        </clipPath>
+    </defs>
 </svg>

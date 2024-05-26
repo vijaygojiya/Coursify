@@ -13,7 +13,7 @@ interface Props {
 
 function BookIcon({color = '#001A72', focused, ...rest}: Props) {
   const sv = useDerivedValue(() => {
-    return focused ? withSpring(360, {damping: 190}) : 0;
+    return focused ? withSpring(360) : 0;
   });
 
   const animatedStyle = useAnimatedStyle(() => ({

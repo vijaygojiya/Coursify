@@ -78,9 +78,7 @@ const AnimatedBackground = ({
       [colors.primaryMain, colors.primaryPressed],
     );
     return {
-      transform: [
-        {scale: withSpring(interpolate(animValue.value, [0, 1], [1, 1.03]))},
-      ],
+      transform: [{scale: interpolate(animValue.value, [0, 1], [1, 0.98])}],
       backgroundColor: color,
     };
   });

@@ -3278,6 +3278,7 @@ __metadata:
     react-native-screens: ^3.31.1
     react-native-svg: ^15.3.0
     react-native-svg-transformer: ^1.4.0
+    react-native-system-navigation-bar: ^2.6.4
     react-test-renderer: 18.2.0
     typescript: 5.0.4
     zod: ^3.23.8
@@ -8864,6 +8865,16 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: e976878361c100639ab4f9bd2cd042f526b28890cc0052139b36a5ebde44cd3b1a54c6dd3b5e391fe10a998767a994748fc6ee3f1b356154418828d12f98d77a
+  languageName: node
+  linkType: hard
+
+"react-native-system-navigation-bar@npm:^2.6.4":
+  version: 2.6.4
+  resolution: "react-native-system-navigation-bar@npm:2.6.4"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: b0fe20a00c5640ec98efb80c4441c0b38ea9fd7c87289be588bd27ff2553f4e5e2d3c9df9e4c752c7f6bcc135c7a848eea37c94e97259dd3f4e47de8e84d0de5
   languageName: node
   linkType: hard
 
