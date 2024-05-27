@@ -18,6 +18,7 @@ import {StatusBar} from 'react-native';
 import TabNavigator from './TabNavigator';
 import SystemNavigationBar from 'react-native-system-navigation-bar';
 import {useAuth} from '@/hooks';
+import BootSplash from 'react-native-bootsplash';
 
 const AppStack = createNativeStackNavigator<AppStackParamsList>();
 
@@ -37,7 +38,11 @@ const AppNavigator = () => {
   }, []);
 
   return (
-    <NavigationContainer theme={appTheme}>
+    <NavigationContainer
+      theme={appTheme}
+      onReady={() => {
+        BootSplash.hide();
+      }}>
       <StatusBar
         //@ts-ignore
         backgroundColor={appTheme.colors.primaryMain}

@@ -2,6 +2,7 @@
 
 #import <React/RCTBundleURLProvider.h>
 #import <Firebase.h>
+#import "RNBootSplash.h" 
 
 @implementation AppDelegate
 
@@ -28,6 +29,10 @@
 #else
   return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 #endif
+}
+
+- (void)customizeRootView:(RCTRootView *)rootView {
+  [RNBootSplash initWithStoryboard:@"BootSplash" rootView:rootView]; // ⬅️ initialize the splash screen
 }
 
 @end

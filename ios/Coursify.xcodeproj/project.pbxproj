@@ -20,6 +20,7 @@
 		7699B88040F8A987B510C191 /* libPods-Coursify-CoursifyTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-Coursify-CoursifyTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		E4A2B67918DD7DEDC6EB7691 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = AC069BB81371603FFF18920E /* PrivacyInfo.xcprivacy */; };
+		4F24ADF10AFB4EB9A95E3486 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1FA533642D44FE7B55C23F6 /* BootSplash.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		C28C6BA9828C493BAF3059F8 /* NunitoSans-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "NunitoSans-Regular.ttf"; path = "../src/assets/fonts/NunitoSans-Regular.ttf"; sourceTree = "<group>"; };
 		E93363065DEB4E9E90E5B853 /* NunitoSans-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "NunitoSans-Light.ttf"; path = "../src/assets/fonts/NunitoSans-Light.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		E1FA533642D44FE7B55C23F6 /* BootSplash.storyboard */ = {isa = PBXFileReference; name = "BootSplash.storyboard"; path = "Coursify/BootSplash.storyboard"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 				13B07FB71A68108700A75B9A /* main.m */,
 				13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */,
 				AC069BB81371603FFF18920E /* PrivacyInfo.xcprivacy */,
+				E1FA533642D44FE7B55C23F6 /* BootSplash.storyboard */,
 			);
 			name = Coursify;
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 				586FD9A9AE354AAB89D142C9 /* NunitoSans-Regular.ttf in Resources */,
 				21F7175C86ED45C29A6BBE73 /* NunitoSans-SemiBold.ttf in Resources */,
 				E4A2B67918DD7DEDC6EB7691 /* PrivacyInfo.xcprivacy in Resources */,
+				4F24ADF10AFB4EB9A95E3486 /* BootSplash.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
