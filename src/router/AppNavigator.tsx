@@ -17,6 +17,7 @@ import colors from '@/styles/colors';
 import {StatusBar} from 'react-native';
 import TabNavigator from './TabNavigator';
 import SystemNavigationBar from 'react-native-system-navigation-bar';
+import {useAuth} from '@/hooks';
 
 const AppStack = createNativeStackNavigator<AppStackParamsList>();
 
@@ -29,7 +30,7 @@ const appTheme = {
   dark: false,
 } as Theme;
 const AppNavigator = () => {
-  const isLoggedIn = false;
+  const {isLoggedIn} = useAuth();
 
   useEffect(() => {
     SystemNavigationBar.setNavigationColor(colors.neutral10);
@@ -44,7 +45,7 @@ const AppNavigator = () => {
       />
       <AppStack.Navigator
         screenOptions={{headerShown: false, animation: 'slide_from_left'}}
-        initialRouteName={isLoggedIn ? Routes.Login : Routes.OnBoarding}>
+        initialRouteName={isLoggedIn ? Routes.TabNavigator : Routes.OnBoarding}>
         {isLoggedIn ? (
           <AppStack.Screen
             name={Routes.TabNavigator}

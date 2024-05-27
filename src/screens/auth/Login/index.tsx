@@ -12,6 +12,8 @@ import {useTheme} from '@react-navigation/native';
 import styles from './styles';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {textVariants} from '@/styles';
+import {fireAuth} from '@/services/firebase';
+import {useMutation} from '@tanstack/react-query';
 
 const defaultValue = {
   email: '',
@@ -26,7 +28,13 @@ const Login = ({navigation}: AppStackScreensProps<'Login'>) => {
   const [isSecureTextEntry, setSecureTextEntry] = useState(true);
   const [inputs, setInputs] = useState(defaultValue);
   const [errors, setErrors] = useState(defaultValue);
-  const [isLoading, setLoading] = useState(false);
+
+  const {mutate, isPending} = useMutation({
+    mutationFn: fireAuth.signInUserWithFirebase,
+    onError: e => {
+      console.log('=====+++===+++==', JSON.stringify(e, null, 9));
+    },
+  });
 
   const inputRefs = useRef<Record<inputKeys, null | TextInput>>({
     email: null,
@@ -50,17 +58,15 @@ const Login = ({navigation}: AppStackScreensProps<'Login'>) => {
 
   const handleOnSubmit = async () => {
     setErrors(defaultValue);
-    setLoading(true);
+
     try {
       loginSchema.parse(inputs);
-      // await signInUserWithFirebase(inputs.email, inputs.password);
+      mutate({...inputs});
     } catch (error) {
       if (error instanceof ZodError) {
         const validationErrors = zodErrorSimplify<typeof defaultValue>(error);
         setErrors(validationErrors);
       }
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -155,7 +161,7 @@ const Login = ({navigation}: AppStackScreensProps<'Login'>) => {
           {t('forgotPassword')}
         </Text>
         <AppButton
-          isLoading={isLoading}
+          isLoading={isPending}
           onPress={handleOnSubmit}
           title={t('login')}
         />

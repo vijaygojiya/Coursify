@@ -11,6 +11,9 @@ import Routes from '@/router/routes';
 import {useTheme} from '@react-navigation/native';
 import styles from './styles';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {ReactNativeFirebase} from '@react-native-firebase/app';
+import {fireAuth} from '@/services/firebase';
+import {useMutation} from '@tanstack/react-query';
 
 const defaultValue = {
   name: '',
@@ -27,7 +30,12 @@ const SignUp = ({navigation}: AppStackScreensProps<'SignUp'>) => {
   const [isVisible, setVisible] = useState(true);
   const [inputs, setInputs] = useState(defaultValue);
   const [errors, setErrors] = useState(defaultValue);
-  const [isLoading, setLoading] = useState(false);
+  const {mutate, isPending} = useMutation({
+    mutationFn: fireAuth.createUserInFirebase,
+    onError: e => {
+      console.log('e', e);
+    },
+  });
 
   const inputRefs = useRef<Record<inputKeys, null | TextInput>>({
     name: null,
@@ -43,33 +51,24 @@ const SignUp = ({navigation}: AppStackScreensProps<'SignUp'>) => {
   }, []);
 
   const handleSubmit = async () => {
-    setLoading(true);
     setErrors(defaultValue);
     try {
       signupSchema.parse(inputs);
-      // const {user} = await createUserInFirebase(inputs.email, inputs.password);
-
-      // await signupApi({
-      //   email: inputs.email,
-      //   name: inputs.name,
-      //   userId: user.uid,
-      // });
+      mutate({...inputs});
     } catch (error) {
       if (error instanceof ZodError) {
         const validationErrors = zodErrorSimplify<typeof defaultValue>(error);
         setErrors(validationErrors);
       } else {
-        // const fireError = error as ReactNativeFirebase.NativeFirebaseError;
-        // if (fireError.code === 'auth/email-already-in-use') {
-        //   setErrors(prev => ({
-        //     ...prev,
-        //     email:
-        //       'Account with this email already exists. Please use a different email or log in with this one.',
-        //   }));
-        // }
+        const fireError = error as ReactNativeFirebase.NativeFirebaseError;
+        if (fireError.code === 'auth/email-already-in-use') {
+          setErrors(prev => ({
+            ...prev,
+            email:
+              'Account with this email already exists. Please use a different email or log in with this one.',
+          }));
+        }
       }
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -165,7 +164,7 @@ const SignUp = ({navigation}: AppStackScreensProps<'SignUp'>) => {
         </Text>
         {renderInputs()}
         <AppButton
-          isLoading={isLoading}
+          isLoading={isPending}
           onPress={handleSubmit}
           title={t('signUp')}
         />

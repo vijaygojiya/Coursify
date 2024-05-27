@@ -4,13 +4,12 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {Logout} from '@/assets';
 import {useTheme} from '@react-navigation/native';
 import {randomUserImage} from '@/types/constant';
+import {useAuth} from '@/hooks';
 
 const DrawerContent = () => {
   const {colors} = useTheme();
 
-  const onLogoutPress = () => {
-    // signOut();
-  };
+  const {logOut} = useAuth();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -26,7 +25,7 @@ const DrawerContent = () => {
 
       <View style={styles.contentContainer}>
         <View style={styles.contentSpacer} />
-        <Pressable onPress={onLogoutPress} style={styles.logoutButton}>
+        <Pressable onPress={logOut} style={styles.logoutButton}>
           <Logout />
           <Text style={styles.text}>Logout</Text>
         </Pressable>

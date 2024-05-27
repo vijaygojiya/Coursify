@@ -12,9 +12,12 @@
   },
   "dependencies": {
     "@os-team/i18next-react-native-language-detector": "^1.0.33",
+    "@react-native-firebase/app": "^20.0.0",
+    "@react-native-firebase/auth": "^20.0.0",
     "@react-navigation/bottom-tabs": "^6.5.20",
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/native-stack": "^6.9.26",
+    "@tanstack/react-query": "^5.39.0",
     "i18next": "^23.11.5",
     "react": "18.2.0",
     "react-i18next": "^14.1.2",

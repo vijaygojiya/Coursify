@@ -6,14 +6,22 @@ import {
   SafeAreaProvider,
   initialWindowMetrics,
 } from 'react-native-safe-area-context';
+import {AuthProvider} from '@/context';
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 const s = {flex: 1};
+
+const queryClient = new QueryClient();
 
 const App = () => {
   return (
     <View style={s}>
-      <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-        <AppNavigator />
-      </SafeAreaProvider>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+            <AppNavigator />
+          </SafeAreaProvider>
+        </AuthProvider>
+      </QueryClientProvider>
     </View>
   );
 };
