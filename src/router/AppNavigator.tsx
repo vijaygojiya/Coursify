@@ -29,7 +29,7 @@ const appTheme = {
   dark: false,
 } as Theme;
 const AppNavigator = () => {
-  const isLoggedIn = true;
+  const isLoggedIn = false;
 
   useEffect(() => {
     SystemNavigationBar.setNavigationColor(colors.neutral10);

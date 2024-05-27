@@ -4,8 +4,7 @@ import {StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
   headerLeftIconContainer: {marginStart: 12},
   tabBarStyle: {
-    height: 59,
-    paddingTop: 9,
+    paddingTop: 10,
     elevation: undefined,
   },
 

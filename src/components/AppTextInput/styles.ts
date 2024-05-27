@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontFamily: fonts.regular,
     fontSize: 16,
-    paddingVertical: 8,
+    paddingVertical: 12,
     paddingHorizontal: 8,
   },
   rowContainer: {
