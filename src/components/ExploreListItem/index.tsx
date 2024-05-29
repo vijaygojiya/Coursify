@@ -51,6 +51,7 @@ const ExploreListItem = ({
         <StartLine height={18} width={18} />
         <View style={styles.spacer} />
         <Pressable
+          hitSlop={5}
           onPress={() => {
             setBookMark(v => !v);
           }}>
