@@ -14,7 +14,7 @@ import {
   SignUpScreen,
 } from '@/screens';
 import colors from '@/styles/colors';
-import {StatusBar} from 'react-native';
+import {StatusBar, View} from 'react-native';
 import TabNavigator from './TabNavigator';
 import SystemNavigationBar from 'react-native-system-navigation-bar';
 import {useAuth} from '@/hooks';
@@ -55,6 +55,7 @@ const AppNavigator = () => {
           <AppStack.Screen
             name={Routes.TabNavigator}
             component={TabNavigator}
+            options={{animation: 'fade'}}
           />
         ) : (
           <>

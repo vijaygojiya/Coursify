@@ -111,6 +111,7 @@ const OnBoarding = ({}: AppStackScreensProps<'OnBoarding'>) => {
       <Animated.ScrollView
         ref={animatedRef}
         horizontal={true}
+        scrollEventThrottle={16}
         showsHorizontalScrollIndicator={false}
         decelerationRate="normal"
         disableIntervalMomentum

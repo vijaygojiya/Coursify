@@ -22,3 +22,7 @@ export {default as Studying} from './svgs/studying.svg';
 export {default as Engineer} from './svgs/engineer.svg';
 
 export {default as Logout} from './svgs/logout-line.svg';
+export {default as BookMarkFill} from './svgs/bookmark-fill.svg';
+export {default as BookMarkLine} from './svgs/bookmark-line.svg';
+export {default as StarFill} from './svgs/star-fill.svg';
+export {default as StartLine} from './svgs/star-line.svg';
