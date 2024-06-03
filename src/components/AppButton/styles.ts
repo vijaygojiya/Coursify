@@ -4,6 +4,10 @@ import {StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
   container: {
     marginVertical: 12,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    paddingVertical: 12,
   },
   title: {
     fontFamily: fonts.bold,
@@ -12,11 +16,6 @@ const styles = StyleSheet.create({
     lineHeight: 23,
     textTransform: 'capitalize',
   },
-  animateBgContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 10,
-    paddingVertical: 12,
-  },
+  animateBgContainer: {},
 });
 export default styles;

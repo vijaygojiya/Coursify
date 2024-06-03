@@ -7,7 +7,6 @@ import Animated, {
 } from 'react-native-reanimated';
 import CarouselIndicator from '../CarouselIndicator';
 import CarouselItem from '../CarouselItem';
-import styles from './styles';
 
 const ExploreCarousel = () => {
   const animatedRef = useAnimatedRef<Animated.ScrollView>();
@@ -28,7 +27,6 @@ const ExploreCarousel = () => {
         decelerationRate={'normal'}
         scrollEventThrottle={16}
         pagingEnabled={true}
-        contentContainerStyle={styles.contentContainerStyle}
         horizontal
         showsHorizontalScrollIndicator={false}>
         {[1, 2, 3].map((_, index) => {

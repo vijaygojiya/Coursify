@@ -2,24 +2,24 @@
   "migIndex": 1,
   "data": [
     {
-      "path": "src/assets/fonts/NunitoSans-Bold.ttf",
-      "sha1": "1a43f6ab652eb0c71cd0d748bd8d4bf360903fe1"
+      "path": "src/assets/fonts/Montserrat-Bold.ttf",
+      "sha1": "98c66622226025f539568865af96df5175e2979c"
     },
     {
-      "path": "src/assets/fonts/NunitoSans-Light.ttf",
-      "sha1": "32f3cecd9b6c0f67c1a6bec6886e2b8f160617f1"
+      "path": "src/assets/fonts/Montserrat-Light.ttf",
+      "sha1": "9dfbddad5025d8d224b4939e54c1a4ac8ac6015b"
     },
     {
-      "path": "src/assets/fonts/NunitoSans-Medium.ttf",
-      "sha1": "947e59a8d3586d17a5f8698ae2f371e580411cdb"
+      "path": "src/assets/fonts/Montserrat-Medium.ttf",
+      "sha1": "25c429296b9d6eb242cba92d1ee7fae484b019cb"
     },
     {
-      "path": "src/assets/fonts/NunitoSans-Regular.ttf",
-      "sha1": "c4bc36919dfa9ee086b71d7b2796fafc22249b97"
+      "path": "src/assets/fonts/Montserrat-Regular.ttf",
+      "sha1": "bb895d19b8a1fbe1c57fc89cac5da82fdc8fdef4"
     },
     {
-      "path": "src/assets/fonts/NunitoSans-SemiBold.ttf",
-      "sha1": "0ec94b38226fe45cb85bad4cb5f884512bae6eb7"
+      "path": "src/assets/fonts/Montserrat-SemiBold.ttf",
+      "sha1": "0754a3a23d8d68b0f0558df3109e0df86e968f24"
     }
   ]
 }

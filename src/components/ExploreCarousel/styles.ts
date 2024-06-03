@@ -6,9 +6,7 @@ const indicatorWidth = containerWith / 3;
 const styles = StyleSheet.create({
   divider: {
     borderBottomWidth: StyleSheet.hairlineWidth,
-    // backgroundColor: colors.GrayBorder,
   },
-  //item
 
   itemContainer: {
     paddingHorizontal: 10,
@@ -18,7 +16,6 @@ const styles = StyleSheet.create({
   itemImage: {
     height: '100%',
     width: '100%',
-    // backgroundColor: colors.white,
     borderRadius: 12,
     overflow: 'hidden',
   },
@@ -27,16 +24,11 @@ const styles = StyleSheet.create({
     height: 5,
     borderRadius: 18,
     alignSelf: 'center',
-    // backgroundColor: colors.InActiveSlider,
   },
   indicator: {
     height: '100%',
     width: indicatorWidth,
-    // backgroundColor: colors.primary,
     borderRadius: 8,
-  },
-  contentContainerStyle: {
-    paddingVertical: 18,
   },
 });
 export default styles;

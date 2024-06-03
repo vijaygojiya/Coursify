@@ -6,14 +6,14 @@ import {
   TextStyle,
   ViewStyle,
 } from 'react-native';
-import React, {FC, PropsWithChildren} from 'react';
+import React, {FC} from 'react';
 import styles from './styles';
 import {useTheme} from '@react-navigation/native';
 import Animated, {
   interpolate,
   interpolateColor,
   useAnimatedStyle,
-  useDerivedValue,
+  useSharedValue,
   withSpring,
 } from 'react-native-reanimated';
 
@@ -24,52 +24,21 @@ interface AppButtonProps extends PressableProps {
   containerStyle?: ViewStyle;
   titleStyle?: TextStyle;
 }
+export const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 const AppButton: FC<AppButtonProps> = ({
   title = '',
   isLoading = false,
   disabled,
+  onPressIn,
+  onPressOut,
   containerStyle = {},
   titleStyle = {},
+
   ...rest
 }) => {
+  const animValue = useSharedValue(0);
   const {colors} = useTheme();
-
-  return (
-    <Pressable
-      disabled={disabled || isLoading}
-      {...rest}
-      style={[styles.container, containerStyle]}>
-      {({pressed}) => (
-        <AnimatedBackground pressed={pressed}>
-          {isLoading ? (
-            <ActivityIndicator size={23} color={colors.primarySurface} />
-          ) : (
-            <Text
-              style={[
-                styles.title,
-                {color: colors.primarySurface},
-                titleStyle,
-              ]}>
-              {title}
-            </Text>
-          )}
-        </AnimatedBackground>
-      )}
-    </Pressable>
-  );
-};
-
-export default AppButton;
-
-const AnimatedBackground = ({
-  children,
-  pressed,
-}: PropsWithChildren<{pressed: boolean}>) => {
-  const {colors} = useTheme();
-  const animValue = useDerivedValue(() => {
-    return withSpring(pressed ? 1 : 0);
-  });
 
   const animStyle = useAnimatedStyle(() => {
     const color = interpolateColor(
@@ -83,8 +52,28 @@ const AnimatedBackground = ({
     };
   });
   return (
-    <Animated.View style={[styles.animateBgContainer, animStyle]}>
-      {children}
-    </Animated.View>
+    <AnimatedPressable
+      disabled={disabled || isLoading}
+      onPressIn={data => {
+        animValue.value = withSpring(1);
+        onPressIn?.(data);
+      }}
+      onPressOut={data => {
+        animValue.value = withSpring(0);
+        onPressOut?.(data);
+      }}
+      {...rest}
+      style={[styles.container, animStyle, containerStyle]}>
+      {isLoading ? (
+        <ActivityIndicator size={23} color={colors.primarySurface} />
+      ) : (
+        <Text
+          style={[styles.title, {color: colors.primarySurface}, titleStyle]}>
+          {title}
+        </Text>
+      )}
+    </AnimatedPressable>
   );
 };
+
+export default AppButton;

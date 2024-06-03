@@ -3,30 +3,60 @@ import React, {FC, Fragment} from 'react';
 import {TabScreensProps} from '@/types/navigation';
 import {ExploreData, sectionTitles} from '@/utils/dummy';
 import ExploreCarousel from '@/components/ExploreCarousel';
-import {ExploreListItem, ScreenContainer} from '@/components';
+import {
+  ExploreListItem,
+  PopularInstructors,
+  ScreenContainer,
+} from '@/components';
 import {ICourse} from '@/types/courses';
 import {textVariants} from '@/styles';
 import {useTheme} from '@react-navigation/native';
 import styles from './styles';
 
+const renderItem: ListRenderItem<ICourse> = ({item, index}) => {
+  return <ExploreListItem {...{...item, index}} />;
+};
+
 const Explore: FC<TabScreensProps<'Explore'>> = () => {
   const {colors} = useTheme();
-  const renderItem: ListRenderItem<ICourse> = ({item, index}) => {
-    return <ExploreListItem {...{...item, index}} />;
-  };
+
   return (
     <ScreenContainer>
       <ScrollView
         bounces={false}
         overScrollMode="never"
+        contentContainerStyle={styles.mainContentContainer}
         showsVerticalScrollIndicator={false}>
         <ExploreCarousel />
-        {sectionTitles.map((title, index) => {
+        <Text
+          style={[textVariants.h4, styles.title, {color: colors.neutral100}]}>
+          {sectionTitles[0]}
+        </Text>
+        <FlatList
+          data={[
+            ...ExploreData[0],
+            ...ExploreData[0],
+            ...ExploreData[0],
+            ...ExploreData[0],
+          ]}
+          contentContainerStyle={styles.listContainer}
+          showsHorizontalScrollIndicator={false}
+          horizontal={true}
+          keyExtractor={(item, i) => item.id + sectionTitles[0] + i}
+          renderItem={renderItem}
+        />
+        <Text
+          style={[textVariants.h4, styles.title, {color: colors.neutral100}]}>
+          {'Popular Instructors'}
+        </Text>
+        <PopularInstructors />
+
+        {sectionTitles.slice(1).map((title, index) => {
           return (
             <Fragment key={title + index}>
               <Text
                 style={[
-                  textVariants.h3,
+                  textVariants.h4,
                   styles.title,
                   {color: colors.neutral100},
                 ]}>
@@ -39,7 +69,6 @@ const Explore: FC<TabScreensProps<'Explore'>> = () => {
                   ...ExploreData[index],
                   ...ExploreData[index],
                 ]}
-                style={styles.listStyle}
                 contentContainerStyle={styles.listContainer}
                 showsHorizontalScrollIndicator={false}
                 horizontal={true}

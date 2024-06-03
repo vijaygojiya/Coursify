@@ -8,12 +8,13 @@ const styles = StyleSheet.create({
   },
   labelText: {
     fontFamily: fonts.medium,
+    fontSize: 16,
     marginStart: 8,
     marginBottom: 6,
   },
   textInput: {
     flex: 1,
-    fontFamily: fonts.regular,
+    fontFamily: fonts.medium,
     fontSize: 16,
     paddingVertical: 12,
     paddingHorizontal: 8,
