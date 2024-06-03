@@ -1,9 +1,9 @@
 const fonts = {
-  light: 'NunitoSans-Light',
-  medium: 'NunitoSans-Medium',
-  regular: 'NunitoSans-Regular',
-  semiBold: 'NunitoSans-SemiBold',
-  bold: 'NunitoSans-Bold',
+  light: 'Montserrat-Light',
+  medium: 'Montserrat-Medium',
+  regular: 'Montserrat-Regular',
+  semiBold: 'Montserrat-SemiBold',
+  bold: 'Montserrat-Bold',
 };
 
 export default fonts;

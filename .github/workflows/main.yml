@@ -1,0 +1,112 @@
+name: Android Build
+
+on:
+  push:
+    branches:
+      - 'release'
+    tags:
+      - 'v*'
+jobs:
+  buildApk:
+    name: Build android APK
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4.1.5
+        
+      - name: Setup Java JDK
+        uses: actions/setup-java@v4.2.1
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+
+      # Gradle cache for faster builds
+      - uses: actions/cache@v4.0.2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4.0.2
+        with:
+          node-version: '20.*.*'
+          cache: 'yarn'
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - uses: actions/cache@v4.0.2
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install node dependencies
+        run: yarn install --frozen-lockfile
+        
+      - name: Decode Keystore & google services config
+        env:
+           ENCODED_STRING: ${{ secrets.SIGNING_KEY_STORE_BASE64 }}
+           GOOGLE_SERVICES_CONFIG: ${{ secrets.GOOGLE_SERVICES_JSON }}
+           SIGNING_KEY_STORE_PATH: ${{ secrets.SIGNING_KEY_STORE_PATH }}
+           GITHUB_TOKEN: ${{ secrets.TOKEN }}
+ 
+        run: |
+           echo $ENCODED_STRING > keystore-b64.txt
+           base64 -d keystore-b64.txt > android/app/keystore.jks
+           echo $GOOGLE_SERVICES_CONFIG > google-services-b64.txt
+           base64 -d google-services-b64.txt > android/app/google-services.json
+
+      - name: Generate android APK
+        env:
+           SIGNING_KEY_STORE_PATH: ${{ secrets.SIGNING_KEY_STORE_PATH }}
+           SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
+           SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
+           SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+        run: yarn generateReleaseApk
+        
+      - name: Upload APK
+        uses: actions/upload-artifact@v4.3.3
+        with:
+          name: app.apk
+          path: android/app/build/outputs/apk/release/app-release.apk
+          if-no-files-found: error
+
+  # releaseApk:
+  #   name: Release android APK
+  #   needs: buildApk
+  #   if: contains(github.ref, 'tags')
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Download APK from build
+  #       uses: actions/download-artifact@v4.1.17
+  #       with:
+  #         name: apk
+  #     - name: Create Release
+  #       id: create_release
+  #       uses: actions/create-release@v1
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.TOKEN }}
+
+      #   with:
+      #     tag_name: ${{ github.ref }}
+      #     release_name: Release ${{ github.ref }}
+      #     draft: false
+      #     prerelease: false
+
+      # - name: Upload Release APK
+      #   id: upload_release_asset
+      #   uses: actions/upload-release-asset@v1.0.1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.TOKEN }}
+      #   with:
+      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
+      #     asset_path: apk/app-release.apk
+      #     asset_name: app-release.apk
+      #     asset_content_type: application/zip

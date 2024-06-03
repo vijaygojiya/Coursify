@@ -1,4 +1,4 @@
-import {randomCourseImage} from '@/types/constant';
+import {randomCourseImage, randomUserImage} from '@/types/constant';
 import {ZodError} from 'zod';
 
 export const zodErrorSimplify = <T>(error: ZodError) => {
@@ -25,4 +25,8 @@ export const zodErrorSimplify = <T>(error: ZodError) => {
 
 export const getRandomImage = (index: number) => {
   return randomCourseImage + '?' + Date.now() + index;
+};
+
+export const getRandomUserImage = (index: number) => {
+  return randomUserImage + '?' + Date.now() + index;
 };

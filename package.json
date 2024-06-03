@@ -8,6 +8,7 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
+    "generateReleaseApk":"cd android && ./gradlew assembleRelease && cd ..",
     "link-assets": "react-native-asset"
   },
   "dependencies": {
@@ -26,6 +27,7 @@
     "react-native-drawer-layout": "^3.3.0",
     "react-native-gesture-handler": "^2.16.2",
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
+    "react-native-linear-gradient": "^2.8.3",
     "react-native-reanimated": "^3.11.0",
     "react-native-safe-area-context": "^4.10.1",
     "react-native-screens": "^3.31.1",

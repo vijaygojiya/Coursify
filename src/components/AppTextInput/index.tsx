@@ -36,16 +36,16 @@ const AppTextInput = forwardRef<TextInput, AppTextInputProps>(
       <View style={[styles.container]}>
         <Text
           numberOfLines={1}
-          style={[styles.labelText, {color: colors.neutral80}]}>
+          style={[styles.labelText, {color: colors.neutral90}]}>
           {label}
         </Text>
         <View style={[styles.rowContainer, {borderColor: colors.infoBorder}]}>
           {leftIcon}
           <TextInput
             ref={ref}
-            placeholderTextColor={colors.neutral80}
+            placeholderTextColor={colors.neutral60}
             cursorColor={colors.primaryMain}
-            style={[styles.textInput, {color: colors.neutral90}, style]}
+            style={[styles.textInput, {color: colors.neutral100}, style]}
             {...rest}
           />
           <Pressable

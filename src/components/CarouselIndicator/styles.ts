@@ -6,10 +6,11 @@ const indicatorWidth = containerWith / 3;
 const styles = StyleSheet.create({
   indicatorContainer: {
     width: containerWith,
-    height: 5,
-    borderRadius: 18,
+    height: 3.8,
+    borderRadius: 8,
     alignSelf: 'center',
-    marginBottom: 12,
+    marginTop: 18,
+    marginBottom: 8,
   },
   indicator: {
     height: '100%',

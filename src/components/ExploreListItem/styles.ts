@@ -1,32 +1,22 @@
-import {fonts} from '@/styles';
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
-    width: 262,
-    elevation: 8,
-    marginBottom: 22,
-    borderRadius: 8,
-    overflow: 'hidden',
+    width: 220,
   },
   image: {
     aspectRatio: 16 / 9,
     width: '100%',
+    borderRadius: 8,
   },
   title: {
-    marginHorizontal: 14,
-    marginTop: 12,
-    fontFamily: fonts.bold,
+    marginTop: 10,
     marginBottom: 4,
   },
   instructor: {
-    marginHorizontal: 14,
-    fontFamily: fonts.medium,
+    flex: 1,
   },
   footerContainer: {
-    marginVertical: 12,
-    marginHorizontal: 10,
-    columnGap: 2,
     flexDirection: 'row',
     alignItems: 'center',
   },
