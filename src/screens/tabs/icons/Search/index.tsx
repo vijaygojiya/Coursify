@@ -14,7 +14,7 @@ interface Props {
 
 const SearchIcon = ({color = '#001A72', focused}: Props) => {
   const sv = useDerivedValue(() => {
-    return focused ? withSpring(360) : 0;
+    return focused ? withSpring(180) : 0;
   });
 
   const animatedStyle = useAnimatedStyle(() => ({

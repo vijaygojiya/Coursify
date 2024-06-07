@@ -33,5 +33,18 @@ const styles = StyleSheet.create({
     fontFamily: fonts.bold,
   },
   spacer: {flex: 1},
+  socialIconContainer: {
+    flexDirection: 'row',
+    alignContent: 'center',
+    justifyContent: 'center',
+    columnGap: 18,
+    marginVertical: 8,
+  },
+  socialIcon: {
+    borderWidth: 1,
+    borderRadius: 8,
+    padding: 12,
+    paddingHorizontal: 28,
+  },
 });
 export default styles;

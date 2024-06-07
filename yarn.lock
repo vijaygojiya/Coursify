@@ -2502,6 +2502,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-google-signin/google-signin@npm:^12.2.0":
+  version: 12.2.0
+  resolution: "@react-native-google-signin/google-signin@npm:12.2.0"
+  peerDependencies:
+    expo: ">=50.0.0"
+    react: "*"
+    react-dom: "*"
+    react-native: "*"
+  peerDependenciesMeta:
+    expo:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: 9cabbd8c4f646f3b167791136627eb73a5da6d09903b8619a227488ea1d700af51fa13fc752704d813cef05291612fddc993413274e9a643b3a7705588c92fc2
+  languageName: node
+  linkType: hard
+
 "@react-native/assets-registry@npm:0.74.83":
   version: 0.74.83
   resolution: "@react-native/assets-registry@npm:0.74.83"
@@ -3455,6 +3472,7 @@ __metadata:
     "@os-team/i18next-react-native-language-detector": ^1.0.33
     "@react-native-firebase/app": ^20.0.0
     "@react-native-firebase/auth": ^20.0.0
+    "@react-native-google-signin/google-signin": ^12.2.0
     "@react-native/babel-preset": 0.74.83
     "@react-native/eslint-config": 0.74.83
     "@react-native/metro-config": 0.74.83
@@ -3478,7 +3496,9 @@ __metadata:
     react-native: 0.74.1
     react-native-asset: ^2.1.1
     react-native-bootsplash: ^5.5.3
+    react-native-config: ^1.5.1
     react-native-drawer-layout: ^3.3.0
+    react-native-fbsdk-next: ^13.0.0
     react-native-gesture-handler: ^2.16.2
     react-native-keyboard-aware-scroll-view: ^0.9.5
     react-native-linear-gradient: ^2.8.3
@@ -9354,6 +9374,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-config@npm:^1.5.1":
+  version: 1.5.1
+  resolution: "react-native-config@npm:1.5.1"
+  peerDependencies:
+    react-native-windows: ">=0.61"
+  peerDependenciesMeta:
+    react-native-windows:
+      optional: true
+  checksum: ae17b750e445310573ce33798db67c9b8c50e55cb2ba136e9a9ef8372dd3f7669ce236bb18bf1fa8a426fd1aa9e6b516fb2f593767bd24688242f6847cd37712
+  languageName: node
+  linkType: hard
+
 "react-native-drawer-layout@npm:^3.3.0":
   version: 3.3.0
   resolution: "react-native-drawer-layout@npm:3.3.0"
@@ -9365,6 +9397,19 @@ __metadata:
     react-native-gesture-handler: ">= 1.0.0"
     react-native-reanimated: ">= 1.0.0"
   checksum: 91a62b64f5c02f99c6333e015b47b5fc636310e8c23be5cf20804e56b766f3cc098bfc5e9fa5cf5ce099eeca7bfbd22ef79510ec99dffc1bef4c22f0d2d43639
+  languageName: node
+  linkType: hard
+
+"react-native-fbsdk-next@npm:^13.0.0":
+  version: 13.0.0
+  resolution: "react-native-fbsdk-next@npm:13.0.0"
+  peerDependencies:
+    expo: ">=47.0.0"
+    react-native: ">=0.63.3"
+  peerDependenciesMeta:
+    expo:
+      optional: true
+  checksum: ba0cd96ad369b5607b27fad3cc49cdc58a3428a7c90343caac52af019fe43b8558b449edbb9a2dcf215d6280c985b7724e1a65ee5999f7532c97400124aebf3b
   languageName: node
   linkType: hard
 

@@ -2,7 +2,7 @@ import {Text, TextInput, View} from 'react-native';
 import React, {useCallback, useRef, useState} from 'react';
 import {AppStackScreensProps} from '@/types/navigation';
 import {AppButton, AppTextInput, ScreenContainer} from '@/components';
-import {EyeHide, EyeShow, Lock, Message} from '@/assets';
+import {EyeHide, EyeShow, Facebook, Google, Lock, Message} from '@/assets';
 import {useTranslation} from 'react-i18next';
 import Routes from '@/router/routes';
 import {loginSchema} from '@/utils/validation';
@@ -14,6 +14,7 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {textVariants} from '@/styles';
 import {fireAuth} from '@/services/firebase';
 import {useMutation} from '@tanstack/react-query';
+import BounceContainer from '@/components/BounceContainer';
 
 const defaultValue = {
   email: '',
@@ -102,6 +103,28 @@ const Login = ({navigation}: AppStackScreensProps<'Login'>) => {
       handleOnSubmit();
     }
   };
+  const handleLoginWithFacebook = async () => {
+    try {
+      const users = await fireAuth.facebookLogin();
+      console.log('=+===++===++==++', JSON.stringify(users, null, 8));
+    } catch (error) {
+      console.log(
+        'error while sign in with facebook ',
+        JSON.stringify(error, null, 8),
+      );
+    }
+  };
+  const handleLoginWithGoogle = async () => {
+    try {
+      const users = await fireAuth.googleSignIn();
+      console.log('=+===++===++==++', JSON.stringify(users, null, 8));
+    } catch (error) {
+      console.log(
+        'error while sign in with google ',
+        JSON.stringify(error, null, 8),
+      );
+    }
+  };
   const renderInputs = () => {
     return inputConfigs.map((inputKey, index) => {
       const config = getInputConfig(inputKey);
@@ -165,6 +188,18 @@ const Login = ({navigation}: AppStackScreensProps<'Login'>) => {
           onPress={handleOnSubmit}
           title={t('login')}
         />
+        <View style={styles.socialIconContainer}>
+          <BounceContainer
+            onPress={handleLoginWithFacebook}
+            style={[styles.socialIcon, {borderColor: colors.infoBorder}]}>
+            <Facebook />
+          </BounceContainer>
+          <BounceContainer
+            onPress={handleLoginWithGoogle}
+            style={[styles.socialIcon, {borderColor: colors.infoBorder}]}>
+            <Google />
+          </BounceContainer>
+        </View>
         <View style={styles.spacer} />
         <Text
           style={[

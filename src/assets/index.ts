@@ -26,3 +26,6 @@ export {default as BookMarkFill} from './svgs/bookmark-fill.svg';
 export {default as BookMarkLine} from './svgs/bookmark-line.svg';
 export {default as StarFill} from './svgs/star-fill.svg';
 export {default as StartLine} from './svgs/star-line.svg';
+
+export {default as Facebook} from './svgs/facebook-circle-fill.svg';
+export {default as Google} from './svgs/google-fill.svg';

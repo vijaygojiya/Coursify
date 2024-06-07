@@ -12,7 +12,7 @@ interface Props {
 }
 function ExploreIcon({color, focused, ...rest}: Props) {
   const sv = useDerivedValue(() => {
-    return focused ? withSpring(360) : 0;
+    return focused ? withSpring(180) : 0;
   }, [focused]);
 
   const animatedStyle = useAnimatedStyle(() => ({

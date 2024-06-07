@@ -3,7 +3,7 @@ name: Android Build
 on:
   push:
     branches:
-      - 'release'
+      - 'main'
     tags:
       - 'v*'
 jobs:
@@ -36,6 +36,7 @@ jobs:
         with:
           node-version: '20.*.*'
           cache: 'yarn'
+
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -60,6 +61,14 @@ jobs:
            echo $ENCODED_STRING > keystore-b64.txt
            base64 -d keystore-b64.txt > android/app/keystore.jks
 
+      - name: Create env file
+        run: |
+          touch .env
+          echo WEB_CLIENT_ID=${{ secrets.WEB_CLIENT_ID }} >> .env
+          echo FB_APP_ID=${{ secrets.FB_APP_ID }} >> .env
+          echo FB_LOGIN_PROTOCOL=${{ secrets.FB_LOGIN_PROTOCOL }} >> .env
+          echo FB_CLIENT_TOKEN=${{ secrets.FB_CLIENT_TOKEN }} >> .env
+    
            
       - name: Generate android APK
         env:
