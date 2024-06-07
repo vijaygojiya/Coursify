@@ -8,7 +8,8 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "link-assets": "react-native-asset"
+    "link-assets": "react-native-asset",
+    "generate:apk": "cd android && ./gradlew assembleRelease && cd .."
   },
   "dependencies": {
     "@os-team/i18next-react-native-language-detector": "^1.0.33",
