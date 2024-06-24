@@ -77,6 +77,10 @@ jobs:
           SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
           SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
           SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+          WEB_CLIENT_ID: ${{ secrets.WEB_CLIENT_ID }}
+          FB_APP_ID: ${{ secrets.FB_APP_ID }}
+          FB_LOGIN_PROTOCOL: ${{ secrets.FB_LOGIN_PROTOCOL }}
+          FB_CLIENT_TOKEN: ${{ secrets.FB_CLIENT_TOKEN }}
         run: yarn generate:apk
         
       - name: Upload APK
