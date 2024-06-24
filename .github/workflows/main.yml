@@ -3,7 +3,7 @@ name: Android Build
 on:
   push:
     branches:
-      - 'main'
+      - 'devlope'
     tags:
       - 'v*'
 jobs:
@@ -50,41 +50,34 @@ jobs:
 
       - name: Install node dependencies
         run: yarn install --frozen-lockfile
-        
+
       - name: Decode Keystore & google services config
         env:
-           ENCODED_STRING: ${{ secrets.SIGNING_KEY_STORE_BASE64 }}
-           GOOGLE_SERVICES_CONFIG: ${{ secrets.GOOGLE_SERVICES_JSON }}
-           SIGNING_KEY_STORE_PATH: ${{ secrets.SIGNING_KEY_STORE_PATH }}
-           GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          ENCODED_STRING: ${{ secrets.SIGNING_KEY_STORE_BASE64 }}
+          GOOGLE_SERVICES_CONFIG: ${{ secrets.GOOGLE_SERVICES_JSON }}
+          SIGNING_KEY_STORE_PATH: ${{ secrets.SIGNING_KEY_STORE_PATH }}
+
         run: |
           echo $ENCODED_STRING > keystore-b64.txt
           base64 -d keystore-b64.txt > android/app/keystore.jks
           echo $GOOGLE_SERVICES_CONFIG > google-services-b64.txt
           base64 -d google-services-b64.txt > android/app/google-services.json
 
-      - name: Create .env file
-        uses: ozaytsev86/create-env-file@v1
-        with:
-          WEB_CLIENT_ID: ${{ secrets.WEB_CLIENT_ID }}
-          FB_APP_ID: ${{ secrets.FB_APP_ID }}
-          FB_LOGIN_PROTOCOL: ${{ secrets.FB_LOGIN_PROTOCOL }}
-          FB_CLIENT_TOKEN: ${{ secrets.FB_CLIENT_TOKEN }}
-          file_name: .env
-          fail_on_empty: false
-          sort_keys: false
-        
       - name: Generate android APK
         env:
           SIGNING_KEY_STORE_PATH: ${{ secrets.SIGNING_KEY_STORE_PATH }}
           SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
           SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
           SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+          WEB_CLIENT_ID: ${{ secrets.WEB_CLIENT_ID }}
+          FB_APP_ID: ${{ secrets.FB_APP_ID }}
+          FB_LOGIN_PROTOCOL: ${{ secrets.FB_LOGIN_PROTOCOL }}
+          FB_CLIENT_TOKEN: ${{ secrets.FB_CLIENT_TOKEN }}
         run: |
-         cat .env
-         ls
-         yarn generate:apk
-        
+          cat .env
+          ls -a
+          yarn generate:apk
+
       - name: Upload APK
         uses: actions/upload-artifact@v4.3.3
         with:
