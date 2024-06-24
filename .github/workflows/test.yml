@@ -15,6 +15,7 @@ jobs:
         uses: actions/checkout@v4.1.5
 
       - name: env set
+        uses: ozaytsev86/create-env-file@v1
         env:
           SIGNING_KEY_STORE_PATH: ${{ secrets.SIGNING_KEY_STORE_PATH }}
           SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
@@ -24,11 +25,11 @@ jobs:
           FB_APP_ID: ${{ secrets.FB_APP_ID }}
           FB_LOGIN_PROTOCOL: ${{ secrets.FB_LOGIN_PROTOCOL }}
           FB_CLIENT_TOKEN: ${{ secrets.FB_CLIENT_TOKEN }}
-
+      - name: create text env
         run: |
-         ls -a
-         cp .env newfile.txt
-         ls -a
+          ls -a
+          cp .env newfile.txt
+          ls -a
 
       - name: Upload APK
         uses: actions/upload-artifact@v4.3.3
