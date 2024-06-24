@@ -63,9 +63,9 @@ jobs:
           echo $GOOGLE_SERVICES_CONFIG > google-services-b64.txt
           base64 -d google-services-b64.txt > android/app/google-services.json
 
-      - name: Create env file
-       uses: SpicyPizza/create-envfile@v2.0.2
-       with:
+      - name: Create .env file
+        uses: ozaytsev86/create-env-file@v1
+        with:
           WEB_CLIENT_ID: ${{ secrets.WEB_CLIENT_ID }}
           FB_APP_ID: ${{ secrets.FB_APP_ID }}
           FB_LOGIN_PROTOCOL: ${{ secrets.FB_LOGIN_PROTOCOL }}
@@ -81,9 +81,9 @@ jobs:
           SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
           SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
         run: |
-        cat .env
-        ls
-        yarn generate:apk
+         cat .env
+         ls
+         yarn generate:apk
         
       - name: Upload APK
         uses: actions/upload-artifact@v4.3.3
