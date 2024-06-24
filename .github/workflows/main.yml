@@ -3,7 +3,7 @@ name: Android Build
 on:
   push:
     branches:
-      - 'devlope'
+      - 'main'
     tags:
       - 'v*'
 jobs:
@@ -13,6 +13,16 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4.1.5
+
+      - name: env set
+        uses: skiddph/actions-env@v1.0.3
+        with:
+          file: .env
+        env:
+          WEB_CLIENT_ID: ${{ secrets.WEB_CLIENT_ID }}
+          FB_APP_ID: ${{ secrets.FB_APP_ID }}
+          FB_LOGIN_PROTOCOL: ${{ secrets.FB_LOGIN_PROTOCOL }}
+          FB_CLIENT_TOKEN: ${{ secrets.FB_CLIENT_TOKEN }}
 
       - name: Setup Java JDK
         uses: actions/setup-java@v4.2.1
@@ -69,10 +79,7 @@ jobs:
           SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
           SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
           SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
-          WEB_CLIENT_ID: ${{ secrets.WEB_CLIENT_ID }}
-          FB_APP_ID: ${{ secrets.FB_APP_ID }}
-          FB_LOGIN_PROTOCOL: ${{ secrets.FB_LOGIN_PROTOCOL }}
-          FB_CLIENT_TOKEN: ${{ secrets.FB_CLIENT_TOKEN }}
+
         run: |
           cat .env
           ls -a
