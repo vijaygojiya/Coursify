@@ -16,7 +16,7 @@ jobs:
 
       - name: env set
         uses: ozaytsev86/create-env-file@v1
-        env:
+        with:
           SIGNING_KEY_STORE_PATH: ${{ secrets.SIGNING_KEY_STORE_PATH }}
           SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
           SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
