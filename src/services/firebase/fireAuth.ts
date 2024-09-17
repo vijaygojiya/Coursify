@@ -1,7 +1,10 @@
 import {webClientId} from '@/types/constant';
 import auth from '@react-native-firebase/auth';
 
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {
+  GoogleSignin,
+  isSuccessResponse,
+} from '@react-native-google-signin/google-signin';
 import {Settings, LoginManager, AccessToken} from 'react-native-fbsdk-next';
 
 const facebookSettings = () => {
@@ -46,18 +49,21 @@ const getCurrentUserInfo = () => {
 
 const googleSignIn = async () => {
   try {
-    console.log('asfadfd.........................................e')
     await GoogleSignin.hasPlayServices({
       showPlayServicesUpdateDialog: true,
-    }).catch(e => {
-      console.log('eee', e);
     });
 
-    const {idToken} = await GoogleSignin.signIn();
-    console.log('eee', idToken, 'tid');
-
-    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-    return await fireAuth.signInWithCredential(googleCredential);
+    const response = await GoogleSignin.signIn();
+    if (isSuccessResponse(response)) {
+      const idToken = response.data?.idToken;
+      if (!idToken) {
+        throw response;
+      }
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+      return await fireAuth.signInWithCredential(googleCredential);
+    } else {
+      console.log('error while sign in with google');
+    }
   } catch (error) {
     throw error;
   }

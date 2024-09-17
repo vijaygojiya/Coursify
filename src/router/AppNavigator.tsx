@@ -41,7 +41,7 @@ const AppNavigator = () => {
     <NavigationContainer
       theme={appTheme}
       onReady={() => {
-        BootSplash.hide();
+        BootSplash.hide({fade: true});
       }}>
       <StatusBar
         //@ts-ignore

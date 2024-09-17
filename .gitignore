@@ -80,3 +80,4 @@ yarn-error.log
 #firebase config
 GoogleService-Info.plist
 google-services.json
+.env

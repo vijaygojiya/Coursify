@@ -4,6 +4,9 @@
 #import <Firebase.h>
 #import "RNBootSplash.h" 
 #import <GoogleSignIn/GoogleSignIn.h>
+#import <AuthenticationServices/AuthenticationServices.h>
+#import <SafariServices/SafariServices.h>
+#import <FBSDKCoreKit/FBSDKCoreKit-Swift.h>
 
 @implementation AppDelegate
 
