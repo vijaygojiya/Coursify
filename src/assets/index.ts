@@ -1,5 +1,5 @@
 export {default as Profile} from './svgs/Profile.svg';
-export {default as Chevron} from './svgs/chevron.svg';
+export {default as Chevron} from './svgs/chevron-right.svg';
 export {default as EyeHide} from './svgs/HideEye.svg';
 export {default as EyeShow} from './svgs/ShowEye.svg';
 export {default as Lock} from './svgs/Lock.svg';
