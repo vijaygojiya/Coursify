@@ -59,6 +59,7 @@ const colors = {
   transparent60: 'rgba(70, 70, 70, 0.6)',
   transparent50: 'rgba(161, 161, 161, 0.5)',
   transparent20: 'rgba(34, 34, 34, 0.2)',
+  transparent: 'transparent',
 };
 
 export default colors;

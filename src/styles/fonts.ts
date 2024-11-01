@@ -1,9 +1,8 @@
 const fonts = {
-  light: 'Montserrat-Light',
-  medium: 'Montserrat-Medium',
-  regular: 'Montserrat-Regular',
-  semiBold: 'Montserrat-SemiBold',
-  bold: 'Montserrat-Bold',
+  medium: 'Poppins-Medium',
+  regular: 'Poppins-Regular',
+  semiBold: 'Poppins-SemiBold',
+  bold: 'Poppins-Bold',
 };
 
 export default fonts;

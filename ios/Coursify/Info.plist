@@ -51,14 +51,13 @@
 		<true/>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Montserrat-Bold.ttf</string>
-		<string>Montserrat-Light.ttf</string>
-		<string>Montserrat-Medium.ttf</string>
-		<string>Montserrat-Regular.ttf</string>
-		<string>Montserrat-SemiBold.ttf</string>
+		<string>Poppins-Bold.ttf</string>
+		<string>Poppins-Medium.ttf</string>
+		<string>Poppins-Regular.ttf</string>
+		<string>Poppins-SemiBold.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>BootSplash</string>
@@ -75,10 +74,10 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>FacebookAppID</key>
-<string>335482172923991</string>
-<key>FacebookClientToken</key>
-<string>16610b196cb20a3fe5e43226d284886c</string>
-<key>FacebookDisplayName</key>
-<string>Coursify</string>
+	<string>335482172923991</string>
+	<key>FacebookClientToken</key>
+	<string>16610b196cb20a3fe5e43226d284886c</string>
+	<key>FacebookDisplayName</key>
+	<string>Coursify</string>
 </dict>
 </plist>

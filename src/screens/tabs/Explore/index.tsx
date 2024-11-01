@@ -1,5 +1,5 @@
 import {FlatList, ListRenderItem, ScrollView, Text} from 'react-native';
-import React, {FC, Fragment} from 'react';
+import React, {FC, Fragment, useRef} from 'react';
 import {TabScreensProps} from '@/types/navigation';
 import {ExploreData, sectionTitles} from '@/utils/dummy';
 import ExploreCarousel from '@/components/ExploreCarousel';
@@ -10,7 +10,7 @@ import {
 } from '@/components';
 import {ICourse} from '@/types/courses';
 import {textVariants} from '@/styles';
-import {useTheme} from '@react-navigation/native';
+import {useScrollToTop, useTheme} from '@react-navigation/native';
 import styles from './styles';
 
 const renderItem: ListRenderItem<ICourse> = ({item, index}) => {
@@ -19,10 +19,13 @@ const renderItem: ListRenderItem<ICourse> = ({item, index}) => {
 
 const Explore: FC<TabScreensProps<'Explore'>> = () => {
   const {colors} = useTheme();
+  const scrollRef = useRef<ScrollView | null>(null);
+  useScrollToTop(scrollRef);
 
   return (
     <ScreenContainer>
       <ScrollView
+        ref={scrollRef}
         bounces={false}
         overScrollMode="never"
         contentContainerStyle={styles.mainContentContainer}

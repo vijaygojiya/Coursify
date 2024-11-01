@@ -43,9 +43,11 @@ const AppTextInput = forwardRef<TextInput, AppTextInputProps>(
           {leftIcon}
           <TextInput
             ref={ref}
+            autoCapitalize="none"
+            autoCorrect={false}
             placeholderTextColor={colors.neutral60}
             cursorColor={colors.primaryMain}
-            style={[styles.textInput, {color: colors.neutral100}, style]}
+            style={[styles.textInput, {color: colors.neutral90}, style]}
             {...rest}
           />
           <Pressable

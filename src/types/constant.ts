@@ -1,7 +1,6 @@
 import Config from 'react-native-config';
 
-export const randomUserImage =
-  'https://source.unsplash.com/random/300×300/?user';
-export const randomCourseImage = 'https://source.unsplash.com/random/?courses';
+export const randomUserImage = 'https://picsum.photos/200';
+export const randomCourseImage = 'https://picsum.photos/300/?blur=2';
 
 export const webClientId = Config.WEB_CLIENT_ID;

@@ -14,8 +14,8 @@ const styles = StyleSheet.create({
   },
   textInput: {
     flex: 1,
-    fontFamily: fonts.medium,
-    fontSize: 16,
+    fontFamily: fonts.regular,
+    fontSize: 14,
     paddingVertical: 12,
     paddingHorizontal: 8,
   },
@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1,
-    // borderColor: colors.inputBorder,
     borderRadius: 8,
   },
   error: {

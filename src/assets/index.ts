@@ -1,5 +1,5 @@
 export {default as Profile} from './svgs/Profile.svg';
-export {default as Chevron} from './svgs/Chevron.svg';
+export {default as Chevron} from './svgs/chevron.svg';
 export {default as EyeHide} from './svgs/HideEye.svg';
 export {default as EyeShow} from './svgs/ShowEye.svg';
 export {default as Lock} from './svgs/Lock.svg';
@@ -29,3 +29,12 @@ export {default as StartLine} from './svgs/star-line.svg';
 
 export {default as Facebook} from './svgs/facebook-circle-fill.svg';
 export {default as Google} from './svgs/google-fill.svg';
+export {default as Clock} from './svgs/clock.svg';
+export {default as Notification} from './svgs/notification.svg';
+export {default as Download} from './svgs/download.svg';
+export {default as DocumentCheck} from './svgs/document-check.svg';
+export {default as Trash} from './svgs/trash.svg';
+export {default as Setting} from './svgs/setting.svg';
+export {default as Globe} from './svgs/globe.svg';
+export {default as Comment} from './svgs/comment.svg';
+export {default as WarningCircle} from './svgs/warning-circle.svg';

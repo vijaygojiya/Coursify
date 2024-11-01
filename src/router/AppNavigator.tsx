@@ -8,17 +8,23 @@ import {
 import {AppStackParamsList} from '@/types/navigation';
 import Routes from './routes';
 import {
+  CourseDetailScreen,
   ForgotPasswordScreen,
   LoginScreen,
   OnBoardingScreen,
+  SettingScreen,
   SignUpScreen,
+  UserProfileScreen,
 } from '@/screens';
 import colors from '@/styles/colors';
-import {StatusBar, View} from 'react-native';
+import {StatusBar} from 'react-native';
 import TabNavigator from './TabNavigator';
 import SystemNavigationBar from 'react-native-system-navigation-bar';
 import {useAuth} from '@/hooks';
 import BootSplash from 'react-native-bootsplash';
+import styles from './styles';
+import {useQuery} from '@tanstack/react-query';
+import {getCurrentUserInfoApi} from '@/apis/userApis';
 
 const AppStack = createNativeStackNavigator<AppStackParamsList>();
 
@@ -32,6 +38,13 @@ const appTheme = {
 } as Theme;
 const AppNavigator = () => {
   const {isLoggedIn} = useAuth();
+
+  useQuery({
+    queryKey: ['currentUser'],
+    queryFn: getCurrentUserInfoApi,
+    select: ({data}) => data.data,
+    enabled: isLoggedIn,
+  });
 
   useEffect(() => {
     SystemNavigationBar.setNavigationColor(colors.neutral10);
@@ -49,14 +62,36 @@ const AppNavigator = () => {
         barStyle={'light-content'}
       />
       <AppStack.Navigator
-        screenOptions={{headerShown: false, animation: 'slide_from_left'}}
-        initialRouteName={isLoggedIn ? Routes.TabNavigator : Routes.OnBoarding}>
+        screenOptions={{headerShown: false, animation: 'slide_from_left'}}>
         {isLoggedIn ? (
-          <AppStack.Screen
-            name={Routes.TabNavigator}
-            component={TabNavigator}
-            options={{animation: 'fade'}}
-          />
+          <>
+            <AppStack.Screen
+              name={Routes.TabNavigator}
+              component={TabNavigator}
+              options={{animation: 'fade'}}
+            />
+            <AppStack.Screen
+              options={{
+                headerShown: true,
+                headerTitleStyle: [
+                  styles.appBarTitle,
+                  {color: colors.neutral90},
+                ],
+                title: 'Settings',
+                headerBackTitle: 'Back',
+              }}
+              name={Routes.Setting}
+              component={SettingScreen}
+            />
+            <AppStack.Screen
+              name={Routes.UserProfile}
+              component={UserProfileScreen}
+            />
+            <AppStack.Screen
+              name={Routes.CourseDetail}
+              component={CourseDetailScreen}
+            />
+          </>
         ) : (
           <>
             <AppStack.Screen

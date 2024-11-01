@@ -1,12 +1,15 @@
-import {Image, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 import React, {useMemo} from 'react';
 import type {ICourse} from '@/types/courses';
-import {useTheme} from '@react-navigation/native';
+import {useNavigation, useTheme} from '@react-navigation/native';
 import styles from './styles';
 import {textVariants} from '@/styles';
 import {getRandomImage} from '@/utils/helper';
 import {StarFill} from '@/assets';
 import BounceContainer from '../BounceContainer';
+import {TabScreensProps} from '@/types/navigation';
+import Routes from '@/router/routes';
+import Animated from 'react-native-reanimated';
 
 interface ExploreListItemProps extends ICourse {
   index: number;
@@ -18,14 +21,21 @@ const ExploreListItem = ({
   rating,
   index,
 }: ExploreListItemProps) => {
-  // const [isBookMarked, setBookMark] = useState(false);
   const {colors} = useTheme();
+  const navigation = useNavigation<TabScreensProps<'Explore'>['navigation']>();
+
   const uri = useMemo(() => {
     return getRandomImage(index);
   }, [index]);
+
   return (
-    <BounceContainer style={[styles.container]}>
-      <Image
+    <BounceContainer
+      onPress={() => {
+        navigation.navigate(Routes.CourseDetail, {url: uri});
+      }}
+      style={[styles.container]}>
+      <Animated.Image
+        sharedTransitionTag={uri}
         source={{uri}}
         style={[styles.image, {backgroundColor: colors.neutral30}]}
       />

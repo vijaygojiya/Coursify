@@ -53,8 +53,8 @@ const SignUp = ({navigation}: AppStackScreensProps<'SignUp'>) => {
   const handleSubmit = async () => {
     setErrors(defaultValue);
     try {
-      signupSchema.parse(inputs);
-      mutate({...inputs});
+      const result = signupSchema.parse(inputs);
+      mutate({...result});
     } catch (error) {
       if (error instanceof ZodError) {
         const validationErrors = zodErrorSimplify<typeof defaultValue>(error);

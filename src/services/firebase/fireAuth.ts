@@ -1,3 +1,4 @@
+import {createUserApi} from '@/apis/userApis';
 import {webClientId} from '@/types/constant';
 import auth from '@react-native-firebase/auth';
 
@@ -21,14 +22,17 @@ const configureGoogleSignin = () => {
 
 const fireAuth = auth();
 
-const createUserInFirebase = ({
+const createUserInFirebase = async ({
   email,
   password,
+  name,
 }: {
   email: string;
   password: string;
+  name: string;
 }) => {
-  return fireAuth.createUserWithEmailAndPassword(email, password);
+  const result = await fireAuth.createUserWithEmailAndPassword(email, password);
+  return createUserApi({email, firebaseId: result.user.uid, name: name});
 };
 
 const signInUserWithFirebase = ({
@@ -40,6 +44,7 @@ const signInUserWithFirebase = ({
 }) => {
   return fireAuth.signInWithEmailAndPassword(email, password);
 };
+
 const getFireAuthToken = async () => {
   return await fireAuth.currentUser?.getIdToken();
 };
