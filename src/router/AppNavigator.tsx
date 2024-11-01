@@ -73,6 +73,7 @@ const AppNavigator = () => {
             <AppStack.Screen
               options={{
                 headerShown: true,
+                headerShadowVisible: false,
                 headerTitleStyle: [
                   styles.appBarTitle,
                   {color: colors.neutral90},
@@ -84,6 +85,16 @@ const AppNavigator = () => {
               component={SettingScreen}
             />
             <AppStack.Screen
+              options={{
+                headerShown: true,
+                headerShadowVisible: false,
+                headerTitleStyle: [
+                  styles.appBarTitle,
+                  {color: colors.neutral90},
+                ],
+                title: 'Profile',
+                headerBackTitle: 'Back',
+              }}
               name={Routes.UserProfile}
               component={UserProfileScreen}
             />
