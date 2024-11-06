@@ -2,7 +2,7 @@ import {Chevron, Clock} from '@/assets';
 import {textVariants} from '@/styles';
 import {AppStackScreensProps} from '@/types/navigation';
 import {Course} from '@/types/types';
-import {useTheme} from '@react-navigation/native';
+import {useNavigation, useTheme} from '@react-navigation/native';
 import React, {useCallback} from 'react';
 import {
   View,
@@ -40,9 +40,9 @@ const staticCourse: Course = {
   modules: [],
   reviews: [],
 };
-const CourseDetailScreen = ({
-  navigation,
-}: AppStackScreensProps<'CourseDetail'>) => {
+const CourseDetailScreen = ({}: AppStackScreensProps<'CourseDetail'>) => {
+  const navigation =
+    useNavigation<AppStackScreensProps<'CourseDetail'>['navigation']>();
   const {title, description, thumbnail, modules, instructor} = staticCourse;
 
   const {colors} = useTheme();
@@ -123,7 +123,7 @@ const CourseDetailScreen = ({
     colors.neutral80,
     thumbnail,
     top,
-    navigation.goBack,
+    navigation?.goBack,
     title,
     description,
     instructor.profileImg,

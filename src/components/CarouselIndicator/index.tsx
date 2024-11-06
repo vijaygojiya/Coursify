@@ -29,9 +29,9 @@ const CarouselIndicator = ({animatedX}: {animatedX: SharedValue<number>}) => {
 
   return (
     <Animated.View
-      style={[styles.indicatorContainer, {backgroundColor: colors.neutral30}]}>
+      style={[styles.indicatorContainer, {backgroundColor: colors.neutral50}]}>
       <Animated.View
-        style={[styles.indicator, {backgroundColor: colors.neutral90}, anim]}
+        style={[styles.indicator, {backgroundColor: colors.primaryPressed}, anim]}
       />
     </Animated.View>
   );

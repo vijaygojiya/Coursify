@@ -1,10 +1,12 @@
 import {
   Pressable,
   PressableProps,
+  StyleProp,
   Text,
   TextInput,
   TextInputProps,
   View,
+  ViewStyle,
 } from 'react-native';
 import React, {ReactNode, forwardRef, memo} from 'react';
 import {useTheme} from '@react-navigation/native';
@@ -15,6 +17,7 @@ interface AppTextInputProps extends TextInputProps {
   leftIcon?: ReactNode | null;
   label: string;
   onRightIconPress?: PressableProps['onPress'];
+  containerStyle?: StyleProp<ViewStyle>;
   error?: string;
 }
 
@@ -27,6 +30,7 @@ const AppTextInput = forwardRef<TextInput, AppTextInputProps>(
       leftIcon = null,
       style,
       error = '',
+      containerStyle = {},
       ...rest
     },
     ref,
@@ -39,7 +43,12 @@ const AppTextInput = forwardRef<TextInput, AppTextInputProps>(
           style={[styles.labelText, {color: colors.neutral90}]}>
           {label}
         </Text>
-        <View style={[styles.rowContainer, {borderColor: colors.infoBorder}]}>
+        <View
+          style={[
+            styles.rowContainer,
+            {borderColor: colors.infoBorder},
+            containerStyle,
+          ]}>
           {leftIcon}
           <TextInput
             ref={ref}

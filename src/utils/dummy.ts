@@ -68,6 +68,14 @@ const sectionTitles = [
   'Popular Courses',
   'Newest Courses',
 ];
+
+export const MockData = {
+  ['Recommended for You']: mockRecommendedCourses,
+  ['Trending Courses']: mockTrendingCourses,
+  ['Popular Courses']: mockPopularCourses,
+  ['Newest Courses']: mockNewestCourses,
+};
+
 const ExploreData = [
   mockRecommendedCourses,
   mockTrendingCourses,

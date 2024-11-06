@@ -22,9 +22,9 @@ const textVariants = StyleSheet.create({
   },
   h4: {
     fontFamily: fonts.semiBold,
-    fontSize: 21,
+    fontSize: 20,
     lineHeight: 28,
-    letterSpacing: -0.022 * 20, // -1.7% of the font size
+    // letterSpacing: -0.022 * 20, // -1.7% of the font size
   },
   h5: {
     fontFamily: fonts.semiBold,
@@ -33,7 +33,7 @@ const textVariants = StyleSheet.create({
   body: {
     fontFamily: fonts.regular,
     fontSize: 16,
-    lineHeight: 22,
+    // lineHeight: 22,
     // letterSpacing: -0.011 * 16, // -1.1% of the font size
   },
   caption: {
@@ -45,7 +45,7 @@ const textVariants = StyleSheet.create({
   small: {
     fontFamily: fonts.regular,
     fontSize: 12,
-    lineHeight: 17,
+    // lineHeight: 17,
     // letterSpacing: 0, // 0% of the font size
   },
   extraSmall: {

@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
 
   appBarTitle: {
     fontFamily: fonts.medium,
-    fontSize: 24,
+    fontSize: 20,
     textAlign: 'center',
   },
 });

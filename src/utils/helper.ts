@@ -30,3 +30,10 @@ export const getRandomImage = (index: number) => {
 export const getRandomUserImage = (index: number) => {
   return randomUserImage + '?' + Date.now() + index;
 };
+
+export const getFirstName = (fullName?: string) => {
+  if (!fullName) {
+    return fullName;
+  }
+  return fullName.split(' ')?.[0]?.trim();
+};

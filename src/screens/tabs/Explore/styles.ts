@@ -1,14 +1,19 @@
+import {fonts} from '@/styles';
 import {StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
-  title: {
-    marginTop: 2,
-    marginBottom: 12,
-    marginStart: 22,
+  mainContentContainer: {
+    paddingBottom: 18,
+    rowGap: 16,
   },
 
-  listContainer: {paddingHorizontal: 22, columnGap: 22, marginBottom: 18},
-  mainContentContainer: {
-    paddingVertical: 18,
+  headerContainer: {
+    marginHorizontal: 18,
+    marginTop: 22,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  subTitle: {
+    fontFamily: fonts.regular,
   },
 });
 export default styles;

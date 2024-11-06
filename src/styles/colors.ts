@@ -11,6 +11,7 @@ const colors = {
   neutral80: '#707070',
   neutral90: '#525252',
   neutral100: '#212221',
+  back: '#000000',
 
   // Primary
   primaryMain: '#0CA190',

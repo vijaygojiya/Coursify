@@ -11,6 +11,9 @@ const Routes = Object.freeze({
   Learn: 'Learn',
 
   CourseDetail: 'CourseDetail',
+  CourseList: 'CourseList',
+
+  EditProfile: 'EditProfile',
   UserProfile: 'UserProfile',
   Setting: 'Setting',
 });

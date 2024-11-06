@@ -11,7 +11,7 @@ const PopularInstructorItem = ({name = '', index = 0}) => {
     <BounceContainer style={styles.container}>
       <Image
         source={{uri: getRandomUserImage(index)}}
-        style={[styles.image, {backgroundColor: colors.neutral30}]}
+        style={[styles.image, {backgroundColor: colors.neutral50}]}
       />
       <Text style={[textVariants.caption, {color: colors.neutral90}]}>
         {name}

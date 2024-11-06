@@ -7,5 +7,8 @@ export {default as SearchScreen} from './tabs/Search';
 export {default as LearnScreen} from './tabs/Learn';
 
 export {default as CourseDetailScreen} from './others/CourseDetail';
+export {default as CourseListScreen} from './others/CourseList';
+
 export {default as UserProfileScreen} from './others/UserProfile';
 export {default as SettingScreen} from './others/Settings';
+export {default as EditProfileScreen} from './others/EditProfile';

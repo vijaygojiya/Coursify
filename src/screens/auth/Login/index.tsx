@@ -8,7 +8,7 @@ import Routes from '@/router/routes';
 import {loginSchema} from '@/utils/validation';
 import {ZodError} from 'zod';
 import {zodErrorSimplify} from '@/utils/helper';
-import {useTheme} from '@react-navigation/native';
+import {useNavigation, useTheme} from '@react-navigation/native';
 import styles from './styles';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {textVariants} from '@/styles';
@@ -24,12 +24,13 @@ type inputKeys = keyof typeof defaultValue;
 
 const inputConfigs: inputKeys[] = Object.keys(defaultValue) as inputKeys[];
 
-const Login = ({navigation}: AppStackScreensProps<'Login'>) => {
+const Login = ({}: AppStackScreensProps<'Login'>) => {
   //
   const [isSecureTextEntry, setSecureTextEntry] = useState(true);
   const [inputs, setInputs] = useState(defaultValue);
   const [errors, setErrors] = useState(defaultValue);
-
+  const navigation =
+    useNavigation<AppStackScreensProps<'Login'>['navigation']>();
   const {mutate, isPending} = useMutation({
     mutationFn: fireAuth.signInUserWithFirebase,
     onError: e => {

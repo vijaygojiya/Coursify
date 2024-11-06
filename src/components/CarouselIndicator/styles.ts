@@ -9,8 +9,7 @@ const styles = StyleSheet.create({
     height: 3.8,
     borderRadius: 8,
     alignSelf: 'center',
-    marginTop: 18,
-    marginBottom: 8,
+    marginTop: 17,
   },
   indicator: {
     height: '100%',

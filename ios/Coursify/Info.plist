@@ -79,5 +79,7 @@
 	<string>16610b196cb20a3fe5e43226d284886c</string>
 	<key>FacebookDisplayName</key>
 	<string>Coursify</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+    <string>This app needs access to your photo library to allow you to upload a profile picture.</string>
 </dict>
 </plist>

@@ -31,6 +31,7 @@ const CarouselItem = ({
 }: CarouselItemProps) => {
   const navigation =
     useNavigation<AppStackScreensProps<'Login'>['navigation']>();
+  console.log('navigation', navigation);
   const VectorImage = SVGs[vector];
   const {width} = useWindowDimensions();
   const {colors} = useTheme();

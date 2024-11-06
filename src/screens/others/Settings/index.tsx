@@ -1,14 +1,11 @@
 import {Alert, FlatList, Image, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {useQuery} from '@tanstack/react-query';
-import {getCurrentUserInfoApi} from '@/apis/userApis';
-import {useTheme} from '@react-navigation/native';
-import {useAuth} from '@/hooks';
+import {useNavigation, useTheme} from '@react-navigation/native';
+import {useAuth, useCurrentUser} from '@/hooks';
 import {AppStackParamsList, AppStackScreensProps} from '@/types/navigation';
 import {SVGsNames} from '@/types/common';
 import Routes from '@/router/routes';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {randomUserImage} from '@/types/constant';
 import {SettingItem} from '@/components';
 import {fonts} from '@/styles';
 
@@ -24,7 +21,7 @@ const settingsListItems: Array<{
   {
     title: 'Profile',
     icon: 'Profile',
-    routeName: Routes.UserProfile,
+    routeName: Routes.EditProfile,
   },
   {
     title: 'Notifications',
@@ -69,14 +66,11 @@ const settingsListItems: Array<{
     hideArrow: true,
   },
 ];
-const Setting = ({navigation}: AppStackScreensProps<'Setting'>) => {
-  const {data: user} = useQuery({
-    queryKey: ['currentUser'],
-    queryFn: getCurrentUserInfoApi,
-    select: ({data}) => data.data,
-    enabled: false,
-  });
-  console.log(user);
+
+const Setting = ({}: AppStackScreensProps<'Setting'>) => {
+  const {data: user} = useCurrentUser();
+  const navigation =
+    useNavigation<AppStackScreensProps<'Setting'>['navigation']>();
   const {colors} = useTheme();
   const {logOut} = useAuth();
 
@@ -100,7 +94,8 @@ const Setting = ({navigation}: AppStackScreensProps<'Setting'>) => {
       return;
     }
     if (routeName) {
-      navigation.navigate('UserProfile');
+      //@ts-ignore
+      navigation.navigate(routeName);
       return;
     }
   };
@@ -108,14 +103,6 @@ const Setting = ({navigation}: AppStackScreensProps<'Setting'>) => {
     <SafeAreaView
       edges={['bottom', 'left', 'right']}
       style={[styles.container, {backgroundColor: colors.neutral10}]}>
-      {/* <View>
-        <Pressable style={styles.back}>
-          <Chevron />
-        </Pressable>
-        <Text style={[styles.appBarTitle, {color: colors.neutral90}]}>
-          Settings
-        </Text>
-      </View> */}
       <FlatList
         bounces={false}
         showsVerticalScrollIndicator={false}
@@ -130,7 +117,7 @@ const Setting = ({navigation}: AppStackScreensProps<'Setting'>) => {
         ListHeaderComponent={
           <View style={styles.profileContainer}>
             <Image
-              source={{uri: randomUserImage}}
+              source={{uri: user?.profileImg}}
               style={[styles.profileImage, {backgroundColor: colors.neutral50}]}
             />
             <View style={styles.infoContainer}>
@@ -164,7 +151,6 @@ export default Setting;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 18,
   },
   appBarTitle: {
     fontFamily: fonts.medium,

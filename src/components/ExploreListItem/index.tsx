@@ -1,4 +1,4 @@
-import {Text, View} from 'react-native';
+import {Image, Text, View} from 'react-native';
 import React, {useMemo} from 'react';
 import type {ICourse} from '@/types/courses';
 import {useNavigation, useTheme} from '@react-navigation/native';
@@ -9,7 +9,6 @@ import {StarFill} from '@/assets';
 import BounceContainer from '../BounceContainer';
 import {TabScreensProps} from '@/types/navigation';
 import Routes from '@/router/routes';
-import Animated from 'react-native-reanimated';
 
 interface ExploreListItemProps extends ICourse {
   index: number;
@@ -34,14 +33,13 @@ const ExploreListItem = ({
         navigation.navigate(Routes.CourseDetail, {url: uri});
       }}
       style={[styles.container]}>
-      <Animated.Image
-        sharedTransitionTag={uri}
+      <Image
         source={{uri}}
-        style={[styles.image, {backgroundColor: colors.neutral30}]}
+        style={[styles.image, {backgroundColor: colors.neutral50}]}
       />
       <Text
-        numberOfLines={2}
-        style={[textVariants.h5, styles.title, {color: colors.neutral100}]}>
+        numberOfLines={1}
+        style={[textVariants.h5, styles.title, {color: colors.back}]}>
         {title}
       </Text>
       <View style={styles.footerContainer}>

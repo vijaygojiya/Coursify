@@ -1,88 +1,139 @@
-import {FlatList, ListRenderItem, ScrollView, Text} from 'react-native';
-import React, {FC, Fragment, useRef} from 'react';
-import {TabScreensProps} from '@/types/navigation';
-import {ExploreData, sectionTitles} from '@/utils/dummy';
-import ExploreCarousel from '@/components/ExploreCarousel';
 import {
-  ExploreListItem,
-  PopularInstructors,
-  ScreenContainer,
-} from '@/components';
+  ListRenderItem,
+  RefreshControl,
+  ScrollView,
+  Text,
+  View,
+} from 'react-native';
+import React, {useRef} from 'react';
+import {TabScreensProps} from '@/types/navigation';
+import {
+  ExploreData,
+  PopularInstructorsData,
+  sectionTitles,
+} from '@/utils/dummy';
+import ExploreCarousel from '@/components/ExploreCarousel';
+import {ExploreListItem, HorizontalListSection} from '@/components';
 import {ICourse} from '@/types/courses';
-import {textVariants} from '@/styles';
-import {useScrollToTop, useTheme} from '@react-navigation/native';
+import {
+  useNavigation,
+  useScrollToTop,
+  useTheme,
+} from '@react-navigation/native';
 import styles from './styles';
+import PopularInstructorItem from '@/components/PopularInstructorItem';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {textVariants} from '@/styles';
+import {useCurrentUser, useRefreshByUser} from '@/hooks';
+import {getFirstName} from '@/utils/helper';
+import BounceContainer from '@/components/BounceContainer';
+import {Setting} from '@/assets';
+import Routes from '@/router/routes';
 
 const renderItem: ListRenderItem<ICourse> = ({item, index}) => {
   return <ExploreListItem {...{...item, index}} />;
 };
+const renderPopularInstructor: ListRenderItem<
+  (typeof PopularInstructorsData)[number]
+> = ({item: {name}, index}) => {
+  return <PopularInstructorItem name={name} index={index} />;
+};
 
-const Explore: FC<TabScreensProps<'Explore'>> = () => {
-  const {colors} = useTheme();
+const Explore = ({}: TabScreensProps<'Explore'>) => {
+  //
   const scrollRef = useRef<ScrollView | null>(null);
+  // console.log(navigation);
+  const navigation = useNavigation();
+
   useScrollToTop(scrollRef);
 
-  return (
-    <ScreenContainer>
-      <ScrollView
-        ref={scrollRef}
-        bounces={false}
-        overScrollMode="never"
-        contentContainerStyle={styles.mainContentContainer}
-        showsVerticalScrollIndicator={false}>
-        <ExploreCarousel />
-        <Text
-          style={[textVariants.h4, styles.title, {color: colors.neutral100}]}>
-          {sectionTitles[0]}
-        </Text>
-        <FlatList
-          data={[
-            ...ExploreData[0],
-            ...ExploreData[0],
-            ...ExploreData[0],
-            ...ExploreData[0],
-          ]}
-          contentContainerStyle={styles.listContainer}
-          showsHorizontalScrollIndicator={false}
-          horizontal={true}
-          keyExtractor={(item, i) => item.id + sectionTitles[0] + i}
-          renderItem={renderItem}
-        />
-        <Text
-          style={[textVariants.h4, styles.title, {color: colors.neutral100}]}>
-          {'Popular Instructors'}
-        </Text>
-        <PopularInstructors />
+  const {colors} = useTheme();
 
-        {sectionTitles.slice(1).map((title, index) => {
-          return (
-            <Fragment key={title + index}>
-              <Text
-                style={[
-                  textVariants.h4,
-                  styles.title,
-                  {color: colors.neutral100},
-                ]}>
-                {title}
-              </Text>
-              <FlatList
-                data={[
-                  ...ExploreData[index],
-                  ...ExploreData[index],
-                  ...ExploreData[index],
-                  ...ExploreData[index],
-                ]}
-                contentContainerStyle={styles.listContainer}
-                showsHorizontalScrollIndicator={false}
-                horizontal={true}
-                keyExtractor={(item, i) => item.id + title + i}
-                renderItem={renderItem}
-              />
-            </Fragment>
-          );
-        })}
-      </ScrollView>
-    </ScreenContainer>
+  const {data: user, refetch} = useCurrentUser({enabled: true});
+  const {isRefetchingByUser, refetchByUser} = useRefreshByUser(refetch);
+
+  const {bottom} = useSafeAreaInsets();
+
+  return (
+    <ScrollView
+      ref={scrollRef}
+      overScrollMode="never"
+      refreshControl={
+        <RefreshControl
+          refreshing={isRefetchingByUser}
+          onRefresh={refetchByUser}
+          progressViewOffset={bottom + 22}
+        />
+      }
+      contentContainerStyle={[
+        styles.mainContentContainer,
+        {paddingTop: bottom},
+      ]}
+      showsVerticalScrollIndicator={false}>
+      <View style={styles.headerContainer}>
+        <View style={{flex: 1}}>
+          <Text style={[textVariants.h4, {color: colors.neutral100}]}>
+            Hey, {getFirstName(user?.name)}
+          </Text>
+          <Text
+            style={[
+              textVariants.caption,
+              styles.subTitle,
+              {color: colors.neutral80},
+            ]}>
+            Learn something new today!
+          </Text>
+        </View>
+        <BounceContainer
+          onPress={() => {
+            navigation.navigate(Routes.Setting);
+          }}>
+          <Setting />
+        </BounceContainer>
+      </View>
+      {/**-promotion-**/}
+      <ExploreCarousel />
+      <HorizontalListSection
+        onChevronPress={() => {
+          navigation.navigate('CourseList', {type: sectionTitles[0]});
+        }}
+        title={sectionTitles[0]}
+        keyExtractor={(item, i) => item.id + sectionTitles[0] + i}
+        data={[
+          ...ExploreData[0],
+          ...ExploreData[0],
+          ...ExploreData[0],
+          ...ExploreData[0],
+        ]}
+        renderItem={renderItem}
+      />
+
+      <HorizontalListSection
+        data={PopularInstructorsData}
+        renderItem={renderPopularInstructor}
+        title={'Popular Instructors'}
+        keyExtractor={(item, i) => item.name + sectionTitles[0] + i}
+      />
+      {sectionTitles.slice(1).map((title, index) => {
+        return (
+          <HorizontalListSection
+            key={title + index}
+            title={title}
+            onChevronPress={() => {
+              navigation.navigate('CourseList', {type: title});
+            }}
+            keyExtractor={(item, i) => item.id + sectionTitles[0] + i}
+            data={[
+              ...ExploreData[index],
+              ...ExploreData[index],
+              ...ExploreData[index],
+              ...ExploreData[index],
+            ]}
+            renderItem={renderItem}
+          />
+        );
+      })}
+    </ScrollView>
   );
 };
 

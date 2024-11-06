@@ -1,6 +1,5 @@
 import React from 'react';
 import {ImageBackground, Text, View, useWindowDimensions} from 'react-native';
-import Animated from 'react-native-reanimated';
 import {getRandomImage} from '@/utils/helper';
 import styles from './styles';
 import {useTheme} from '@react-navigation/native';

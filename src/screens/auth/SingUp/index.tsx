@@ -8,7 +8,7 @@ import {signupSchema} from '@/utils/validation';
 import {useTranslation} from 'react-i18next';
 import {ZodError} from 'zod';
 import Routes from '@/router/routes';
-import {useTheme} from '@react-navigation/native';
+import {useNavigation, useTheme} from '@react-navigation/native';
 import styles from './styles';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {ReactNativeFirebase} from '@react-native-firebase/app';
@@ -25,7 +25,7 @@ type inputKeys = keyof typeof defaultValue;
 
 const inputConfigs: inputKeys[] = Object.keys(defaultValue) as inputKeys[];
 
-const SignUp = ({navigation}: AppStackScreensProps<'SignUp'>) => {
+const SignUp = ({}: AppStackScreensProps<'SignUp'>) => {
   //
   const [isVisible, setVisible] = useState(true);
   const [inputs, setInputs] = useState(defaultValue);
@@ -45,6 +45,8 @@ const SignUp = ({navigation}: AppStackScreensProps<'SignUp'>) => {
 
   const {t} = useTranslation(['auth', 'common']);
   const {colors} = useTheme();
+  const navigation =
+    useNavigation<AppStackScreensProps<'SignUp'>['navigation']>();
 
   const togglePassword = useCallback(() => {
     setVisible(v => !v);

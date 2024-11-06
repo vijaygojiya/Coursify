@@ -1,3 +1,4 @@
+import {fonts} from '@/styles';
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
@@ -11,6 +12,7 @@ const styles = StyleSheet.create({
   },
   title: {
     marginTop: 10,
+    fontFamily: fonts.medium,
     marginBottom: 4,
   },
   instructor: {

@@ -38,3 +38,5 @@ export {default as Setting} from './svgs/setting.svg';
 export {default as Globe} from './svgs/globe.svg';
 export {default as Comment} from './svgs/comment.svg';
 export {default as WarningCircle} from './svgs/warning-circle.svg';
+export {default as Edit} from './svgs/edit.svg';
+export {default as Hourglass} from './svgs/hourglass.svg';

@@ -5,3 +5,8 @@ export {default as Divider} from './Divider';
 export {default as ExploreListItem} from './ExploreListItem';
 export {default as PopularInstructors} from './PopularInstructors';
 export {default as SettingItem} from './SettingItem';
+export {default as HorizontalListSection} from './HorizontalListSection';
+export {default as CourseItem} from './CourseItem';
+export {default as CourseFilterBar} from './CourseFilterBar';
+export {default as CategoryItem} from './CategoryItem';
+export {default as SearchPlaceholder} from './SearchPlaceholder';

@@ -12,14 +12,21 @@ export type AppStackParamsList = {
   ForgotPassword: undefined;
   TabNavigator: NavigatorScreenParams<TabParamList>;
   CourseDetail: {url: string};
+  CourseList: {type: string};
   UserProfile: undefined;
   Setting: undefined;
+  EditProfile: undefined;
+};
+export type TopTabParamsList = {
+  Inprogress: undefined;
+  Downloaded: undefined;
+  Favorite: undefined;
 };
 
 export type TabParamList = {
   Explore: undefined;
   Search: undefined;
-  Learn: undefined;
+  Learn: NavigatorScreenParams<TopTabParamsList>;
 };
 
 export type AppStackScreensProps<T extends keyof AppStackParamsList> =
