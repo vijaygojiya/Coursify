@@ -38,12 +38,13 @@ const useIsSignedOut = () => {
 };
 
 const AppStack = createNativeStackNavigator({
-  screenOptions: {
-    headerShown: false,
-    animation: 'slide_from_left',
-    headerShadowVisible: false,
-    headerTitleStyle: [styles.appBarTitle, {color: colors.neutral90}],
-    headerBackTitle: 'Back',
+  screenOptions: () => {
+    return {
+      headerShown: false,
+      headerShadowVisible: false,
+      headerTitleStyle: [styles.appBarTitle, {color: colors.neutral90}],
+      headerBackTitle: 'Back',
+    };
   },
   screens: {
     Dashboard: TabNavigator,
@@ -83,26 +84,13 @@ const AuthStack = createNativeStackNavigator({
 const RootStack = createNativeStackNavigator({
   screenOptions: {headerShown: false},
   screens: {
-    Dashboard: TabNavigator,
-    CourseDetail: CourseDetailScreen,
-    UserProfile: {
-      screen: UserProfileScreen,
-      options: {title: 'Profile', headerShown: true},
+    AuthFlow: {
+      screen: AuthStack,
+      if: useIsSignedOut,
     },
-    Setting: {
-      screen: SettingScreen,
-      options: {
-        title: 'Settings',
-        headerShown: true,
-      },
-    },
-    CourseList: {
-      screen: CourseListScreen,
-      options: {headerShown: true},
-    },
-    EditProfile: {
-      screen: EditProfileScreen,
-      options: {title: 'Edit Profile', headerShown: true},
+    AppFlow: {
+      screen: AppStack,
+      if: useIsSignedIn,
     },
   },
 });
