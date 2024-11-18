@@ -12,7 +12,6 @@ import {textVariants} from '@/styles';
 import {useNavigation, useTheme} from '@react-navigation/native';
 import styles from './styles';
 import {AppButton} from '@/components';
-import {AppStackScreensProps} from '@/types/navigation';
 import Routes from '@/router/routes';
 interface CarouselItemProps {
   vector: SVGsNames;
@@ -29,9 +28,7 @@ const CarouselItem = ({
   subTitle,
   title,
 }: CarouselItemProps) => {
-  const navigation =
-    useNavigation<AppStackScreensProps<'Login'>['navigation']>();
-  console.log('navigation', navigation);
+  const navigation = useNavigation();
   const VectorImage = SVGs[vector];
   const {width} = useWindowDimensions();
   const {colors} = useTheme();

@@ -46,7 +46,7 @@ const SignUp = ({}: AppStackScreensProps<'SignUp'>) => {
   const {t} = useTranslation(['auth', 'common']);
   const {colors} = useTheme();
   const navigation =
-    useNavigation<AppStackScreensProps<'SignUp'>['navigation']>();
+    useNavigation();
 
   const togglePassword = useCallback(() => {
     setVisible(v => !v);

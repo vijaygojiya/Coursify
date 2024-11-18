@@ -2,66 +2,57 @@ import {Alert, FlatList, Image, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {useNavigation, useTheme} from '@react-navigation/native';
 import {useAuth, useCurrentUser} from '@/hooks';
-import {AppStackParamsList, AppStackScreensProps} from '@/types/navigation';
-import {SVGsNames} from '@/types/common';
 import Routes from '@/router/routes';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {SettingItem} from '@/components';
 import {fonts} from '@/styles';
+import {AppStackScreensProps} from '@/types/navigation';
 
-const settingsListItems: Array<{
-  title: string;
-  icon: SVGsNames;
-  isDelete?: boolean;
-  hideArrow?: boolean;
-  isLogout?: boolean;
-
-  routeName?: keyof AppStackParamsList;
-}> = [
+const settingsListItems = [
   {
     title: 'Profile',
-    icon: 'Profile',
+    icon: 'Profile' as const,
     routeName: Routes.EditProfile,
   },
   {
     title: 'Notifications',
-    icon: 'Notification',
+    icon: 'Notification' as const,
   },
 
   {
     title: 'Download Settings',
-    icon: 'Download',
+    icon: 'Download' as const,
   },
   {
     title: 'Change Language',
-    icon: 'Globe',
+    icon: 'Globe' as const,
   },
   {
     title: 'Privacy Policy',
-    icon: 'Lock',
+    icon: 'Lock' as const,
   },
   {
     title: 'Terms and Conditions',
-    icon: 'DocumentCheck',
+    icon: 'DocumentCheck' as const,
   },
 
   {
     title: 'Report a Bug',
-    icon: 'WarningCircle',
+    icon: 'WarningCircle' as const,
   },
   {
     title: 'Send Feedback',
-    icon: 'Comment',
+    icon: 'Comment' as const,
   },
   {
     title: 'Delete Account',
-    icon: 'Trash',
+    icon: 'Trash' as const,
     isDelete: true,
     hideArrow: true,
   },
   {
     title: 'Logout',
-    icon: 'Logout',
+    icon: 'Logout' as const,
     isLogout: true,
     hideArrow: true,
   },
@@ -69,8 +60,8 @@ const settingsListItems: Array<{
 
 const Setting = ({}: AppStackScreensProps<'Setting'>) => {
   const {data: user} = useCurrentUser();
-  const navigation =
-    useNavigation<AppStackScreensProps<'Setting'>['navigation']>();
+  const navigation = useNavigation();
+
   const {colors} = useTheme();
   const {logOut} = useAuth();
 
@@ -94,7 +85,6 @@ const Setting = ({}: AppStackScreensProps<'Setting'>) => {
       return;
     }
     if (routeName) {
-      //@ts-ignore
       navigation.navigate(routeName);
       return;
     }

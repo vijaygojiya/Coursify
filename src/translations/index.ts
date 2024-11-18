@@ -1,6 +1,6 @@
 import i18n from 'i18next';
 import {initReactI18next} from 'react-i18next';
-import RNLanguageDetector from '@os-team/i18next-react-native-language-detector';
+// import RNLanguageDetector from '@os-team/i18next-react-native-language-detector';
 
 import * as en from './en';
 import * as fr from './fr';
@@ -16,7 +16,7 @@ const ns = Object.keys(en) as TupleUnion<keyof typeof en>;
 export const defaultNS = ns[0];
 
 i18n
-  .use(RNLanguageDetector)
+  // .use(RNLanguageDetector)
   .use(initReactI18next)
   .init({
     ns,

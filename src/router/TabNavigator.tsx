@@ -8,6 +8,8 @@ import {ExploreScreen, SearchScreen} from '@/screens';
 import {BookIcon, ExploreIcon, SearchIcon} from '@/screens/tabs/icons';
 import {TabBarButton} from './TabBarButton';
 import TopTabNavigator from './TopTabNavigator';
+import {TabParamList} from '@/types/navigation';
+import Routes from './routes';
 
 const exploreTabBarButton = ({
   accessibilityState,
@@ -53,22 +55,27 @@ const getScreenOptions = (): BottomTabNavigationOptions => {
   };
 };
 
-const MyTabs = createBottomTabNavigator({
-  screenOptions: getScreenOptions,
-  screens: {
-    Explore: {
-      screen: ExploreScreen,
-      options: {tabBarButton: exploreTabBarButton},
-    },
-    Search: {
-      screen: SearchScreen,
-      options: {tabBarButton: searchTabBarButton},
-    },
-    Learn: {
-      screen: TopTabNavigator,
-      options: {tabBarButton: renderLeanTabBarButton},
-    },
-  },
-});
+const Tab = createBottomTabNavigator<TabParamList>();
 
-export default MyTabs;
+const BottomNavigator = () => {
+  return (
+    <Tab.Navigator screenOptions={getScreenOptions}>
+      <Tab.Screen
+        name={Routes.Explore}
+        component={ExploreScreen}
+        options={{tabBarButton: exploreTabBarButton}}
+      />
+      <Tab.Screen
+        name={Routes.Search}
+        component={SearchScreen}
+        options={{tabBarButton: searchTabBarButton}}
+      />
+      <Tab.Screen
+        name={Routes.Learn}
+        component={TopTabNavigator}
+        options={{tabBarButton: renderLeanTabBarButton}}
+      />
+    </Tab.Navigator>
+  );
+};
+export default BottomNavigator;

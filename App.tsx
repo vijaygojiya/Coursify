@@ -1,4 +1,4 @@
-import {AppStateStatus, Platform, StatusBar, View} from 'react-native';
+import {AppState, AppStateStatus, StatusBar, View} from 'react-native';
 import React, {useEffect} from 'react';
 import AppNavigator from '@/router/AppNavigator';
 import '@/translations';
@@ -11,25 +11,34 @@ import {focusManager, QueryClient} from '@tanstack/react-query';
 import {fireAuth} from '@/services/firebase';
 import {PersistQueryClientProvider} from '@tanstack/react-query-persist-client';
 import {clientPersister} from '@/services/storage';
-import {useAppState, useOnlineManager} from '@/hooks';
+import {useOnlineManager} from '@/hooks';
 import colors from '@/styles/colors';
 
 const s = {flex: 1};
 
-function onAppStateChange(status: AppStateStatus) {
-  // React Query already supports in web browser refetch on window focus by default
-  if (Platform.OS !== 'web') {
-    focusManager.setFocused(status === 'active');
-  }
-}
+focusManager.setEventListener(onFocus => {
+  const subscription = AppState.addEventListener(
+    'change',
+    (status: AppStateStatus) => {
+      onFocus(status === 'active');
+    },
+  );
+
+  return () => subscription.remove();
+});
 
 const queryClient = new QueryClient({
-  defaultOptions: {queries: {retry: 2}},
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      structuralSharing: false,
+      retry: false,
+    },
+  },
 });
 
 const App = () => {
   useOnlineManager();
-  useAppState(onAppStateChange);
 
   useEffect(() => {
     fireAuth.facebookSettings();
@@ -39,7 +48,10 @@ const App = () => {
   return (
     <View style={s}>
       <PersistQueryClientProvider
-        persistOptions={{persister: clientPersister}}
+        persistOptions={{
+          persister: clientPersister,
+          dehydrateOptions: {shouldDehydrateMutation: () => false},
+        }}
         client={queryClient}>
         <AuthProvider>
           <StatusBar

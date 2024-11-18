@@ -1,7 +1,7 @@
 import {Chevron, Clock} from '@/assets';
 import {textVariants} from '@/styles';
 import {AppStackScreensProps} from '@/types/navigation';
-import {Course} from '@/types/types';
+import {ICourse} from '@/types/types';
 import {useNavigation, useTheme} from '@react-navigation/native';
 import React, {useCallback} from 'react';
 import {
@@ -18,7 +18,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const screenWith = Dimensions.get('screen').width;
-const staticCourse: Course = {
+const staticCourse: ICourse = {
   id: 'as-asd-d-34-3s',
   title: 'React Native Masterclass',
   thumbnail:
@@ -40,9 +40,10 @@ const staticCourse: Course = {
   modules: [],
   reviews: [],
 };
+
 const CourseDetailScreen = ({}: AppStackScreensProps<'CourseDetail'>) => {
-  const navigation =
-    useNavigation<AppStackScreensProps<'CourseDetail'>['navigation']>();
+  const navigation = useNavigation();
+
   const {title, description, thumbnail, modules, instructor} = staticCourse;
 
   const {colors} = useTheme();

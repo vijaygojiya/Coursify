@@ -95,7 +95,7 @@ const Explore = ({}: TabScreensProps<'Explore'>) => {
       <ExploreCarousel />
       <HorizontalListSection
         onChevronPress={() => {
-          navigation.navigate('CourseList', {type: sectionTitles[0]});
+          navigation.navigate(Routes.CourseList, {type: sectionTitles[0]});
         }}
         title={sectionTitles[0]}
         keyExtractor={(item, i) => item.id + sectionTitles[0] + i}
@@ -120,7 +120,7 @@ const Explore = ({}: TabScreensProps<'Explore'>) => {
             key={title + index}
             title={title}
             onChevronPress={() => {
-              navigation.navigate('CourseList', {type: title});
+              navigation.navigate(Routes.CourseList, {type: title});
             }}
             keyExtractor={(item, i) => item.id + sectionTitles[0] + i}
             data={[

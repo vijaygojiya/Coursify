@@ -40,3 +40,5 @@ export {default as Comment} from './svgs/comment.svg';
 export {default as WarningCircle} from './svgs/warning-circle.svg';
 export {default as Edit} from './svgs/edit.svg';
 export {default as Hourglass} from './svgs/hourglass.svg';
+export {default as Heart} from './svgs/heart.svg';
+

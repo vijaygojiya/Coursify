@@ -7,8 +7,6 @@ import {textVariants} from '@/styles';
 import {getRandomImage} from '@/utils/helper';
 import {StarFill} from '@/assets';
 import BounceContainer from '../BounceContainer';
-import {TabScreensProps} from '@/types/navigation';
-import Routes from '@/router/routes';
 
 interface ExploreListItemProps extends ICourse {
   index: number;
@@ -21,7 +19,7 @@ const ExploreListItem = ({
   index,
 }: ExploreListItemProps) => {
   const {colors} = useTheme();
-  const navigation = useNavigation<TabScreensProps<'Explore'>['navigation']>();
+  const navigation = useNavigation();
 
   const uri = useMemo(() => {
     return getRandomImage(index);
@@ -30,7 +28,7 @@ const ExploreListItem = ({
   return (
     <BounceContainer
       onPress={() => {
-        navigation.navigate(Routes.CourseDetail, {url: uri});
+        navigation.navigate('CourseDetail');
       }}
       style={[styles.container]}>
       <Image

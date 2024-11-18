@@ -10,7 +10,6 @@ type IItem = (typeof MockData)['Newest Courses'][number];
 
 interface CourseItemProps extends IItem {}
 const CourseItem = ({instructor, title}: CourseItemProps) => {
-  console.log(title);
   const {colors} = useTheme();
   return (
     <Pressable style={[styles.container, {backgroundColor: colors.neutral10}]}>

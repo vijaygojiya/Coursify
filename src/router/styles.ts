@@ -15,12 +15,6 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
     lineHeight: 30,
   },
-
-  appBarTitle: {
-    fontFamily: fonts.medium,
-    fontSize: 20,
-    textAlign: 'center',
-  },
 });
 
 export default styles;

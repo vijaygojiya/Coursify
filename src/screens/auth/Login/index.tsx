@@ -29,8 +29,7 @@ const Login = ({}: AppStackScreensProps<'Login'>) => {
   const [isSecureTextEntry, setSecureTextEntry] = useState(true);
   const [inputs, setInputs] = useState(defaultValue);
   const [errors, setErrors] = useState(defaultValue);
-  const navigation =
-    useNavigation<AppStackScreensProps<'Login'>['navigation']>();
+  const navigation = useNavigation();
   const {mutate, isPending} = useMutation({
     mutationFn: fireAuth.signInUserWithFirebase,
     onError: e => {
@@ -106,8 +105,7 @@ const Login = ({}: AppStackScreensProps<'Login'>) => {
   };
   const handleLoginWithFacebook = async () => {
     try {
-      const users = await fireAuth.facebookLogin();
-      console.log('=+===++===++==++', JSON.stringify(users, null, 8));
+      await fireAuth.facebookLogin();
     } catch (error) {
       console.log(
         'error while sign in with facebook ',
