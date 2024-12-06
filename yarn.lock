@@ -3708,11 +3708,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-navigation/bottom-tabs@npm:^7.0.4":
-  version: 7.0.4
-  resolution: "@react-navigation/bottom-tabs@npm:7.0.4"
+"@react-navigation/bottom-tabs@npm:^7.0.6":
+  version: 7.0.6
+  resolution: "@react-navigation/bottom-tabs@npm:7.0.6"
   dependencies:
-    "@react-navigation/elements": ^2.0.3
+    "@react-navigation/elements": ^2.1.0
     color: ^4.2.3
   peerDependencies:
     "@react-navigation/native": ^7.0.3
@@ -3720,7 +3720,7 @@ __metadata:
     react-native: "*"
     react-native-safe-area-context: ">= 4.0.0"
     react-native-screens: ">= 4.0.0"
-  checksum: 158ea4d5a163244036d2a2efc8cc5f8bfdefd8519d64a975f8a7978896d5810ec7dcdd518cac540e4e349a30880006cede5763764bae938c212d02a9ccd3f31b
+  checksum: c63006705f26ad5710b4dbe30179a270730917a54f1b6f43626668cc240e8bee15c06177c259f455875d66abc0b7fea0961628439c1678ea816c5ffc25c5c30b
   languageName: node
   linkType: hard
 
@@ -3741,9 +3741,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-navigation/elements@npm:^2.0.3":
-  version: 2.0.3
-  resolution: "@react-navigation/elements@npm:2.0.3"
+"@react-navigation/elements@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "@react-navigation/elements@npm:2.1.0"
   dependencies:
     color: ^4.2.3
   peerDependencies:
@@ -3755,31 +3755,31 @@ __metadata:
   peerDependenciesMeta:
     "@react-native-masked-view/masked-view":
       optional: true
-  checksum: 0d680ca1eb022c2ad7794daaa581668f827f0566f0892033b19273497273064c66034dbd225512bb4b80557b8f7852e8598d089bc6b3ddb032bb4262d69e9d94
+  checksum: 318ce2b7613d1928123cf130597078d5b0c7dabe31a4ddd9cc913a29792625adf6c69ecb7081a4c6ebb55a05a87c511618b531770297849f5b30b92f70e9bc86
   languageName: node
   linkType: hard
 
-"@react-navigation/material-top-tabs@npm:^7.0.4":
-  version: 7.0.4
-  resolution: "@react-navigation/material-top-tabs@npm:7.0.4"
+"@react-navigation/material-top-tabs@npm:^7.0.6":
+  version: 7.0.6
+  resolution: "@react-navigation/material-top-tabs@npm:7.0.6"
   dependencies:
-    "@react-navigation/elements": ^2.0.3
+    "@react-navigation/elements": ^2.1.0
     color: ^4.2.3
-    react-native-tab-view: ^4.0.1
+    react-native-tab-view: ^4.0.2
   peerDependencies:
     "@react-navigation/native": ^7.0.3
     react: ">= 18.2.0"
     react-native: "*"
     react-native-pager-view: ">= 6.0.0"
-  checksum: 4a4415266e0711ded1061d35457e395cd35065258b1d591425bf27c412d7eecdc245030eca72d52dc55f1689a621c95e376d9a4d2ef717147b46f8c76f37a02d
+  checksum: 615cd5a3572dce58350a0a5864bc7cae4290692e21e4806fdad0305b64dcfad0247f45f2e67bcc705465fde08ccbdb3cae1edb483a7c7b4effedd5c5813c6da0
   languageName: node
   linkType: hard
 
-"@react-navigation/native-stack@npm:^7.0.3":
-  version: 7.0.3
-  resolution: "@react-navigation/native-stack@npm:7.0.3"
+"@react-navigation/native-stack@npm:^7.1.0":
+  version: 7.1.0
+  resolution: "@react-navigation/native-stack@npm:7.1.0"
   dependencies:
-    "@react-navigation/elements": ^2.0.3
+    "@react-navigation/elements": ^2.1.0
     warn-once: ^0.1.1
   peerDependencies:
     "@react-navigation/native": ^7.0.3
@@ -3787,7 +3787,7 @@ __metadata:
     react-native: "*"
     react-native-safe-area-context: ">= 4.0.0"
     react-native-screens: ">= 4.0.0"
-  checksum: 1eb07d58c439ac29eaeec8748324e05149fd2c2ffd25b8a2d20d9543fbb727077e8c52e2320097eea42e2826921a42fcac094a0917895fe60443542cf845491e
+  checksum: 21914ba535c8c3a7ba20636ce09d42ae93524ce9f0df5d19c0392ae4684ddea3e0eab31bf35df1f6f7123370786d91e40ad57690cde6dc8dfd47a3deeabe32a5
   languageName: node
   linkType: hard
 
@@ -4446,10 +4446,10 @@ __metadata:
     "@react-native/eslint-config": 0.76.2
     "@react-native/metro-config": 0.76.2
     "@react-native/typescript-config": 0.76.2
-    "@react-navigation/bottom-tabs": ^7.0.4
-    "@react-navigation/material-top-tabs": ^7.0.4
+    "@react-navigation/bottom-tabs": ^7.0.6
+    "@react-navigation/material-top-tabs": ^7.0.6
     "@react-navigation/native": ^7.0.3
-    "@react-navigation/native-stack": ^7.0.3
+    "@react-navigation/native-stack": ^7.1.0
     "@tanstack/query-sync-storage-persister": ^5.60.5
     "@tanstack/react-query": ^5.60.5
     "@tanstack/react-query-persist-client": ^5.60.5
@@ -10694,16 +10694,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-tab-view@npm:^4.0.1":
-  version: 4.0.1
-  resolution: "react-native-tab-view@npm:4.0.1"
+"react-native-tab-view@npm:^4.0.2":
+  version: 4.0.2
+  resolution: "react-native-tab-view@npm:4.0.2"
   dependencies:
     use-latest-callback: ^0.2.1
   peerDependencies:
     react: ">= 18.2.0"
     react-native: "*"
     react-native-pager-view: ">= 6.0.0"
-  checksum: b81535cf16311b8499e413dd7de2d87ba7774d64dde67621f762a8d17ce0b02e7a974052af41f55c808f3a58ce1f23a3d86d2b6340796d4e34a9d3a649c0ace3
+  checksum: 9a2f7a6a573fbb4cc3189fa816667717e5cac4a4ab120739ea66083cd82f53504a401c092e9f7ddeab6fdcb76d9abba5e61367b6ec83f71df366132c9162d2b6
   languageName: node
   linkType: hard
 

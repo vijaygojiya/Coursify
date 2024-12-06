@@ -15,11 +15,7 @@ import {
 import ExploreCarousel from '@/components/ExploreCarousel';
 import {ExploreListItem, HorizontalListSection} from '@/components';
 import {ICourse} from '@/types/courses';
-import {
-  useNavigation,
-  useScrollToTop,
-  useTheme,
-} from '@react-navigation/native';
+import {useScrollToTop, useTheme} from '@react-navigation/native';
 import styles from './styles';
 import PopularInstructorItem from '@/components/PopularInstructorItem';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
@@ -27,7 +23,7 @@ import {textVariants} from '@/styles';
 import {useCurrentUser, useRefreshByUser} from '@/hooks';
 import {getFirstName} from '@/utils/helper';
 import BounceContainer from '@/components/BounceContainer';
-import {Setting} from '@/assets';
+import {Notification, Setting} from '@/assets';
 import Routes from '@/router/routes';
 
 const renderItem: ListRenderItem<ICourse> = ({item, index}) => {
@@ -39,11 +35,9 @@ const renderPopularInstructor: ListRenderItem<
   return <PopularInstructorItem name={name} index={index} />;
 };
 
-const Explore = ({}: TabScreensProps<'Explore'>) => {
+const Explore = ({navigation}: TabScreensProps<'Explore'>) => {
   //
   const scrollRef = useRef<ScrollView | null>(null);
-  // console.log(navigation);
-  const navigation = useNavigation();
 
   useScrollToTop(scrollRef);
 
@@ -52,7 +46,7 @@ const Explore = ({}: TabScreensProps<'Explore'>) => {
   const {data: user, refetch} = useCurrentUser({enabled: true});
   const {isRefetchingByUser, refetchByUser} = useRefreshByUser(refetch);
 
-  const {bottom} = useSafeAreaInsets();
+  const {top} = useSafeAreaInsets();
 
   return (
     <ScrollView
@@ -62,13 +56,10 @@ const Explore = ({}: TabScreensProps<'Explore'>) => {
         <RefreshControl
           refreshing={isRefetchingByUser}
           onRefresh={refetchByUser}
-          progressViewOffset={bottom + 22}
+          progressViewOffset={top + 42}
         />
       }
-      contentContainerStyle={[
-        styles.mainContentContainer,
-        {paddingTop: bottom},
-      ]}
+      contentContainerStyle={[styles.mainContentContainer, {paddingTop: top}]}
       showsVerticalScrollIndicator={false}>
       <View style={styles.headerContainer}>
         <View style={{flex: 1}}>
@@ -88,7 +79,7 @@ const Explore = ({}: TabScreensProps<'Explore'>) => {
           onPress={() => {
             navigation.navigate(Routes.Setting);
           }}>
-          <Setting />
+          <Notification />
         </BounceContainer>
       </View>
       {/**-promotion-**/}

@@ -13,6 +13,7 @@ import {PersistQueryClientProvider} from '@tanstack/react-query-persist-client';
 import {clientPersister} from '@/services/storage';
 import {useOnlineManager} from '@/hooks';
 import colors from '@/styles/colors';
+import BootSplash from 'react-native-bootsplash';
 
 const s = {flex: 1};
 
@@ -51,6 +52,9 @@ const App = () => {
         persistOptions={{
           persister: clientPersister,
           dehydrateOptions: {shouldDehydrateMutation: () => false},
+        }}
+        onSuccess={() => {
+          BootSplash.hide();
         }}
         client={queryClient}>
         <AuthProvider>

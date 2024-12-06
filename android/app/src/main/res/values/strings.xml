@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Coursify</string>
+        <string name="FB_APP_ID">335482172923991</string>
+    <string name="FB_LOGIN_PROTOCOL">fb335482172923991</string>
+    <string name="FB_CLIENT_TOKEN">16610b196cb20a3fe5e43226d284886c</string>
+
 </resources>

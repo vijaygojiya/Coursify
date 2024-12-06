@@ -6,6 +6,7 @@ import {
   CourseListScreen,
   EditProfileScreen,
   ForgotPasswordScreen,
+  LoadingScreen,
   LoginScreen,
   OnBoardingScreen,
   SettingScreen,
@@ -14,13 +15,13 @@ import {
 } from '@/screens';
 import {useAuth} from '@/hooks';
 import TabNavigator from './TabNavigator';
-import BootSplash from 'react-native-bootsplash';
 import {DefaultTheme, Theme} from '@react-navigation/native';
 import colors from '@/styles/colors';
 import SystemNavigationBar from 'react-native-system-navigation-bar';
 import {fonts} from '@/styles';
 import {AppStackParamsList} from '@/types/navigation';
 import Routes from './routes';
+import {useIsRestoring} from '@tanstack/react-query';
 
 SystemNavigationBar.setNavigationColor(colors.neutral10);
 
@@ -40,12 +41,10 @@ const AppStack = createNativeStackNavigator<AppStackParamsList>();
 
 const AppStackNavigation = () => {
   const {isLoggedIn} = useAuth();
+  const isRestoring = useIsRestoring();
+
   return (
-    <NavigationContainer
-      theme={appTheme}
-      onReady={() => {
-        BootSplash.hide();
-      }}>
+    <NavigationContainer theme={appTheme}>
       <AppStack.Navigator
         screenOptions={{
           headerTintColor: colors.primaryMain,
@@ -54,7 +53,13 @@ const AppStackNavigation = () => {
           headerTitleStyle: [{color: colors.neutral90}],
           headerBackTitle: 'Back',
         }}>
-        {!isLoggedIn ? (
+        {isRestoring ? (
+          <AppStack.Screen
+            name={Routes.Loading}
+            component={LoadingScreen}
+            options={{headerShown: false}}
+          />
+        ) : !isLoggedIn ? (
           <AppStack.Group screenOptions={{headerShown: false}}>
             <AppStack.Screen
               name={Routes.OnBoarding}

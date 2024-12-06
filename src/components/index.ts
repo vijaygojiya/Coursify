@@ -11,3 +11,5 @@ export {default as CourseFilterBar} from './CourseFilterBar';
 export {default as CategoryItem} from './CategoryItem';
 export {default as SearchPlaceholder} from './SearchPlaceholder';
 export {default as CheckBox} from './CheckBox';
+export {default as FullScreenLoader} from './FullScreenLoader';
+export {default as LineSeparator} from './LineSeparator';

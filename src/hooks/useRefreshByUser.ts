@@ -9,7 +9,7 @@ function useRefreshByUser(refetch: () => Promise<unknown>) {
     try {
       await refetch();
     } finally {
-      setIsRefetchingByUser(false);
+      // setIsRefetchingByUser(false);
     }
   }
 

@@ -1,10 +1,8 @@
 import React from 'react';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import {ColorValue, Dimensions, View} from 'react-native';
+import {ColorValue, Dimensions, Text, View} from 'react-native';
 import {Download, Heart, Hourglass} from '@/assets';
-import {initialWindowMetrics} from 'react-native-safe-area-context';
 import colors from '@/styles/colors';
-import {AppButton, CheckBox} from '@/components';
 import {TopTabParamsList} from '@/types/navigation';
 
 const renderDownloadIcon = ({color}: {color: ColorValue}) => {
@@ -23,34 +21,35 @@ const screenWidth = Dimensions.get('window').width;
 
 const HomeScree = () => {
   return (
-    <View>
-      <AppButton title="Logout" onPress={() => {}} />
-      <CheckBox playOnMount={true} />
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <Text>Coming Soon</Text>
     </View>
   );
 };
 
 const TopTab = createMaterialTopTabNavigator<TopTabParamsList>();
+
 const TopTabNavigator = () => {
   return (
     <TopTab.Navigator
       initialLayout={{width: screenWidth}}
       screenOptions={{
+        tabBarAndroidRipple: {borderless: false},
         tabBarStyle: {
-          paddingTop: initialWindowMetrics?.insets.top,
           elevation: undefined,
         },
+
         tabBarActiveTintColor: colors.primaryMain,
         tabBarInactiveTintColor: colors.neutral50,
         tabBarShowLabel: false,
         tabBarIndicatorContainerStyle: {},
         tabBarIndicatorStyle: {
           backgroundColor: colors.primaryMain,
-          height: 3,
+          height: 2,
           borderTopEndRadius: 8,
           borderTopStartRadius: 8,
-          width: (screenWidth - 23 * 6) / 3,
-          marginHorizontal: 23,
+          width: (screenWidth - 32 * 6) / 3,
+          marginHorizontal: 32,
         },
       }}>
       <TopTab.Screen

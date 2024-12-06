@@ -6,6 +6,7 @@ import {
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 
 export type AppStackParamsList = {
+  Loading: undefined;
   Login: undefined;
   SignUp: undefined;
   OnBoarding: undefined;

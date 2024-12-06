@@ -1,12 +1,14 @@
 import {Alert, FlatList, Image, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {useNavigation, useTheme} from '@react-navigation/native';
+import {useTheme} from '@react-navigation/native';
 import {useAuth, useCurrentUser} from '@/hooks';
 import Routes from '@/router/routes';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {SettingItem} from '@/components';
+import {FullScreenLoader, SettingItem} from '@/components';
 import {fonts} from '@/styles';
 import {AppStackScreensProps} from '@/types/navigation';
+import {useMutation} from '@tanstack/react-query';
+import {deleteUser} from '@/apis/userApis';
 
 const settingsListItems = [
   {
@@ -58,9 +60,13 @@ const settingsListItems = [
   },
 ];
 
-const Setting = ({}: AppStackScreensProps<'Setting'>) => {
-  const {data: user} = useCurrentUser();
-  const navigation = useNavigation();
+const Setting = ({navigation}: AppStackScreensProps<'Setting'>) => {
+  const {mutate, isPending} = useMutation({
+    mutationFn: deleteUser,
+    onSuccess: () => {
+      logOut();
+    },
+  });
 
   const {colors} = useTheme();
   const {logOut} = useAuth();
@@ -79,7 +85,12 @@ const Setting = ({}: AppStackScreensProps<'Setting'>) => {
     }
     if (isDelete) {
       Alert.alert('', 'Are you sure want to delete your account!', [
-        {text: 'Yes', onPress: logOut},
+        {
+          text: 'Yes',
+          onPress: () => {
+            mutate();
+          },
+        },
         {text: 'No'},
       ]);
       return;
@@ -104,22 +115,6 @@ const Setting = ({}: AppStackScreensProps<'Setting'>) => {
             App Version 1.0.0
           </Text>
         }
-        ListHeaderComponent={
-          <View style={styles.profileContainer}>
-            <Image
-              source={{uri: user?.profileImg}}
-              style={[styles.profileImage, {backgroundColor: colors.neutral50}]}
-            />
-            <View style={styles.infoContainer}>
-              <Text style={[styles.text, {color: colors.neutral100}]}>
-                {user?.name}
-              </Text>
-              <Text style={[styles.email, {color: colors.neutral70}]}>
-                {user?.email}
-              </Text>
-            </View>
-          </View>
-        }
         renderItem={({item, index}) => {
           return (
             <SettingItem
@@ -132,6 +127,7 @@ const Setting = ({}: AppStackScreensProps<'Setting'>) => {
           );
         }}
       />
+      <FullScreenLoader loading={isPending} />
     </SafeAreaView>
   );
 };
@@ -142,35 +138,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  appBarTitle: {
-    fontFamily: fonts.medium,
-    fontSize: 24,
-    textAlign: 'center',
-  },
-  profileContainer: {
-    marginVertical: 8,
-    columnGap: 8,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  infoContainer: {flex: 1},
-  profileImage: {
-    height: 54,
-    width: 54,
-    borderRadius: 54 / 2,
-  },
+
   contentContainer: {
     flexGrow: 1,
     paddingHorizontal: 22,
-  },
-
-  text: {
-    fontFamily: fonts.medium,
-    fontSize: 18,
-  },
-  email: {
-    fontFamily: fonts.regular,
-    fontSize: 12,
+    // backgroundColor: 'red',
   },
 
   appVersion: {

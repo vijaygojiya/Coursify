@@ -1,5 +1,6 @@
 const Routes = Object.freeze({
   //Auth
+  Loading: 'Loading',
   Login: 'Login',
   SignUp: 'SignUp',
   OnBoarding: 'OnBoarding',

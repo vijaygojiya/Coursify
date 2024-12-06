@@ -39,3 +39,10 @@ export const updateCurrentUserInfoApi = async (
     data: data,
   });
 };
+
+export const deleteUser = async () => {
+  return axiosClient<ApiResponse<unknown>>({
+    method: HTTP_METHODS.delete,
+    url: apiEndpoints.user.createUser(),
+  });
+};

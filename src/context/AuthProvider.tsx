@@ -26,6 +26,7 @@ const AuthProvider: FC<PropsWithChildren<unknown>> = ({children}) => {
   const [isLoggedIn, setLoggedIn] = useState<boolean | null>(false);
   useEffect(() => {
     const subscriber = fireAuth.fireAuth.onAuthStateChanged(user => {
+      console.log('======user', JSON.stringify(user, null, 8));
       setLoggedIn(!!user?.email);
     });
     return subscriber;
