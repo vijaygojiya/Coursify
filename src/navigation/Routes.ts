@@ -1,2 +1,4 @@
-const AppRoutes = Object.freeze({});
+const AppRoutes = Object.freeze({
+  Login: 'Login',
+});
 export default AppRoutes;

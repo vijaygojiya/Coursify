@@ -7,6 +7,7 @@ import {
 import {LoginScreen} from '@/screens';
 import {useAuth} from '@/hooks';
 import TabNavigator from './TabNavigator';
+import {lightTheme} from '@/styles';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,7 +18,7 @@ const appScreenOption: NativeStackNavigationOptions = {
 const AppNavigator = () => {
   const {isLoggedIn} = useAuth();
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={lightTheme}>
       <Stack.Navigator screenOptions={appScreenOption}>
         {isLoggedIn ? (
           <Stack.Screen name="Dashboard" component={TabNavigator} />

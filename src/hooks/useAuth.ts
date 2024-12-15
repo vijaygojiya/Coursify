@@ -1,5 +1,11 @@
-const useAuth = () => {
-  return {isLoggedIn: true};
-};
+import {AuthContext} from '@/contexts/AuthProvider';
+import {useContext} from 'react';
 
-export default useAuth;
+export default function useAuth() {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used within a AuthProvider');
+  }
+
+  return context;
+}
