@@ -1,8 +1,11 @@
 import React, {useCallback, useRef, useState} from 'react';
 import {useAuth} from '@/hooks';
 import {
+  AppleIcon,
   EyeCloseIcon,
   EyeOpenIcon,
+  FacebookIcon,
+  GoogleIcon,
   LockIcon,
   LoginVector,
   MainIcon,
@@ -87,15 +90,10 @@ const Login = () => {
         {paddingTop: top, paddingBottom: bottom},
       ]}
       disableScrollOnKeyboardHide={true}>
-      <LoginVector width={226} height={220} style={{alignSelf: 'center'}} />
-      <Text
-        style={{
-          fontSize: 26,
-          fontWeight: '500',
-          alignSelf: 'center',
-          color: colors.primary,
-        }}>
-        Welcome Back
+      <View style={styles.spacer} />
+      <Text style={[styles.appTitle, {color: colors.neutral100}]}>
+        Welcome Back!{'\n'}
+        <Text style={{color: colors.primary}}>Coursify</Text>
       </Text>
       {inputConfigs.map((inputKey, index) => {
         const isPassword = inputKey === 'password';
@@ -138,17 +136,32 @@ const Login = () => {
           />
         );
       })}
-      <Pressable style={{alignSelf: 'flex-end'}}>
-        <Text style={{fontSize: 14, color: colors.primary, marginBottom: 18}}>
+      <Pressable style={styles.forgotPasswordContainer}>
+        <Text style={[styles.forgotPassword, {color: colors.primary}]}>
           Forgot password?
         </Text>
       </Pressable>
-      <AppButton title="Login" />
-      <View style={{flex: 1}} />
-      <Pressable
-        style={{alignSelf: 'center'}}
-        hitSlop={{top: 10, bottom: 5}}
-        onPress={() => {}}>
+      <AppButton onPress={handleSubmit} title="Login" />
+      <View style={styles.orRowContainer}>
+        <View style={[styles.line, {backgroundColor: colors.neutral50}]} />
+        <Text style={[styles.orText, {color: colors.neutral70}]}>OR</Text>
+        <View style={[styles.line, {backgroundColor: colors.neutral50}]} />
+      </View>
+
+      <View style={styles.socialIconContainer}>
+        <Pressable style={[styles.iconContainer, {borderColor: colors.border}]}>
+          <GoogleIcon fill={colors.primary} />
+        </Pressable>
+        <Pressable style={[styles.iconContainer, {borderColor: colors.border}]}>
+          <FacebookIcon fill={colors.primary} />
+        </Pressable>
+        <Pressable style={[styles.iconContainer, {borderColor: colors.border}]}>
+          <AppleIcon fill={colors.primary} />
+        </Pressable>
+      </View>
+
+      <View style={styles.spacer} />
+      <Pressable hitSlop={{top: 10, bottom: 5}} onPress={() => {}}>
         <Text style={[styles.footerText, {color: colors.text}]}>
           Don't have an account?{'  '}
           <Text style={[styles.createAccountText, {color: colors.primary}]}>

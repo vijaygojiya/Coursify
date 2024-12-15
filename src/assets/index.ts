@@ -4,3 +4,6 @@ export {default as EyeOpenIcon} from './icons/eye-open.svg';
 export {default as LockIcon} from './icons/lock-on.svg';
 export {default as MainIcon} from './icons/mail.svg';
 export {default as LoginVector} from './vectors/login.svg';
+export {default as AppleIcon} from './icons/apple.svg';
+export {default as GoogleIcon} from './icons/google.svg';
+export {default as FacebookIcon} from './icons/facebook.svg';

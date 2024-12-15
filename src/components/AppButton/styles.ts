@@ -1,3 +1,4 @@
+import {textStyles} from '@/styles';
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
@@ -9,8 +10,8 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
   },
   title: {
-    fontSize: 16,
-    lineHeight: 18,
+    ...textStyles.labelLarge,
+    lineHeight: 20,
   },
 });
 export default styles;

@@ -38,7 +38,7 @@ const AppButton: FC<AppButtonProps> = ({
         containerStyle,
       ]}>
       {isLoading ? (
-        <ActivityIndicator size={18} color={colors.neutral10} />
+        <ActivityIndicator size={20} color={colors.neutral10} />
       ) : (
         <Text style={[styles.title, {color: colors.neutral10}, titleStyle]}>
           {title}

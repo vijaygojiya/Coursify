@@ -1,4 +1,4 @@
-import {FontsSize} from '@/styles';
+import {textStyles} from '@/styles';
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
@@ -6,24 +6,24 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   labelText: {
-    fontSize: 14,
+    ...textStyles.bodySmall,
     marginBottom: 8,
   },
   textInput: {
+    ...textStyles.bodyLarge,
     flex: 1,
-    fontSize: FontsSize.Headline,
     paddingVertical: 14,
-    paddingHorizontal: 6,
+    paddingHorizontal: 4,
   },
   rowContainer: {
-    paddingHorizontal: 12,
+    paddingHorizontal: 10,
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1,
     borderRadius: 8,
   },
   error: {
-    fontSize: 12,
+    ...textStyles.bodySmall,
     marginTop: 4,
   },
 });
