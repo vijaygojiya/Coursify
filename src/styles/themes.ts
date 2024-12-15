@@ -69,6 +69,7 @@ export const lightTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
+    primary: AppColors.primaryMain,
     background: AppColors.neutral10,
     ...AppColors,
   },

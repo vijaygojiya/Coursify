@@ -8,6 +8,7 @@ import {LoginScreen} from '@/screens';
 import {useAuth} from '@/hooks';
 import TabNavigator from './TabNavigator';
 import {lightTheme} from '@/styles';
+import AppRoutes from './Routes';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,9 +22,9 @@ const AppNavigator = () => {
     <NavigationContainer theme={lightTheme}>
       <Stack.Navigator screenOptions={appScreenOption}>
         {isLoggedIn ? (
-          <Stack.Screen name="Dashboard" component={TabNavigator} />
+          <Stack.Screen name={AppRoutes.Dashboard} component={TabNavigator} />
         ) : (
-          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name={AppRoutes.Login} component={LoginScreen} />
         )}
       </Stack.Navigator>
     </NavigationContainer>

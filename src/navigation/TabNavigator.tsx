@@ -4,6 +4,7 @@ import {
   BottomTabNavigationOptions,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
+import AppRoutes from './Routes';
 
 const Tab = createBottomTabNavigator();
 
@@ -17,7 +18,7 @@ const tabScreenOptions: BottomTabNavigationOptions = {
 const TabNavigator = () => {
   return (
     <Tab.Navigator screenOptions={tabScreenOptions}>
-      <Tab.Screen name="Home" component={Temp} />
+      <Tab.Screen name={AppRoutes.Home} component={Temp} />
     </Tab.Navigator>
   );
 };
