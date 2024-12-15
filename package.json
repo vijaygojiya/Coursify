@@ -7,11 +7,18 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "pod": "pod-install ios"
   },
   "dependencies": {
+    "@react-navigation/bottom-tabs": "^7.2.0",
+    "@react-navigation/native": "^7.0.14",
+    "@react-navigation/native-stack": "^7.2.0",
     "react": "18.3.1",
-    "react-native": "0.76.5"
+    "react-native": "0.76.5",
+    "react-native-safe-area-context": "^5.0.0",
+    "react-native-screens": "^4.3.0",
+    "react-native-svg": "^15.10.1"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
@@ -27,9 +34,12 @@
     "@types/react": "^18.2.6",
     "@types/react-test-renderer": "^18.0.0",
     "babel-jest": "^29.6.3",
+    "babel-plugin-module-resolver": "^5.0.2",
     "eslint": "^8.19.0",
     "jest": "^29.6.3",
+    "pod-install": "^0.3.2",
     "prettier": "2.8.8",
+    "react-native-svg-transformer": "^1.5.0",
     "react-test-renderer": "18.3.1",
     "typescript": "5.0.4"
   },
