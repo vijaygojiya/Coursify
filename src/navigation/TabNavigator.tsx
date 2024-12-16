@@ -5,8 +5,9 @@ import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 import AppRoutes from './Routes';
+import {BottomTabParamsList} from '@/typings/navigation';
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<BottomTabParamsList>();
 
 const Temp = () => <View />;
 

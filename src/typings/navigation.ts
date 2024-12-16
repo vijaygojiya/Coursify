@@ -8,6 +8,7 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 export type AppStackParamsList = {
   Dashboard: NavigatorScreenParams<BottomTabParamsList>;
   Login: undefined;
+  SignUp: undefined;
 };
 
 export type AppScreenProps<T extends keyof AppStackParamsList> =

@@ -10,9 +10,11 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   textInput: {
-    ...textStyles.bodyLarge,
+    ...textStyles.bodyMedium,
     flex: 1,
-    paddingVertical: 14,
+    paddingVertical: 0,
+    paddingTop: 12,
+    paddingBottom: 12,
     paddingHorizontal: 4,
   },
   rowContainer: {
