@@ -10,6 +10,7 @@ import TabNavigator from './TabNavigator';
 import {lightTheme} from '@/styles';
 import AppRoutes from './Routes';
 import {AppStackParamsList} from '@/typings/navigation';
+import Onboarding from '@/screens/auth/Onboarding';
 
 const Stack = createNativeStackNavigator<AppStackParamsList>();
 
@@ -26,6 +27,7 @@ const AppNavigator = () => {
           <Stack.Screen name={AppRoutes.Dashboard} component={TabNavigator} />
         ) : (
           <>
+            <Stack.Screen name={AppRoutes.Onboarding} component={Onboarding} />
             <Stack.Screen name={AppRoutes.Login} component={LoginScreen} />
             <Stack.Screen name={AppRoutes.SignUp} component={SignUpScreen} />
           </>
