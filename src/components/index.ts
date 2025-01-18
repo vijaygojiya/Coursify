@@ -8,3 +8,5 @@ export {default as HorizontalListSection} from './HorizontalListSection';
 export {default as SearchPlaceholder} from './SearchPlaceholder';
 export {default as CategoryItem} from './CategoryItem';
 export {default as CourseItem} from './CourseItem';
+export {default as SettingItem} from './SettingItem';
+export {default as SettingHeader} from './SettingHeader';

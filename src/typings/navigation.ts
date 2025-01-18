@@ -20,6 +20,7 @@ export type BottomTabParamsList = {
   Explore: undefined;
   Search: undefined;
   Learn: NavigatorScreenParams<TopTabParamsList>;
+  Settings: undefined;
 };
 
 export type BottomTabScreensProps<T extends keyof BottomTabParamsList> =

@@ -17,3 +17,13 @@ export {default as NotificationIcon} from './icons/notification.svg';
 export {default as DownloadIcon} from './icons/download.svg';
 export {default as HeartIcon} from './icons/heart.svg';
 export {default as HourglassIcon} from './icons/hourglass.svg';
+export {default as SettingIcon} from './icons/setting.svg';
+
+export {default as CommentIcon} from './icons/comment.svg';
+export {default as DocCheckIcon} from './icons/document-check.svg';
+export {default as GlobeIcon} from './icons/globe.svg';
+export {default as Lock2Icon} from './icons/lock.svg';
+export {default as LogoutIcon} from './icons/logout-line.svg';
+export {default as ProfileIcon} from './icons/profile.svg';
+export {default as TrashIcon} from './icons/trash.svg';
+export {default as WarningCircleIcon} from './icons/warning-circle.svg';

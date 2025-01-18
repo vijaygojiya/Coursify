@@ -8,6 +8,7 @@ const Routes = Object.freeze({
   Explore: 'Explore',
   Search: 'Search',
   Learn: 'Learn',
+  Settings: 'Settings',
 
   CourseList: 'CourseList',
 });

@@ -9,8 +9,9 @@ import {TabBarButton} from './TabBarButton';
 import {AppScreenProps, BottomTabParamsList} from '@/typings/navigation';
 import {BookIcon, ExploreIcon, SearchIcon} from './icons';
 import Routes from './Routes';
-import {ExploreScreen, SearchScreen} from '@/screens';
+import {ExploreScreen, SearchScreen, SettingsScreen} from '@/screens';
 import TopTabNavigator from './TopTabNavigator';
+import SettingsIcon from './icons/Settings';
 
 const exploreTabBarButton = ({
   accessibilityState,
@@ -48,6 +49,18 @@ const renderLeanTabBarButton = ({
   />
 );
 
+const renderSettingsTabBarButton = ({
+  accessibilityState,
+  onPress,
+}: BottomTabBarButtonProps) => (
+  <TabBarButton
+    title="Settings"
+    focused={accessibilityState?.selected}
+    icon={SettingsIcon}
+    onPress={onPress}
+  />
+);
+
 const getScreenOptions = (): BottomTabNavigationOptions => {
   return {
     lazy: true,
@@ -76,6 +89,13 @@ const BottomNavigator = ({}: AppScreenProps<'Dashboard'>) => {
         component={TopTabNavigator}
         options={{
           tabBarButton: renderLeanTabBarButton,
+        }}
+      />
+      <Tab.Screen
+        name={Routes.Settings}
+        component={SettingsScreen}
+        options={{
+          tabBarButton: renderSettingsTabBarButton,
         }}
       />
     </Tab.Navigator>

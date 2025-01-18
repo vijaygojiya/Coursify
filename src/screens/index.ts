@@ -4,4 +4,6 @@ export {default as OnboardingScreen} from './Auth/Onboarding';
 
 export {default as ExploreScreen} from './Tabs/Explore';
 export {default as SearchScreen} from './Tabs/Search';
+export {default as SettingsScreen} from './Tabs/Settings';
+
 export {default as CourseListScreen} from './Other/CourseList';
