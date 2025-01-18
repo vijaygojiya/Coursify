@@ -1,12 +1,18 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {AppFonts} from '@/styles';
 import {useCurrentUser} from '@/hooks';
-import {useTheme} from '@react-navigation/native';
+import {useNavigation, useTheme} from '@react-navigation/native';
+import {EditIcon} from '@/assets';
+import {AppRoutes} from '@/navigation';
+import {BottomTabScreensProps} from '@/typings/navigation';
 
 const SettingHeader = () => {
   const {data: user} = useCurrentUser();
   const {colors} = useTheme();
+  const navigation =
+    useNavigation<BottomTabScreensProps<'Settings'>['navigation']>();
+
   return (
     <View style={styles.profileContainer}>
       <Image
@@ -21,6 +27,13 @@ const SettingHeader = () => {
           {user?.email}
         </Text>
       </View>
+      <Pressable
+        hitSlop={5}
+        onPress={() => {
+          navigation.navigate(AppRoutes.EditProfile);
+        }}>
+        <EditIcon stroke={colors.neutral60} />
+      </Pressable>
     </View>
   );
 };
@@ -33,6 +46,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 22,
+    paddingBottom: 12,
   },
   infoContainer: {flex: 1},
   profileImage: {

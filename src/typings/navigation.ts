@@ -11,6 +11,7 @@ export type AppStackParamsList = {
   SignUp: undefined;
   Onboarding: undefined;
   CourseList: {type: string};
+  EditProfile: undefined;
 };
 
 export type AppScreenProps<T extends keyof AppStackParamsList> =

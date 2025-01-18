@@ -11,6 +11,7 @@ const Routes = Object.freeze({
   Settings: 'Settings',
 
   CourseList: 'CourseList',
+  EditProfile: 'EditProfile',
 });
 
 export default Routes;

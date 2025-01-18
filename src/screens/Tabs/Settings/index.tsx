@@ -20,10 +20,6 @@ const settingsListItems: Array<{
   hideArrow?: boolean;
 }> = [
   {
-    title: 'Profile',
-    icon: 'ProfileIcon',
-  },
-  {
     title: 'Notifications',
     icon: 'NotificationIcon',
   },

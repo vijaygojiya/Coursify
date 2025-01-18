@@ -6,6 +6,7 @@ import {
 } from '@react-navigation/native-stack';
 import {
   CourseListScreen,
+  EditProfileScreen,
   LoginScreen,
   OnboardingScreen,
   SignUpScreen,
@@ -30,6 +31,12 @@ const AppNavigator = () => {
         {isLoggedIn ? (
           <>
             <Stack.Screen name={AppRoutes.Dashboard} component={TabNavigator} />
+            <Stack.Screen
+              name={AppRoutes.EditProfile}
+              component={EditProfileScreen}
+              options={{headerShown: true, title: 'Edit Profile'}}
+            />
+
             <Stack.Screen
               name={AppRoutes.CourseList}
               component={CourseListScreen}
