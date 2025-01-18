@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 22,
     paddingBottom: 12,
+    marginTop: 12,
   },
   infoContainer: {flex: 1},
   profileImage: {

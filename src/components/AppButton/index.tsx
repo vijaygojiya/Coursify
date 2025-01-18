@@ -2,6 +2,7 @@ import {
   ActivityIndicator,
   Pressable,
   PressableProps,
+  StyleProp,
   Text,
   TextStyle,
   ViewStyle,
@@ -13,7 +14,7 @@ import {useTheme} from '@react-navigation/native';
 interface AppButtonProps extends PressableProps {
   title: string;
   isLoading?: boolean;
-  containerStyle?: ViewStyle;
+  containerStyle?: StyleProp<ViewStyle>;
   titleStyle?: TextStyle;
 }
 

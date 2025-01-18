@@ -22,6 +22,8 @@ const Stack = createNativeStackNavigator<AppStackParamsList>();
 
 const appScreenOption: NativeStackNavigationOptions = {
   headerShown: false,
+  statusBarBackgroundColor: 'white',
+  statusBarStyle: 'dark',
 };
 
 const AppNavigator = () => {

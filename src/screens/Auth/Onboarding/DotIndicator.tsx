@@ -8,6 +8,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import {useTheme} from '@react-navigation/native';
 import styles from './styles';
+import {screenWidth} from '@/utils/constant';
 
 interface DotIndicatorProps {
   animatedX: SharedValue<number>;
@@ -18,13 +19,13 @@ const DotIndicator = ({index, animatedX}: DotIndicatorProps) => {
   const {colors} = useTheme();
   const animStyle = useAnimatedStyle(() => {
     const scale = interpolate(
-      animatedX.value,
+      animatedX.value / screenWidth,
       [index - 1, index, index + 1],
       [0.8, 1, 0.8],
       Extrapolation.CLAMP,
     );
     const color = interpolateColor(
-      animatedX.value,
+      animatedX.value / screenWidth,
       [index - 1, index, index + 1],
       [colors.primaryPressed, colors.primaryMain, colors.primaryPressed],
     );

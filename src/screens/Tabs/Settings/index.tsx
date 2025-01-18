@@ -81,7 +81,12 @@ const Setting = ({}: BottomTabScreensProps<'Settings'>) => {
   }: (typeof settingsListItems)[number]) => {
     if (isLogout) {
       Alert.alert('', 'Are you sure want to logout!', [
-        {text: 'Yes', onPress: fireAuth.signOut},
+        {
+          text: 'Yes',
+          onPress: () => {
+            fireAuth.signOut();
+          },
+        },
         {text: 'No'},
       ]);
       return;
