@@ -6,6 +6,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {BottomTabScreensProps} from '@/typings/navigation';
 import styles from './styles';
 import {CategoryItem, SearchPlaceholder} from '@/components';
+import {AppRoutes} from '@/navigation';
 
 const courseCategories = [
   'AI & Machine Learning',
@@ -22,21 +23,24 @@ const courseCategories = [
 
 const getKeyIndex = (item: string, index: number) => `${item}-${index}`;
 
-const Search = ({}: BottomTabScreensProps<'Search'>) => {
+const Search = ({navigation}: BottomTabScreensProps<'Search'>) => {
   const listRef = useRef<FlatList | null>(null);
   useScrollToTop(listRef);
   const {top} = useSafeAreaInsets();
 
-  const renderItem: ListRenderItem<string> = useCallback(({item}) => {
-    return (
-      <CategoryItem
-        title={item}
-        onPress={() => {
-          // navigation.navigate(AppRoutes.CourseList, {type: item});
-        }}
-      />
-    );
-  }, []);
+  const renderItem: ListRenderItem<string> = useCallback(
+    ({item}) => {
+      return (
+        <CategoryItem
+          title={item}
+          onPress={() => {
+            navigation.navigate(AppRoutes.CourseList, {type: item});
+          }}
+        />
+      );
+    },
+    [navigation],
+  );
 
   return (
     <FlatList

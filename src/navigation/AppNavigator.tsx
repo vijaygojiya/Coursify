@@ -4,7 +4,12 @@ import {
   createNativeStackNavigator,
   NativeStackNavigationOptions,
 } from '@react-navigation/native-stack';
-import {LoginScreen, OnboardingScreen, SignUpScreen} from '@/screens';
+import {
+  CourseListScreen,
+  LoginScreen,
+  OnboardingScreen,
+  SignUpScreen,
+} from '@/screens';
 import {useAuth} from '@/hooks';
 import TabNavigator from './TabNavigator';
 import {lightTheme} from '@/styles';
@@ -23,7 +28,19 @@ const AppNavigator = () => {
     <NavigationContainer theme={lightTheme}>
       <Stack.Navigator screenOptions={appScreenOption}>
         {isLoggedIn ? (
-          <Stack.Screen name={AppRoutes.Dashboard} component={TabNavigator} />
+          <>
+            <Stack.Screen name={AppRoutes.Dashboard} component={TabNavigator} />
+            <Stack.Screen
+              name={AppRoutes.CourseList}
+              component={CourseListScreen}
+              options={({route}) => {
+                return {
+                  headerShown: true,
+                  title: route.params?.type,
+                };
+              }}
+            />
+          </>
         ) : (
           <>
             <Stack.Screen

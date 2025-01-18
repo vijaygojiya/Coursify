@@ -8,6 +8,8 @@ const Routes = Object.freeze({
   Explore: 'Explore',
   Search: 'Search',
   Learn: 'Learn',
+
+  CourseList: 'CourseList',
 });
 
 export default Routes;

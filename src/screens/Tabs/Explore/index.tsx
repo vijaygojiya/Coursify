@@ -24,6 +24,7 @@ import {
 } from '@/components';
 import useCurrentUser from '@/hooks/useCurrentUser';
 import {NotificationIcon} from '@/assets';
+import {AppRoutes} from '@/navigation';
 
 const renderItem: ListRenderItem<ICourse> = ({item, index}) => {
   return <ExploreListItem {...{...item, index}} />;
@@ -34,7 +35,7 @@ const renderPopularInstructor: ListRenderItem<
   return <PopularInstructorItem name={name} index={index} />;
 };
 
-const Explore = ({}: BottomTabScreensProps<'Explore'>) => {
+const Explore = ({navigation}: BottomTabScreensProps<'Explore'>) => {
   //
   const scrollRef = useRef<ScrollView | null>(null);
 
@@ -73,7 +74,9 @@ const Explore = ({}: BottomTabScreensProps<'Explore'>) => {
       {/**-promotion-**/}
       <ExploreCarousel />
       <HorizontalListSection
-        onChevronPress={() => {}}
+        onChevronPress={() => {
+          navigation.navigate(AppRoutes.CourseList, {type: sectionTitles[0]});
+        }}
         title={sectionTitles[0]}
         keyExtractor={(item, i) => item.id + sectionTitles[0] + i}
         data={[
@@ -96,7 +99,9 @@ const Explore = ({}: BottomTabScreensProps<'Explore'>) => {
           <HorizontalListSection
             key={title + index}
             title={title}
-            onChevronPress={() => {}}
+            onChevronPress={() => {
+              navigation.navigate(AppRoutes.CourseList, {type: title});
+            }}
             keyExtractor={(item, i) => item.id + sectionTitles[0] + i}
             data={[
               ...ExploreData[index],

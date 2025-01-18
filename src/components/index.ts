@@ -7,3 +7,4 @@ export {default as ExploreCarousel} from './ExploreCarousel';
 export {default as HorizontalListSection} from './HorizontalListSection';
 export {default as SearchPlaceholder} from './SearchPlaceholder';
 export {default as CategoryItem} from './CategoryItem';
+export {default as CourseItem} from './CourseItem';
