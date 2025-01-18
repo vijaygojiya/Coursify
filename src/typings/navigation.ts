@@ -9,14 +9,16 @@ export type AppStackParamsList = {
   Dashboard: NavigatorScreenParams<BottomTabParamsList>;
   Login: undefined;
   SignUp: undefined;
-  Onboarding:undefined
+  Onboarding: undefined;
 };
 
 export type AppScreenProps<T extends keyof AppStackParamsList> =
   NativeStackScreenProps<AppStackParamsList, T>;
 
 export type BottomTabParamsList = {
-  Home: undefined;
+  Explore: undefined;
+  Search: undefined;
+  Learn: undefined;
 };
 
 export type BottomTabScreensProps<T extends keyof BottomTabParamsList> =

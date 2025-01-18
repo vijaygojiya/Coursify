@@ -19,6 +19,7 @@
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		948043410C1E46388DC2443F /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F9FDEC1199F14EBCBD64B5FE /* Poppins-Medium.ttf */; };
 		94893088589434E9AAAF8516 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
+		B13FD1DE2D3BDA1F00F55E08 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B13FD1DD2D3BDA1F00F55E08 /* GoogleService-Info.plist */; };
 		C403C1E5B1C1445B8922C14A /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6E6E815EF28479ABA63B64B /* Poppins-SemiBold.ttf */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +53,7 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Coursify/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-Coursify-CoursifyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coursify-CoursifyTests.release.xcconfig"; path = "Target Support Files/Pods-Coursify-CoursifyTests/Pods-Coursify-CoursifyTests.release.xcconfig"; sourceTree = "<group>"; };
 		A6E6E815EF28479ABA63B64B /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-SemiBold.ttf"; path = "../src/assets/fonts/Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
+		B13FD1DD2D3BDA1F00F55E08 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C66A76C862E54F6AB741E8ED /* Poppins-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Bold.ttf"; path = "../src/assets/fonts/Poppins-Bold.ttf"; sourceTree = "<group>"; };
 		C67A6235FE6D4E649E806C3F /* Poppins-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Regular.ttf"; path = "../src/assets/fonts/Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -140,6 +142,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				B13FD1DD2D3BDA1F00F55E08 /* GoogleService-Info.plist */,
 				00881EBA2D107FDB004D24F9 /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* Coursify */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -270,6 +273,7 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				00881EBB2D107FDB004D24F9 /* GoogleService-Info.plist in Resources */,
+				B13FD1DE2D3BDA1F00F55E08 /* GoogleService-Info.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				94893088589434E9AAAF8516 /* PrivacyInfo.xcprivacy in Resources */,
 				2CE9477A81D046E3932D148E /* Poppins-Bold.ttf in Resources */,

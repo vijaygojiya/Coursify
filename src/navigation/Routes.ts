@@ -1,8 +1,13 @@
-const AppRoutes = Object.freeze({
+const Routes = Object.freeze({
+  //Auth
   Onboarding: 'Onboarding',
   Login: 'Login',
   SignUp: 'SignUp',
   Dashboard: 'Dashboard',
-  Home: 'Home',
+
+  Explore: 'Explore',
+  Search: 'Search',
+  Learn: 'Learn',
 });
-export default AppRoutes;
+
+export default Routes;

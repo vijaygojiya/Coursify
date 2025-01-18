@@ -4,13 +4,12 @@ import {
   createNativeStackNavigator,
   NativeStackNavigationOptions,
 } from '@react-navigation/native-stack';
-import {LoginScreen, SignUpScreen} from '@/screens';
+import {LoginScreen, OnboardingScreen, SignUpScreen} from '@/screens';
 import {useAuth} from '@/hooks';
 import TabNavigator from './TabNavigator';
 import {lightTheme} from '@/styles';
-import AppRoutes from './Routes';
 import {AppStackParamsList} from '@/typings/navigation';
-import Onboarding from '@/screens/auth/Onboarding';
+import {AppRoutes} from '.';
 
 const Stack = createNativeStackNavigator<AppStackParamsList>();
 
@@ -27,7 +26,10 @@ const AppNavigator = () => {
           <Stack.Screen name={AppRoutes.Dashboard} component={TabNavigator} />
         ) : (
           <>
-            <Stack.Screen name={AppRoutes.Onboarding} component={Onboarding} />
+            <Stack.Screen
+              name={AppRoutes.Onboarding}
+              component={OnboardingScreen}
+            />
             <Stack.Screen name={AppRoutes.Login} component={LoginScreen} />
             <Stack.Screen name={AppRoutes.SignUp} component={SignUpScreen} />
           </>

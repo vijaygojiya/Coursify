@@ -9,3 +9,6 @@ export {default as GoogleIcon} from './icons/google.svg';
 export {default as FacebookIcon} from './icons/facebook.svg';
 export {default as UserIcon} from './icons/user.svg';
 export {default as PlaceholderIcon} from './icons/placeholder.svg';
+export {default as CompassFillIcon} from './icons/compass-fill.svg';
+export {default as SearchLineIcon} from './icons/search-line.svg';
+export {default as BookOpenFillIcon} from './icons/book-open-fill.svg';
