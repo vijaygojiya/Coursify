@@ -33,7 +33,7 @@ const ExploreListItem = ({
       />
       <Text
         numberOfLines={1}
-        style={[textStyles.bodySmall, styles.title, {color: colors.back}]}>
+        style={[textStyles.bodyMedium, styles.title, {color: colors.back}]}>
         {title}
       </Text>
       <View style={styles.footerContainer}>

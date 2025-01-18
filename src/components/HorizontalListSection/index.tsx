@@ -1,17 +1,11 @@
-import {
-  FlatList,
-  FlatListProps,
-  Pressable,
-  PressableProps,
-  Text,
-  View,
-} from 'react-native';
+import {FlatList, FlatListProps, Text, View} from 'react-native';
 import React, {useRef} from 'react';
 
 import styles from './styles';
 import {useTheme} from '@react-navigation/native';
 import {textStyles} from '@/styles';
 import {ChevronIcon} from '@/assets';
+import {Pressable, PressableProps} from 'react-native-gesture-handler';
 
 interface HorizontalListSectionProps<T>
   extends Omit<
@@ -43,17 +37,14 @@ const HorizontalListSection = <T,>({
           style={styles.titleContainer}
           onPress={handleScrollToTop}
           hitSlop={5}>
-          <Text style={[textStyles.labelLarge, {color: colors.neutral100}]}>
+          <Text style={[textStyles.titleLarge, {color: colors.neutral100}]}>
             {title}
           </Text>
         </Pressable>
         <Pressable
           onPress={onChevronPress}
           hitSlop={{left: 10, right: 10, top: 3, bottom: 3}}
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-          }}>
+          style={styles.seeAllContainer}>
           <Text style={[textStyles.labelSmall, {color: colors.neutral90}]}>
             See All
           </Text>

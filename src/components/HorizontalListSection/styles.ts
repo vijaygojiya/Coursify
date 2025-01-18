@@ -4,6 +4,7 @@ const styles = StyleSheet.create({
   listContainer: {
     paddingHorizontal: 22,
     columnGap: 14,
+    flexGrow: 0,
   },
   listHeaderContainer: {
     marginTop: 2,
@@ -14,6 +15,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   titleContainer: {flex: 1},
+  seeAllContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
 });
 
 export default styles;

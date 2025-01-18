@@ -3,7 +3,7 @@ import {ImageBackground, Text, View, useWindowDimensions} from 'react-native';
 import {getRandomImage} from '@/utils/helper';
 import styles from './styles';
 import {useTheme} from '@react-navigation/native';
-// import LinearGradient from 'react-native-linear-gradient';
+import LinearGradient from 'react-native-linear-gradient';
 import {textStyles} from '@/styles';
 
 interface CarouselItemProps {
@@ -20,22 +20,22 @@ const CarouselItem = ({index}: CarouselItemProps) => {
         <ImageBackground
           source={{uri: getRandomImage(index)}}
           style={[styles.itemImage, {backgroundColor: colors.neutral40}]}>
-          {/* <LinearGradient
+          <LinearGradient
             locations={[0, 1]}
-            colors={['transparent', 'black']}
-            style={styles.linearGradient}> */}
-          <Text
-            style={[
-              textStyles.headlineMedium,
-              {
-                textAlign: 'center',
-                marginBottom: 8,
-                color: colors.neutral10,
-              },
-            ]}>
-            React Native
-          </Text>
-          {/* </LinearGradient> */}
+            colors={[colors.transparent, colors.back]}
+            style={styles.linearGradient}>
+            <Text
+              style={[
+                textStyles.headlineMedium,
+                {
+                  textAlign: 'center',
+                  marginBottom: 8,
+                  color: colors.neutral10,
+                },
+              ]}>
+              React Native
+            </Text>
+          </LinearGradient>
         </ImageBackground>
       </View>
     </View>
