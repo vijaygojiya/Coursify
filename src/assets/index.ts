@@ -14,3 +14,6 @@ export {default as SearchLineIcon} from './icons/search-line.svg';
 export {default as BookOpenFillIcon} from './icons/book-open-fill.svg';
 export {default as StarFillIcon} from './icons/star-fill.svg';
 export {default as NotificationIcon} from './icons/notification.svg';
+export {default as DownloadIcon} from './icons/download.svg';
+export {default as HeartIcon} from './icons/heart.svg';
+export {default as HourglassIcon} from './icons/hourglass.svg';

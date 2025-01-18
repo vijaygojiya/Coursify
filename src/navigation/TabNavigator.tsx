@@ -6,13 +6,11 @@ import {
 } from '@react-navigation/bottom-tabs';
 
 import {TabBarButton} from './TabBarButton';
-import {View} from 'react-native';
 import {AppScreenProps, BottomTabParamsList} from '@/typings/navigation';
 import {BookIcon, ExploreIcon, SearchIcon} from './icons';
 import Routes from './Routes';
 import {ExploreScreen, SearchScreen} from '@/screens';
-
-const Temp = () => <View />;
+import TopTabNavigator from './TopTabNavigator';
 
 const exploreTabBarButton = ({
   accessibilityState,
@@ -75,7 +73,7 @@ const BottomNavigator = ({}: AppScreenProps<'Dashboard'>) => {
       />
       <Tab.Screen
         name={Routes.Learn}
-        component={Temp}
+        component={TopTabNavigator}
         options={{
           tabBarButton: renderLeanTabBarButton,
         }}

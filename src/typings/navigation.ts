@@ -19,7 +19,7 @@ export type AppScreenProps<T extends keyof AppStackParamsList> =
 export type BottomTabParamsList = {
   Explore: undefined;
   Search: undefined;
-  Learn: undefined;
+  Learn: NavigatorScreenParams<TopTabParamsList>;
 };
 
 export type BottomTabScreensProps<T extends keyof BottomTabParamsList> =
@@ -27,3 +27,9 @@ export type BottomTabScreensProps<T extends keyof BottomTabParamsList> =
     BottomTabScreenProps<BottomTabParamsList, T>,
     NativeStackScreenProps<AppStackParamsList>
   >;
+
+export type TopTabParamsList = {
+  Inprogress: undefined;
+  Downloaded: undefined;
+  Favorite: undefined;
+};
