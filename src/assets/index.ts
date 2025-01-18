@@ -12,3 +12,5 @@ export {default as PlaceholderIcon} from './icons/placeholder.svg';
 export {default as CompassFillIcon} from './icons/compass-fill.svg';
 export {default as SearchLineIcon} from './icons/search-line.svg';
 export {default as BookOpenFillIcon} from './icons/book-open-fill.svg';
+export {default as StarFillIcon} from './icons/star-fill.svg';
+export {default as NotificationIcon} from './icons/notification.svg';

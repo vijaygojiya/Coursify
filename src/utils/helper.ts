@@ -1,4 +1,5 @@
 import {ZodError} from 'zod';
+import {randomCourseImage, randomUserImage} from './constant';
 
 export const zodErrorSimplify = <T>(error: ZodError) => {
   const errors = error.errors
@@ -20,4 +21,19 @@ export const zodErrorSimplify = <T>(error: ZodError) => {
       };
     }, {});
   return errors as T;
+};
+
+export const getFirstName = (fullName?: string) => {
+  if (!fullName) {
+    return fullName;
+  }
+  return fullName.split(' ')?.[0]?.trim();
+};
+
+export const getRandomImage = (index: number) => {
+  return randomCourseImage + '?' + Date.now() + index;
+};
+
+export const getRandomUserImage = (index: number) => {
+  return randomUserImage + '?' + Date.now() + index;
 };

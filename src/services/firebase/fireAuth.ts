@@ -23,7 +23,8 @@ const createUserInFirebase = async ({
   password: string;
 }) => {
   const {user} = await fireAuth.createUserWithEmailAndPassword(email, password);
-  return user.updateProfile({displayName: name});
+  user.updateProfile({displayName: name});
+  return user;
 };
 
 const signInUserWithFirebase = async ({

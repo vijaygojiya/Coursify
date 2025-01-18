@@ -19,6 +19,7 @@ import {AppScreenProps} from '@/typings/navigation';
 import {useMutation} from '@tanstack/react-query';
 import {createUserInFirebase} from '@/services/firebase';
 import {toast} from 'sonner-native';
+import {createUserApi} from '@/apis/userApis';
 
 const defaultValue = {
   name: '',
@@ -60,10 +61,18 @@ const SignUp = ({navigation}: AppScreenProps<'SignUp'>) => {
     password: null,
     name: null,
   });
-
+  const {mutate: createUser, isPending: isLoading} = useMutation({
+    mutationFn: createUserApi,
+  });
   const {mutate, isPending} = useMutation({
     mutationFn: createUserInFirebase,
-    onSuccess: () => {},
+    onSuccess: user => {
+      createUser({
+        email: inputs.email,
+        firebaseId: user.uid,
+        name: inputs.name,
+      });
+    },
     onError: error => {
       if (authErrorRegex.test(error.message)) {
         const message = error.message.split(authErrorRegex)[1];
@@ -170,7 +179,7 @@ const SignUp = ({navigation}: AppScreenProps<'SignUp'>) => {
         <AppButton
           onPress={handleSubmit}
           title="Sign Up"
-          isLoading={isPending}
+          isLoading={isPending || isLoading}
         />
         <View style={styles.spacer} />
         <Pressable

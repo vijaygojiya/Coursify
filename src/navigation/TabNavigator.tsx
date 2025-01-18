@@ -10,6 +10,7 @@ import {View} from 'react-native';
 import {AppScreenProps, BottomTabParamsList} from '@/typings/navigation';
 import {BookIcon, ExploreIcon, SearchIcon} from './icons';
 import Routes from './Routes';
+import {ExploreScreen, SearchScreen} from '@/screens';
 
 const Temp = () => <View />;
 
@@ -64,12 +65,12 @@ const BottomNavigator = ({}: AppScreenProps<'Dashboard'>) => {
     <Tab.Navigator screenOptions={getScreenOptions}>
       <Tab.Screen
         name={Routes.Explore}
-        component={Temp}
+        component={ExploreScreen}
         options={{tabBarButton: exploreTabBarButton}}
       />
       <Tab.Screen
         name={Routes.Search}
-        component={Temp}
+        component={SearchScreen}
         options={{tabBarButton: searchTabBarButton}}
       />
       <Tab.Screen
@@ -77,8 +78,6 @@ const BottomNavigator = ({}: AppScreenProps<'Dashboard'>) => {
         component={Temp}
         options={{
           tabBarButton: renderLeanTabBarButton,
-          headerShown: true,
-          // header: renderCustomHeader,
         }}
       />
     </Tab.Navigator>
