@@ -3,8 +3,15 @@
 #import <React/RCTBundleURLProvider.h>
 #import <Firebase.h>
 #import <GoogleSignIn/GoogleSignIn.h>
+#import "RNBootSplash.h" 
 
 @implementation AppDelegate
+
+
+- (void)customizeRootView:(RCTRootView *)rootView {
+  [super customizeRootView:rootView];
+  [RNBootSplash initWithStoryboard:@"BootSplash" rootView:rootView]; // ⬅️ initialize the splash screen
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

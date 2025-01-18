@@ -16,6 +16,7 @@ import TabNavigator from './TabNavigator';
 import {lightTheme} from '@/styles';
 import {AppStackParamsList} from '@/typings/navigation';
 import {AppRoutes} from '.';
+import BootSplash from 'react-native-bootsplash';
 
 const Stack = createNativeStackNavigator<AppStackParamsList>();
 
@@ -26,7 +27,11 @@ const appScreenOption: NativeStackNavigationOptions = {
 const AppNavigator = () => {
   const {isLoggedIn} = useAuth();
   return (
-    <NavigationContainer theme={lightTheme}>
+    <NavigationContainer
+      onReady={() => {
+        BootSplash.hide();
+      }}
+      theme={lightTheme}>
       <Stack.Navigator screenOptions={appScreenOption}>
         {isLoggedIn ? (
           <>
