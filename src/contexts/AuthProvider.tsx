@@ -9,8 +9,6 @@ import {fireAuth} from '@/services/firebase';
 
 interface Props {
   isLoggedIn: boolean;
-  login: () => void;
-  logout: () => void;
 }
 
 export const AuthContext = createContext<Props | undefined>(undefined);
@@ -31,12 +29,6 @@ const AuthProvider: React.FC<PropsWithChildren<unknown>> = ({children}) => {
     <AuthContext.Provider
       value={{
         isLoggedIn,
-        login: () => {
-          setLoggedIn(true);
-        },
-        logout: () => {
-          setLoggedIn(false);
-        },
       }}>
       {children}
     </AuthContext.Provider>

@@ -53,7 +53,6 @@ const Login = ({navigation}: AppScreenProps<'Login'>) => {
   const [inputs, setInputs] = useState(defaultValue);
   const [errors, setErrors] = useState(defaultValue);
 
-  const {login} = useAuth();
   const {bottom, top} = useSafeAreaInsets();
   const {colors} = useTheme();
 
@@ -65,7 +64,6 @@ const Login = ({navigation}: AppScreenProps<'Login'>) => {
   const {mutate, isPending} = useMutation({
     mutationFn: signInUserWithFirebase,
     onSuccess: () => {
-      login();
       toast.dismiss();
     },
     onError: error => {

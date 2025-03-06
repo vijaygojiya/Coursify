@@ -17,7 +17,7 @@ const CourseItem = ({instructor, title}: CourseItemProps) => {
         source={{uri: randomCourseImage}}
         style={[styles.img, {backgroundColor: colors.primaryBorder}]}
       />
-      <Text style={[textStyles.headlineMedium, {color: colors.neutral100}]}>
+      <Text style={[textStyles.titleMedium, {color: colors.neutral100}]}>
         {title}
       </Text>
       <Text style={[textStyles.labelSmall, {color: colors.neutral80}]}>

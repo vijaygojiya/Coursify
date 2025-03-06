@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {API_BASE_URL} from './apiConstant';
 import {fireAuth} from '@/services/firebase';
+import {toast} from 'sonner-native';
 
 const getToken = async () => {
   const authToken = await fireAuth.currentUser?.getIdToken();
@@ -49,17 +50,16 @@ axiosClient.interceptors.response.use(
       error.response
     ) {
       let res = error.response;
-      console.log('===========', JSON.stringify(res, null, 8));
-      //   const message = error.response?.data?.message ?? 'Something went wrong!';
-      //   if (res.status === 401 && store.getState().user.isLoggedIn) {
-      //     showToast("Oops! You've been logged out. Please log in again.");
-      //     store.dispatch(logoutAction());
-      //   } else {
-      //     showToast(message);
-      //   }
+
+      const message = error.response?.data?.message ?? 'Something went wrong!';
+      if (res.status === 401) {
+        toast.error("Oops! You've been logged out. Please log in again.");
+      } else {
+        toast.error(message);
+      }
     } else {
       if (error.message) {
-        // showToast(error.message);
+        toast.error(error.message);
       }
     }
 
