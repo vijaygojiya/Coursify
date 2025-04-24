@@ -61,19 +61,17 @@ const renderSettingsTabBarButton = ({
   />
 );
 
-const getScreenOptions = (): BottomTabNavigationOptions => {
-  return {
-    lazy: true,
-    headerShown: false,
-    animation: 'shift',
-  };
+const screenOptions: BottomTabNavigationOptions = {
+  lazy: true,
+  headerShown: false,
+  animation: 'shift',
 };
 
 const Tab = createBottomTabNavigator<BottomTabParamsList>();
 
 const BottomNavigator = ({}: AppScreenProps<'Dashboard'>) => {
   return (
-    <Tab.Navigator screenOptions={getScreenOptions}>
+    <Tab.Navigator screenOptions={screenOptions}>
       <Tab.Screen
         name={Routes.Explore}
         component={ExploreScreen}

@@ -86,6 +86,8 @@ const Explore = ({navigation}: BottomTabScreensProps<'Explore'>) => {
           ...ExploreData[0],
         ]}
         renderItem={renderItem}
+        snapToInterval={220 + 14}
+        decelerationRate="fast"
       />
 
       <HorizontalListSection
@@ -97,6 +99,8 @@ const Explore = ({navigation}: BottomTabScreensProps<'Explore'>) => {
       {sectionTitles.slice(1).map((title, index) => {
         return (
           <HorizontalListSection
+            snapToInterval={220 + 14}
+            decelerationRate="fast"
             key={title + index}
             title={title}
             onChevronPress={() => {

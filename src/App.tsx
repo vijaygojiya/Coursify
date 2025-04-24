@@ -10,6 +10,7 @@ import {Toaster} from 'sonner-native';
 import {KeyboardProvider} from 'react-native-keyboard-controller';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import {configureGoogleSignin} from './services/firebase';
+import {StatusBar} from 'react-native';
 
 const GHRView = {flex: 1};
 
@@ -35,6 +36,7 @@ const App = () => {
         <SafeAreaProvider initialMetrics={initialWindowMetrics}>
           <GestureHandlerRootView style={GHRView}>
             <KeyboardProvider>
+              <StatusBar barStyle="dark-content" />
               <AppNavigator />
               <Toaster />
             </KeyboardProvider>
