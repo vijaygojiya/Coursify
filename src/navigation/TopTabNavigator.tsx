@@ -31,6 +31,7 @@ const TopTab = createMaterialTopTabNavigator<TopTabParamsList>();
 
 const TopTabNavigator = ({}: BottomTabScreensProps<'Learn'>) => {
   const {top} = useSafeAreaInsets();
+
   return (
     <TopTab.Navigator
       initialLayout={{width: screenWidth}}

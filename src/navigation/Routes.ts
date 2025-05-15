@@ -12,6 +12,9 @@ const Routes = Object.freeze({
 
   CourseList: 'CourseList',
   EditProfile: 'EditProfile',
+
+  //instructor routes
+  AddNewCourse: 'AddNewCourse',
 });
 
 export default Routes;

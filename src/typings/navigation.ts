@@ -12,6 +12,7 @@ export type AppStackParamsList = {
   Onboarding: undefined;
   CourseList: {type: string};
   EditProfile: undefined;
+  AddNewCourse: undefined;
 };
 
 export type AppScreenProps<T extends keyof AppStackParamsList> =
@@ -34,4 +35,10 @@ export type TopTabParamsList = {
   Inprogress: undefined;
   Downloaded: undefined;
   Favorite: undefined;
+};
+
+export type CreateCourseStackParamsList = {
+  CourseOverview: undefined;
+  CourseCurriculum: undefined;
+  CoursePreview: undefined;
 };

@@ -10,7 +10,7 @@ import React, {ReactNode, forwardRef, memo} from 'react';
 import styles from './styles';
 import {useTheme} from '@react-navigation/native';
 
-interface AppTextInputProps extends TextInputProps {
+export interface AppTextInputProps extends TextInputProps {
   rightIcon?: ReactNode | null;
   leftIcon?: ReactNode | null;
   label: string;

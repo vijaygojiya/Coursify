@@ -28,3 +28,4 @@ export {default as ProfileIcon} from './icons/profile.svg';
 export {default as TrashIcon} from './icons/trash.svg';
 export {default as WarningCircleIcon} from './icons/warning-circle.svg';
 export {default as EditIcon} from './icons/edit.svg';
+export {default as UploadIcon} from './icons/upload.svg';

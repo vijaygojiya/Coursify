@@ -88,6 +88,7 @@ const SignUp = ({navigation}: AppScreenProps<'SignUp'>) => {
       signupSchema.parse(inputs);
       mutate(inputs);
     } catch (error) {
+      console.log('------error', JSON.stringify(error, null, 8));
       if (error instanceof ZodError) {
         const validationErrors = zodErrorSimplify<typeof defaultValue>(error);
         setErrors(validationErrors);

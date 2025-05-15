@@ -8,3 +8,4 @@ export {default as SettingsScreen} from './Tabs/Settings';
 
 export {default as CourseListScreen} from './Other/CourseList';
 export {default as EditProfileScreen} from './Other/EditProfile';
+export {default as CourseOverviewScreen} from './Instructors/CourseOverview';

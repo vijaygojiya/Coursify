@@ -33,3 +33,23 @@ export const signupSchema = z.object({
   email,
   password,
 });
+
+export const courseBasicInfoSchema = z.object({
+  title: z.string().min(5, 'Course title must be at least 5 characters'),
+  level: z.enum(['Beginner', 'Intermediate', 'Advanced'], {
+    errorMap: () => ({message: 'Please select a difficulty level'}),
+  }),
+
+  coverImg: z.object({
+    uri: z.string().url('Invalid image URI'),
+    size: z.number().max(2 * 1024 * 1024, 'Image must be under 5MB'),
+  }),
+
+  promoVideo: z
+    .object({
+      uri: z.string().url('Invalid video URI'),
+      size: z.number().max(60 * 1024 * 1024, 'Video must be under 60MB'),
+      duration: z.number().max(60, 'Video must be 60 seconds or less'),
+    })
+    .optional(),
+});

@@ -1,0 +1,151 @@
+import {StyleSheet} from 'react-native';
+import React, {useCallback, useMemo, useRef, useState} from 'react';
+import {useMutation} from '@tanstack/react-query';
+import {createNewCourseApi} from '@/apis/courseApis';
+import {
+  AppButton,
+  AppTextInput,
+  FileSelector,
+  OptionSheet,
+  PlaceholderInput,
+} from '@/components';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-controller';
+import {ImageOrVideo} from 'react-native-image-crop-picker';
+import {BottomSheetModal} from '@gorhom/bottom-sheet';
+import {courseBasicInfoSchema, zodErrorSimplify} from '@/utils';
+import {ZodError} from 'zod';
+
+type keys = 'title' | 'shortDescription' | 'level' | 'coverImg' | 'promoVideo';
+
+const CourseOverview = () => {
+  const [coverImg, setCoverImage] = useState<ImageOrVideo | null>(null);
+  const [promoVideo, setPromoVideo] = useState<ImageOrVideo | null>(null);
+  const [title, setTitle] = useState('');
+  const [shortDescription, setShortDescription] = useState('');
+  const [errors, setErrors] = useState<Record<keys, string>>({
+    title: '',
+    shortDescription: '',
+    level: '',
+    coverImg: '',
+    promoVideo: '',
+  });
+
+  const [level, setLevel] = useState('');
+  const levelOptionSheetRef = useRef<BottomSheetModal>(null);
+
+  const isAllFiledEnter = useMemo(() => {
+    return title && shortDescription && !!promoVideo && !!coverImg && level;
+  }, [title, shortDescription, promoVideo, coverImg, level]);
+
+  console.log('------>>>>>>', JSON.stringify({coverImg, promoVideo}, null, 8));
+
+  const onNextBtnPress = useCallback(() => {
+    try {
+      courseBasicInfoSchema.parse({
+        title,
+        shortDescription,
+        level,
+        ...(coverImg ? {coverImg: coverImg} : {}),
+        ...(promoVideo ? {promoVideo} : {}),
+      });
+    } catch (error) {
+      if (error instanceof ZodError) {
+        const validationErrors = zodErrorSimplify<keys>(error);
+        setErrors(validationErrors);
+      }
+    }
+  }, [coverImg, level, promoVideo, shortDescription, title]);
+
+  return (
+    <KeyboardAwareScrollView
+      overScrollMode="never"
+      bounces={false}
+      contentContainerStyle={styles.scrollContentStyle}>
+      <AppTextInput
+        label="Title"
+        placeholder="e.g. Mastering React Native"
+        maxLength={100}
+        value={title}
+        onChangeText={setTitle}
+        error={errors.title}
+      />
+      <AppTextInput
+        label="Short Description"
+        placeholder="Write a brief summary of your course"
+        maxLength={160}
+        style={{height: 78}}
+        multiline={true}
+        value={shortDescription}
+        onChangeText={setShortDescription}
+        error={errors.shortDescription}
+      />
+      <PlaceholderInput
+        label="Level"
+        placeholder="Please select level"
+        value={level}
+        onPress={() => {
+          levelOptionSheetRef.current?.present();
+        }}
+        error={errors.level}
+      />
+      <FileSelector
+        label="Course Cover Image"
+        placeholder="Select an image to represent your course"
+        file={coverImg}
+        onFileSelected={setCoverImage}
+        options={{
+          mediaType: 'photo',
+          cropping: true,
+          width: 1600,
+          height: 900,
+          cropperToolbarTitle: 'Crop Cover Image',
+          cropperCircleOverlay: false,
+          compressImageQuality: 0.8,
+          includeBase64: false,
+          forceJpg: true,
+        }}
+        onRemoveFile={() => {
+          setCoverImage(null);
+        }}
+        error={errors.coverImg}
+      />
+      <FileSelector
+        label="Promo Video"
+        placeholder={'Upload 60s course intro video\n(MP4, max 60 sec)'}
+        file={promoVideo}
+        onFileSelected={setPromoVideo}
+        options={{mediaType: 'video'}}
+        onRemoveFile={() => {
+          setPromoVideo(null);
+        }}
+        error={errors.promoVideo}
+      />
+      <AppButton
+        title="Next"
+        // disabled={!isAllFiledEnter}
+        onPress={onNextBtnPress}
+      />
+      <OptionSheet
+        configList={[
+          {name: 'Beginner'},
+          {name: 'Intermediate'},
+          {name: 'Advanced'},
+        ]}
+        ref={levelOptionSheetRef}
+        onItemSelect={name => {
+          setLevel(name);
+        }}
+      />
+    </KeyboardAwareScrollView>
+  );
+};
+
+export default CourseOverview;
+
+const styles = StyleSheet.create({
+  scrollContentStyle: {
+    flexGrow: 1,
+    paddingHorizontal: 18,
+    paddingVertical: 28,
+  },
+});

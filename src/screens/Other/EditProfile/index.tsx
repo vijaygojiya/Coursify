@@ -1,5 +1,5 @@
 import {Image, Pressable, StyleSheet, View} from 'react-native';
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {useCurrentUser} from '@/hooks';
 import {AppButton, AppTextInput} from '@/components';
 import {useTheme} from '@react-navigation/native';
@@ -17,6 +17,8 @@ const EditProfile = ({navigation}: AppScreenProps<'EditProfile'>) => {
   const [bio, setBio] = useState(user?.bio ?? '');
   const [profilePic, setProfilePic] = useState(user?.profileImg);
 
+  const isOpeningGallery = useRef(false);
+
   const {mutate, isPending} = useMutation({
     mutationFn: updateCurrentUserInfoApi,
     onSuccess: () => {
@@ -29,6 +31,10 @@ const EditProfile = ({navigation}: AppScreenProps<'EditProfile'>) => {
   const {colors} = useTheme();
 
   const handelEditProfilePic = async () => {
+    if (isOpeningGallery.current) {
+      return;
+    }
+    isOpeningGallery.current = true;
     try {
       const options: Options = {
         mediaType: 'photo',
@@ -45,6 +51,8 @@ const EditProfile = ({navigation}: AppScreenProps<'EditProfile'>) => {
       setProfilePic(selectedImageAsset.path);
     } catch (error: unknown) {
       console.log('error while open image crop picker', error);
+    } finally {
+      isOpeningGallery.current = false;
     }
   };
   const updateProfileData = () => {

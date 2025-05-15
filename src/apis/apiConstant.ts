@@ -16,4 +16,7 @@ export const apiEndpoints = {
     createUser: () => 'user',
     getCurrentUser: () => 'me',
   },
+  course: {
+    createNew: () => 'course',
+  },
 };
