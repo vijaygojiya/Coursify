@@ -6,15 +6,15 @@ import {TrashIcon, UploadIcon} from '@/assets';
 import {textStyles} from '@/styles';
 import {openPicker, Options} from 'react-native-image-crop-picker';
 import {getVideoThumbnail} from '@/utils';
-import {IAppAssets} from '@/typings/common';
+import {ImageOrVideo} from 'react-native-image-crop-picker';
 
 interface FileSelectorPros {
   label: string;
   error?: string;
   placeholder?: string;
   options?: Partial<Options>;
-  file: IAppAssets | null;
-  onFileSelected: (f: IAppAssets) => void;
+  file: ImageOrVideo | null;
+  onFileSelected: (f: ImageOrVideo) => void;
   onRemoveFile?: () => void;
 }
 
@@ -47,7 +47,7 @@ const FileSelector = ({
       if (options.mediaType === 'video') {
         const thumbnail = await getVideoThumbnail(selectedImageAsset.path);
         console.log('==>', thumbnail);
-        onFileSelected({...selectedImageAsset, thumbnail: thumbnail});
+        onFileSelected({...selectedImageAsset, thumbnail});
       } else {
         onFileSelected(selectedImageAsset);
       }
@@ -73,12 +73,18 @@ const FileSelector = ({
           styles.rowContainer,
           {
             borderColor: colors.border,
+            backgroundColor: colors.neutral10,
           },
         ]}>
         {file ? (
           <View style={styles.fileContainer}>
             <Image
-              source={{uri: file?.thumbnail?.path || file.path}}
+              source={{
+                uri:
+                  'thumbnail' in file
+                    ? file?.thumbnail?.path || file.path
+                    : file.path,
+              }}
               style={{height: 44, width: 54, borderRadius: 12}}
             />
             <Text

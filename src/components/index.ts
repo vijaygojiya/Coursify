@@ -15,3 +15,8 @@ export {default as OptionSheetListItem} from './OptionSheetListItem';
 export {default as FileSelector} from './FileSelector';
 export {default as OptionSheet} from './OptionSheet';
 export {default as AppBottomSheetBackdrop} from './AppBottomSheetBackdrop';
+export {default as AnimatedChevron} from './AnimatedChevron';
+export {default as BottomSheetAppTextInput} from './BottomSheetAppTextInput';
+export {default as LessonBottomSheet} from './LessonBottomSheet';
+export {default as AppSheetHandleComponent} from './AppSheetHandleComponent';
+export {default as ActionButton} from './ActionButton';

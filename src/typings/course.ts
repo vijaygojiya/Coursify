@@ -1,17 +1,17 @@
 import {IUser} from './types';
 
-interface ILesson {
+export interface ILesson {
+  id: string;
   title: string;
   position: number;
   contentType: 'video';
   videoUrl: string;
+  thumbnail: string;
   duration: number;
-  textContent?: string | undefined;
 }
 
-interface IModule {
+export interface IModule {
   title: string;
-  position: number;
   lessons: Array<ILesson>;
 }
 

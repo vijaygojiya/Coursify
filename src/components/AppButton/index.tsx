@@ -16,6 +16,7 @@ interface AppButtonProps extends PressableProps {
   isLoading?: boolean;
   containerStyle?: StyleProp<ViewStyle>;
   titleStyle?: TextStyle;
+  isOutlined?: boolean;
 }
 
 const AppButton: FC<AppButtonProps> = ({
@@ -24,7 +25,7 @@ const AppButton: FC<AppButtonProps> = ({
   disabled,
   containerStyle = {},
   titleStyle = {},
-
+  isOutlined = false,
   ...rest
 }) => {
   const {colors} = useTheme();
@@ -35,13 +36,25 @@ const AppButton: FC<AppButtonProps> = ({
       {...rest}
       style={[
         styles.container,
-        {backgroundColor: disabled ? colors.neutral50 : colors.primary},
+        {
+          backgroundColor: disabled ? colors.neutral50 : colors.primary,
+          borderColor: colors.primary,
+        },
+        isOutlined ? styles.outlineContainer : {},
         containerStyle,
       ]}>
       {isLoading ? (
-        <ActivityIndicator size={20} color={colors.neutral10} />
+        <ActivityIndicator
+          size={20}
+          color={isOutlined ? colors.primary : colors.neutral10}
+        />
       ) : (
-        <Text style={[styles.title, {color: colors.neutral10}, titleStyle]}>
+        <Text
+          style={[
+            styles.title,
+            {color: isOutlined ? colors.primary : colors.neutral10},
+            titleStyle,
+          ]}>
           {title}
         </Text>
       )}

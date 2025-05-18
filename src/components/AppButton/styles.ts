@@ -13,5 +13,9 @@ const styles = StyleSheet.create({
     ...textStyles.labelLarge,
     lineHeight: 20,
   },
+  outlineContainer: {
+    backgroundColor: 'transparent',
+    borderWidth: 1,
+  },
 });
 export default styles;

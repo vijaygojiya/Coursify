@@ -4,7 +4,12 @@ import {BottomSheetDefaultBackdropProps} from '@gorhom/bottom-sheet/lib/typescri
 
 const AppBottomSheetBackdrop = (props: BottomSheetDefaultBackdropProps) => {
   return (
-    <BottomSheetBackdrop {...props} appearsOnIndex={0} disappearsOnIndex={-1} />
+    <BottomSheetBackdrop
+      {...props}
+      appearsOnIndex={0}
+      disappearsOnIndex={-1}
+      pressBehavior="none"
+    />
   );
 };
 

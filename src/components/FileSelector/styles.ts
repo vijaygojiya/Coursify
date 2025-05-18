@@ -18,9 +18,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 4,
   },
   rowContainer: {
-    flex: 1,
     rowGap: 8,
-
     paddingVertical: 12,
     borderWidth: 1.5,
     borderRadius: 8,
@@ -31,7 +29,6 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   fileContainer: {
-    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     columnGap: 6,

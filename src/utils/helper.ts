@@ -77,3 +77,33 @@ export const getVideoThumbnail = (url: string, timeStamp = 10000) => {
     format: 'jpeg',
   });
 };
+
+export const getUniqueId = () =>
+  Date.now().toString(36) + Math.random().toString(36).substring(2);
+
+export function formatTime(milliseconds: number | null = 0) {
+  if (!milliseconds) {
+    return '';
+  }
+  const seconds = Math.floor((milliseconds / 1000) % 60);
+  const minutes = Math.floor((milliseconds / (1000 * 60)) % 60);
+  const hours = Math.floor((milliseconds / (1000 * 60 * 60)) % 24);
+  const days = Math.floor(milliseconds / (1000 * 60 * 60 * 24));
+
+  const parts: string[] = [];
+
+  if (days > 0) {
+    parts.push(`${days} day${days > 1 ? 's' : ''}`);
+  }
+  if (hours > 0) {
+    parts.push(`${hours} hour${hours > 1 ? 's' : ''}`);
+  }
+  if (minutes > 0) {
+    parts.push(`${minutes} min`);
+  }
+  if (seconds > 0 || parts.length === 0) {
+    parts.push(`${seconds}s`);
+  }
+
+  return parts.join(' ');
+}

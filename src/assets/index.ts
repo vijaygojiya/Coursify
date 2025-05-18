@@ -29,3 +29,5 @@ export {default as TrashIcon} from './icons/trash.svg';
 export {default as WarningCircleIcon} from './icons/warning-circle.svg';
 export {default as EditIcon} from './icons/edit.svg';
 export {default as UploadIcon} from './icons/upload.svg';
+export {default as PlusCircleIcon} from './icons/plus-circle.svg';
+export {default as CrossIcon} from './icons/cross-small.svg';
