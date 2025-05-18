@@ -1,7 +1,5 @@
 import {StyleSheet} from 'react-native';
 import React, {useCallback, useMemo, useRef, useState} from 'react';
-import {useMutation} from '@tanstack/react-query';
-import {createNewCourseApi} from '@/apis/courseApis';
 import {
   AppButton,
   AppTextInput,
@@ -10,16 +8,20 @@ import {
   PlaceholderInput,
 } from '@/components';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-controller';
-import {ImageOrVideo} from 'react-native-image-crop-picker';
 import {BottomSheetModal} from '@gorhom/bottom-sheet';
-import {courseBasicInfoSchema, zodErrorSimplify} from '@/utils';
+import {courseBasicInfoSchema, extractFirstErrors} from '@/utils';
 import {ZodError} from 'zod';
+import {CreateNewCourseStackScreenProps} from '@/typings/navigation';
+import Routes from '@/navigation/Routes';
+import {IAppAssets} from '@/typings/common';
 
 type keys = 'title' | 'shortDescription' | 'level' | 'coverImg' | 'promoVideo';
 
-const CourseOverview = () => {
-  const [coverImg, setCoverImage] = useState<ImageOrVideo | null>(null);
-  const [promoVideo, setPromoVideo] = useState<ImageOrVideo | null>(null);
+const CourseOverview = ({
+  navigation,
+}: CreateNewCourseStackScreenProps<'CourseOverview'>) => {
+  const [coverImg, setCoverImage] = useState<IAppAssets | null>(null);
+  const [promoVideo, setPromoVideo] = useState<IAppAssets | null>(null);
   const [title, setTitle] = useState('');
   const [shortDescription, setShortDescription] = useState('');
   const [errors, setErrors] = useState<Record<keys, string>>({
@@ -37,24 +39,26 @@ const CourseOverview = () => {
     return title && shortDescription && !!promoVideo && !!coverImg && level;
   }, [title, shortDescription, promoVideo, coverImg, level]);
 
-  console.log('------>>>>>>', JSON.stringify({coverImg, promoVideo}, null, 8));
+  console.log('----->>>>', JSON.stringify(promoVideo, null, 8));
 
   const onNextBtnPress = useCallback(() => {
     try {
       courseBasicInfoSchema.parse({
         title,
         shortDescription,
-        level,
-        ...(coverImg ? {coverImg: coverImg} : {}),
+        ...(level ? {level} : {}),
+
         ...(promoVideo ? {promoVideo} : {}),
+        ...(coverImg ? {coverImg} : {}),
       });
+      navigation.navigate(Routes.CourseCurriculum);
     } catch (error) {
       if (error instanceof ZodError) {
-        const validationErrors = zodErrorSimplify<keys>(error);
+        const validationErrors = extractFirstErrors(error);
         setErrors(validationErrors);
       }
     }
-  }, [coverImg, level, promoVideo, shortDescription, title]);
+  }, [coverImg, level, navigation, promoVideo, shortDescription, title]);
 
   return (
     <KeyboardAwareScrollView
@@ -122,7 +126,7 @@ const CourseOverview = () => {
       />
       <AppButton
         title="Next"
-        // disabled={!isAllFiledEnter}
+        disabled={!isAllFiledEnter}
         onPress={onNextBtnPress}
       />
       <OptionSheet

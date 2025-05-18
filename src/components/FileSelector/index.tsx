@@ -4,19 +4,17 @@ import styles from './styles';
 import {useTheme} from '@react-navigation/native';
 import {TrashIcon, UploadIcon} from '@/assets';
 import {textStyles} from '@/styles';
-import {
-  ImageOrVideo,
-  openPicker,
-  Options,
-} from 'react-native-image-crop-picker';
+import {openPicker, Options} from 'react-native-image-crop-picker';
+import {getVideoThumbnail} from '@/utils';
+import {IAppAssets} from '@/typings/common';
 
 interface FileSelectorPros {
   label: string;
   error?: string;
   placeholder?: string;
   options?: Partial<Options>;
-  file: ImageOrVideo | null;
-  onFileSelected: (f: ImageOrVideo) => void;
+  file: IAppAssets | null;
+  onFileSelected: (f: IAppAssets) => void;
   onRemoveFile?: () => void;
 }
 
@@ -46,7 +44,13 @@ const FileSelector = ({
         ...options,
       };
       const selectedImageAsset = await openPicker(finalOptions);
-      onFileSelected(selectedImageAsset);
+      if (options.mediaType === 'video') {
+        const thumbnail = await getVideoThumbnail(selectedImageAsset.path);
+        console.log('==>', thumbnail);
+        onFileSelected({...selectedImageAsset, thumbnail: thumbnail});
+      } else {
+        onFileSelected(selectedImageAsset);
+      }
     } catch (gError: unknown) {
       console.log('error while open image crop picker', gError);
     } finally {
@@ -74,7 +78,7 @@ const FileSelector = ({
         {file ? (
           <View style={styles.fileContainer}>
             <Image
-              source={{uri: file.path}}
+              source={{uri: file?.thumbnail?.path || file.path}}
               style={{height: 44, width: 54, borderRadius: 12}}
             />
             <Text

@@ -14,14 +14,19 @@ import {
 import {useAuth, useCurrentUser} from '@/hooks';
 import TabNavigator from './TabNavigator';
 import {lightTheme} from '@/styles';
-import {AppStackParamsList} from '@/typings/navigation';
+import {
+  AppStackParamsList,
+  InstructorStackParamsList,
+} from '@/typings/navigation';
 import {AppRoutes} from '.';
 import BootSplash from 'react-native-bootsplash';
 import {FullScreenLoader} from '@/components';
 import CreateCourseNavigator from './CreateCourseNavigator';
 import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 
-const Stack = createNativeStackNavigator<AppStackParamsList>();
+const Stack = createNativeStackNavigator<
+  AppStackParamsList & InstructorStackParamsList
+>();
 
 const appScreenOption: NativeStackNavigationOptions = {
   headerShown: false,
@@ -31,7 +36,7 @@ const AppNavigator = () => {
   const {isLoggedIn} = useAuth();
   const {data, isLoading} = useCurrentUser({enabled: isLoggedIn});
 
-  const isStudent = data?.role !== 'student';
+  const isStudent = data?.role === 'student';
 
   return (
     <NavigationContainer

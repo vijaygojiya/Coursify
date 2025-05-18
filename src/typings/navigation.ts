@@ -12,7 +12,6 @@ export type AppStackParamsList = {
   Onboarding: undefined;
   CourseList: {type: string};
   EditProfile: undefined;
-  AddNewCourse: undefined;
 };
 
 export type AppScreenProps<T extends keyof AppStackParamsList> =
@@ -42,3 +41,14 @@ export type CreateCourseStackParamsList = {
   CourseCurriculum: undefined;
   CoursePreview: undefined;
 };
+
+export type InstructorStackParamsList = {
+  AddNewCourse: NavigatorScreenParams<CreateCourseStackParamsList>;
+};
+
+export type CreateNewCourseStackScreenProps<
+  T extends keyof CreateCourseStackParamsList,
+> = CompositeScreenProps<
+  NativeStackScreenProps<CreateCourseStackParamsList, T>,
+  NativeStackScreenProps<InstructorStackParamsList>
+>;

@@ -35,21 +35,30 @@ export const signupSchema = z.object({
 });
 
 export const courseBasicInfoSchema = z.object({
-  title: z.string().min(5, 'Course title must be at least 5 characters'),
+  title: z
+    .string({required_error: 'Please add course titleI'})
+    .min(5, 'Course title must be at least 5 characters'),
+
+  shortDescription: z.string().optional(),
   level: z.enum(['Beginner', 'Intermediate', 'Advanced'], {
-    errorMap: () => ({message: 'Please select a difficulty level'}),
+    required_error: 'Please select a difficulty level',
   }),
 
-  coverImg: z.object({
-    uri: z.string().url('Invalid image URI'),
-    size: z.number().max(2 * 1024 * 1024, 'Image must be under 5MB'),
-  }),
+  coverImg: z.object(
+    {
+      path: z.string().url('Invalid image URI'),
+      size: z.number().max(2 * 1024 * 1024, 'Image must be under 5MB'),
+    },
+    {
+      required_error: 'Cover image required!',
+    },
+  ),
 
   promoVideo: z
     .object({
-      uri: z.string().url('Invalid video URI'),
+      path: z.string().url('Invalid video URI'),
       size: z.number().max(60 * 1024 * 1024, 'Video must be under 60MB'),
-      duration: z.number().max(60, 'Video must be 60 seconds or less'),
+      duration: z.number().max(60 * 1000, 'Video must be 60 seconds or less'),
     })
     .optional(),
 });
