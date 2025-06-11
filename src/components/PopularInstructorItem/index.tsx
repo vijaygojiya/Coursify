@@ -24,9 +24,9 @@ export default PopularInstructorItem;
 
 const styles = StyleSheet.create({
   container: {
-    width: 142,
+    width: 116,
     alignItems: 'center',
-    rowGap: 8,
+    rowGap: 12,
   },
   image: {
     width: '100%',

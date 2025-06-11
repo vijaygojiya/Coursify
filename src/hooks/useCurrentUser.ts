@@ -15,7 +15,6 @@ const useCurrentUser = (
     queryKey: ['currentUser'],
     queryFn: getCurrentUserInfoApi,
     select: ({data}) => data.data,
-    staleTime: Infinity,
     enabled: false,
     ...queryConfig,
   });

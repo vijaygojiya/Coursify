@@ -44,7 +44,7 @@ const Explore = ({navigation}: BottomTabScreensProps<'Explore'>) => {
   const {colors} = useTheme();
   const {top} = useSafeAreaInsets();
 
-  const {data: user} = useCurrentUser({enabled: true});
+  const {data: user} = useCurrentUser();
 
   return (
     <ScrollView

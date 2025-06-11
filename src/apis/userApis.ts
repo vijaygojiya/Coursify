@@ -24,6 +24,7 @@ export const createUserApi = async ({
 };
 
 export const getCurrentUserInfoApi = async () => {
+  console.log('fetching-current-user');
   return axiosClient<ApiResponse<IUser>>({
     method: HTTP_METHODS.get,
     url: apiEndpoints.user.getCurrentUser(),

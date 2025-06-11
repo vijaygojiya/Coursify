@@ -1,5 +1,4 @@
 import React, {useCallback, useRef, useState} from 'react';
-import {useAuth} from '@/hooks';
 import {
   AppleIcon,
   EyeCloseIcon,

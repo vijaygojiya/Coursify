@@ -5,12 +5,13 @@ import {useTheme} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {FullScreenLoader, SettingHeader, SettingItem} from '@/components';
 
-import {useMutation} from '@tanstack/react-query';
+import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {deleteUser} from '@/apis/userApis';
 import {BottomTabScreensProps} from '@/typings/navigation';
 import {fireAuth} from '@/services/firebase';
 import {AppFonts} from '@/styles';
 import {SVGsNames} from '@/typings/common';
+import {storage} from '@/utils/persister';
 
 const settingsListItems: Array<{
   title: string;
@@ -70,10 +71,13 @@ const Setting = ({}: BottomTabScreensProps<'Settings'>) => {
     onSuccess: () => {
       fireAuth.currentUser?.delete();
       fireAuth.signOut();
+      queryClient.removeQueries();
+      storage.clearAll();
     },
   });
 
   const {colors} = useTheme();
+  const queryClient = useQueryClient();
 
   const onSettingItemPress = ({
     isDelete,
@@ -85,6 +89,8 @@ const Setting = ({}: BottomTabScreensProps<'Settings'>) => {
           text: 'Yes',
           onPress: () => {
             fireAuth.signOut();
+            queryClient.removeQueries();
+            storage.clearAll();
           },
         },
         {text: 'No'},

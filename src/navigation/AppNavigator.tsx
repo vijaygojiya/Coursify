@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback, useEffect, useMemo} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {
   createNativeStackNavigator,
@@ -11,7 +11,6 @@ import {
   OnboardingScreen,
   SignUpScreen,
 } from '@/screens';
-import {useAuth, useCurrentUser} from '@/hooks';
 import TabNavigator from './TabNavigator';
 import {lightTheme} from '@/styles';
 import {
@@ -19,10 +18,18 @@ import {
   InstructorStackParamsList,
 } from '@/typings/navigation';
 import {AppRoutes} from '.';
-import BootSplash from 'react-native-bootsplash';
-import {FullScreenLoader} from '@/components';
 import CreateCourseNavigator from './CreateCourseNavigator';
 import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
+import {hide} from 'react-native-bootsplash';
+import {
+  FirebaseAuthTypes,
+  onAuthStateChanged,
+} from '@react-native-firebase/auth';
+import {useMMKVBoolean} from 'react-native-mmkv';
+import {storage} from '@/utils/persister';
+import {useCurrentUser} from '@/hooks';
+import {FullScreenLoader} from '@/components';
+import {fireAuth} from '@/services/firebase';
 
 const Stack = createNativeStackNavigator<
   AppStackParamsList & InstructorStackParamsList
@@ -33,21 +40,39 @@ const appScreenOption: NativeStackNavigationOptions = {
 };
 
 const AppNavigator = () => {
-  const {isLoggedIn} = useAuth();
-  const {data, isLoading} = useCurrentUser({enabled: isLoggedIn});
+  const [isLoggedIn, setIsLoggedIn] = useMMKVBoolean('is-logged-in', storage);
+  const {data, isLoading} = useCurrentUser({enabled: Boolean(isLoggedIn)});
 
-  const isStudent = data?.role === 'student';
+  const handleAuthStateChanged = useCallback(
+    function (_user: FirebaseAuthTypes.User | null) {
+      setIsLoggedIn(Boolean(_user));
+    },
+    [setIsLoggedIn],
+  );
+
+  useEffect(() => {
+    const subscriber = onAuthStateChanged(fireAuth, handleAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
+  }, [handleAuthStateChanged]);
+
+  const onNavigationReady = useCallback(() => {
+    hide();
+  }, []);
+
+  const isInstructor = useMemo(() => data?.role === 'instructor', [data?.role]);
 
   return (
-    <NavigationContainer
-      onReady={() => {
-        BootSplash.hide();
-      }}
-      theme={lightTheme}>
+    <NavigationContainer onReady={onNavigationReady} theme={lightTheme}>
       <BottomSheetModalProvider>
         <Stack.Navigator screenOptions={appScreenOption}>
           {isLoggedIn ? (
-            isStudent ? (
+            isInstructor ? (
+              <Stack.Screen
+                component={CreateCourseNavigator}
+                name={AppRoutes.AddNewCourse}
+                options={{headerShown: true, title: 'Create New Course'}}
+              />
+            ) : (
               <>
                 <Stack.Screen
                   name={AppRoutes.Dashboard}
@@ -67,14 +92,6 @@ const AppNavigator = () => {
                       title: route.params?.type,
                     };
                   }}
-                />
-              </>
-            ) : (
-              <>
-                <Stack.Screen
-                  component={CreateCourseNavigator}
-                  name={AppRoutes.AddNewCourse}
-                  options={{headerShown: true, title: 'Create New Course'}}
                 />
               </>
             )

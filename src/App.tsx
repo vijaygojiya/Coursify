@@ -4,15 +4,14 @@ import {
   initialWindowMetrics,
   SafeAreaProvider,
 } from 'react-native-safe-area-context';
-import {AuthProvider} from './contexts';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {Toaster} from 'sonner-native';
 import {KeyboardProvider} from 'react-native-keyboard-controller';
-import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
+import {QueryClient} from '@tanstack/react-query';
 import {configureGoogleSignin} from './services/firebase';
 import {StatusBar} from 'react-native';
-
-const GHRView = {flex: 1};
+import {PersistQueryClientProvider} from '@tanstack/react-query-persist-client';
+import {clientPersister} from './utils/persister';
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -21,29 +20,32 @@ export const queryClient = new QueryClient({
     },
     queries: {
       retry: false,
+      gcTime: 1000 * 60 * 60 * 24, // 24 hours
     },
   },
 });
 
 const App = () => {
+  //
+
   useEffect(() => {
     configureGoogleSignin();
   }, []);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-          <GestureHandlerRootView style={GHRView}>
-            <KeyboardProvider>
-              <StatusBar barStyle="dark-content" />
-              <AppNavigator />
-              <Toaster />
-            </KeyboardProvider>
-          </GestureHandlerRootView>
-        </SafeAreaProvider>
-      </AuthProvider>
-    </QueryClientProvider>
+    <PersistQueryClientProvider
+      client={queryClient}
+      persistOptions={{persister: clientPersister}}>
+      <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+        <GestureHandlerRootView>
+          <KeyboardProvider>
+            <StatusBar barStyle="dark-content" />
+            <AppNavigator />
+            <Toaster />
+          </KeyboardProvider>
+        </GestureHandlerRootView>
+      </SafeAreaProvider>
+    </PersistQueryClientProvider>
   );
 };
 

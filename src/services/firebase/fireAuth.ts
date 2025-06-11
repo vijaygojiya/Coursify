@@ -1,10 +1,16 @@
-import auth from '@react-native-firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  signOut as fireSignOut,
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+} from '@react-native-firebase/auth';
 import {
   GoogleSignin,
   isSuccessResponse,
 } from '@react-native-google-signin/google-signin';
 
-const fireAuth = auth();
+const fireAuth = getAuth();
 
 const configureGoogleSignin = () => {
   GoogleSignin.configure({
@@ -22,7 +28,11 @@ const createUserInFirebase = async ({
   email: string;
   password: string;
 }) => {
-  const {user} = await fireAuth.createUserWithEmailAndPassword(email, password);
+  const {user} = await createUserWithEmailAndPassword(
+    fireAuth,
+    email,
+    password,
+  );
   user.updateProfile({displayName: name});
   return user;
 };
@@ -34,7 +44,7 @@ const signInUserWithFirebase = async ({
   email: string;
   password: string;
 }) => {
-  return fireAuth.signInWithEmailAndPassword(email, password);
+  return signInWithEmailAndPassword(fireAuth,email, password);
 };
 const getFireAuthToken = async () => {
   return await fireAuth.currentUser?.getIdToken();
@@ -45,7 +55,7 @@ const getCurrentUserInfo = () => {
 };
 
 const signOut = async () => {
-  return fireAuth.signOut();
+  return fireSignOut(fireAuth);
 };
 
 const googleSignIn = async () => {
@@ -60,7 +70,7 @@ const googleSignIn = async () => {
       if (!idToken) {
         throw response;
       }
-      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+      const googleCredential = GoogleAuthProvider.credential(idToken);
       return await fireAuth.signInWithCredential(googleCredential);
     } else {
       throw response;

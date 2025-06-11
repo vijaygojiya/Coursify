@@ -9,6 +9,7 @@ import {updateCurrentUserInfoApi} from '@/apis/userApis';
 import {AppScreenProps} from '@/typings/navigation';
 import {EditIcon} from '@/assets';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-controller';
+import {getCurrentUserInfo} from '@/services/firebase';
 
 const EditProfile = ({navigation}: AppScreenProps<'EditProfile'>) => {
   const {data: user, refetch} = useCurrentUser();
@@ -22,6 +23,7 @@ const EditProfile = ({navigation}: AppScreenProps<'EditProfile'>) => {
   const {mutate, isPending} = useMutation({
     mutationFn: updateCurrentUserInfoApi,
     onSuccess: () => {
+      getCurrentUserInfo()?.updateProfile({displayName: name});
       refetch().then(() => {
         navigation.goBack();
       });

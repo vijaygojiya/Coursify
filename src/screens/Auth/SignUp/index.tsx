@@ -17,7 +17,7 @@ import {useTheme} from '@react-navigation/native';
 import {AppButton, AppTextInput} from '@/components';
 import {AppScreenProps} from '@/typings/navigation';
 import {useMutation} from '@tanstack/react-query';
-import {createUserInFirebase} from '@/services/firebase';
+import {createUserInFirebase  } from '@/services/firebase';
 import {toast} from 'sonner-native';
 import {createUserApi} from '@/apis/userApis';
 
@@ -25,6 +25,7 @@ const defaultValue = {
   name: '',
   email: '',
   password: '',
+
 };
 type inputKeys = keyof typeof defaultValue;
 
