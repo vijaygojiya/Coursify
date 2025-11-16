@@ -1,24 +1,23 @@
-import {BottomSheetModal, BottomSheetView} from '@gorhom/bottom-sheet';
-import {
+import { BottomSheetModal, BottomSheetView } from "@gorhom/bottom-sheet";
+import React, {
   forwardRef,
   useCallback,
   useEffect,
   useImperativeHandle,
   useRef,
   useState,
-} from 'react';
-import AppButton from '../AppButton';
-import BottomSheetAppTextInput from '../BottomSheetAppTextInput';
-import FileSelector from '../FileSelector';
-import AppBottomSheetBackdrop from '../AppBottomSheetBackdrop';
-import AppSheetHandleComponent from '../AppSheetHandleComponent';
-import {Video} from 'react-native-image-crop-picker';
-import {ILocalLesson} from '@/screens/Instructors/CourseCurriculum';
-import {getUniqueId} from '@/utils';
-import {ImageOrVideo} from 'react-native-image-crop-picker';
+} from "react";
+import AppButton from "../AppButton";
+import BottomSheetAppTextInput from "../BottomSheetAppTextInput";
+import FileSelector from "../FileSelector";
+import AppBottomSheetBackdrop from "../AppBottomSheetBackdrop";
+import AppSheetHandleComponent from "../AppSheetHandleComponent";
+import { ILocalLesson } from "@/screens/Instructors/CourseCurriculum";
+import { getUniqueId } from "@/utils";
+import { ImagePickerAsset } from "expo-image-picker";
 
 export interface LessonBottomSheetRef {
-  present: (mod?: {title: string; id: string}, less?: ILocalLesson) => void;
+  present: (mod?: { title: string; id: string }, less?: ILocalLesson) => void;
 }
 
 const LessonBottomSheet = forwardRef<
@@ -29,13 +28,13 @@ const LessonBottomSheet = forwardRef<
       moduleData: {
         moduleTitle: string;
         moduleId: string;
-      },
+      }
     ) => void;
   }
->(({onSave}, ref) => {
-  const [moduleTitle, setModuleTitle] = useState('');
-  const [title, setTitle] = useState('');
-  const [videoFile, setVideoFile] = useState<Video | null>(null);
+>(({ onSave }, ref) => {
+  const [moduleTitle, setModuleTitle] = useState("");
+  const [title, setTitle] = useState("");
+  const [videoFile, setVideoFile] = useState<ImagePickerAsset | null>(null);
 
   const bottomSheetRef = useRef<BottomSheetModal>(null);
 
@@ -72,23 +71,23 @@ const LessonBottomSheet = forwardRef<
         {
           moduleTitle: moduleTitle,
           moduleId: moduleId.current ?? getUniqueId(),
-        },
+        }
       );
     }
     bottomSheetRef.current?.close();
   };
 
-  const renderHandle = useCallback( 
+  const renderHandle = useCallback(
     () => <AppSheetHandleComponent title="Add new lesson" />,
-    [],
+    []
   );
 
   const onChange = useCallback((index: number) => {
     if (index === -1) {
       moduleId.current = null;
-      setTitle('');
+      setTitle("");
       setVideoFile(null);
-      setModuleTitle('');
+      setModuleTitle("");
       lessonId.current = null;
     }
   }, []);
@@ -99,8 +98,9 @@ const LessonBottomSheet = forwardRef<
       onChange={onChange}
       backdropComponent={AppBottomSheetBackdrop}
       handleComponent={renderHandle}
-      enablePanDownToClose={false}>
-      <BottomSheetView style={{paddingVertical: 12, paddingHorizontal: 16}}>
+      enablePanDownToClose={false}
+    >
+      <BottomSheetView style={{ paddingVertical: 12, paddingHorizontal: 16 }}>
         <BottomSheetAppTextInput
           label="Module Title"
           value={moduleTitle}
@@ -114,18 +114,14 @@ const LessonBottomSheet = forwardRef<
           placeholder="e.g., Welcome to the course"
         />
         <FileSelector
-          placeholder={'Video file mp4 only'}
-          options={{mediaType: 'video'}}
+          placeholder={"Video file mp4 only"}
+          options={{ type: "video" }}
           onRemoveFile={() => {
             setVideoFile(null);
           }}
-          label={'Video'}
+          label={"Video"}
           file={videoFile}
-          onFileSelected={function (f: ImageOrVideo): void {
-            if ('duration' in f) {
-              setVideoFile(f);
-            }
-          }}
+          onFileSelected={setVideoFile}
         />
         <AppButton
           disabled={!title || !videoFile}

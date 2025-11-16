@@ -5,14 +5,18 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
+    "backgroundColor": "#ffffff",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "ios": {
+      "userInterfaceStyle": "light",
+      "backgroundColor": "#ffffff",
       "supportsTablet": true,
       "bundleIdentifier": "com.coursify",
       "googleServicesFile": "./configs/GoogleService-Info.plist"
     },
     "android": {
+      "userInterfaceStyle": "light",
       "googleServicesFile": "./configs/google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
@@ -71,7 +75,8 @@
         {
           "photosPermission": "This app needs access to your photo library to allow you to upload a profile picture."
         }
-      ]
+      ],
+      "expo-system-ui"
     ]
   }
 }

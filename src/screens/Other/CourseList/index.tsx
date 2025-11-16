@@ -12,7 +12,6 @@ import styles from './styles';
 import {useTheme} from '@react-navigation/native';
 import {useRefreshByUser} from '@/hooks';
 import {CourseItem} from '@/components';
-import CourseFilterBar from '@/components/CourseFilterBar';
 import {AppScreenProps} from '@/typings/navigation';
 
 type MockDataKey = keyof typeof MockData;
@@ -54,7 +53,7 @@ const CourseList = ({route}: AppScreenProps<'CourseList'>) => {
       <FlatList
         data={data}
         overScrollMode="never"
-        ListHeaderComponent={<CourseFilterBar />}
+        // ListHeaderComponent={<CourseFilterBar />}
         refreshControl={
           <RefreshControl
             refreshing={isRefetchingByUser}

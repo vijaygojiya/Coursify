@@ -1,20 +1,22 @@
-import { Image, Pressable, StyleSheet, View } from 'react-native';
-import React, { useRef, useState } from 'react';
-import { useCurrentUser } from '@/hooks';
-import { AppButton, AppTextInput } from '@/components';
-import { useTheme } from '@react-navigation/native';
-import { openPicker, Options } from 'react-native-image-crop-picker';
-import { useMutation } from '@tanstack/react-query';
-import { AppScreenProps } from '@/typings/navigation';
-import { EditIcon } from '@/assets';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
-import { updateCurrentUserInfo } from '@/services/firebase';
+import { Image, Pressable, StyleSheet, View } from "react-native";
+import React, { useRef, useState } from "react";
+import { useCurrentUser } from "@/hooks";
+import { AppButton, AppTextInput } from "@/components";
+import { useTheme } from "@react-navigation/native";
+import * as ImagePicker from "expo-image-picker";
+import { useMutation } from "@tanstack/react-query";
+import { AppScreenProps } from "@/typings/navigation";
+import { EditIcon } from "@/assets";
+import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
+import { updateCurrentUserInfo } from "@/services/firebase";
+import { openPicker } from "@/utils/picker.shared";
+import { openCropper } from "@/utils/picker";
 
-const EditProfile = ({ navigation }: AppScreenProps<'EditProfile'>) => {
+const EditProfile = ({ navigation }: AppScreenProps<"EditProfile">) => {
   const { data: user, refetch } = useCurrentUser();
 
-  const [name, setName] = useState(user?.name ?? '');
-  const [bio, setBio] = useState(user?.bio ?? '');
+  const [name, setName] = useState(user?.name ?? "");
+  const [bio, setBio] = useState(user?.bio ?? "");
   const [profilePic, setProfilePic] = useState(user?.profileImg);
 
   const isOpeningGallery = useRef(false);
@@ -36,27 +38,30 @@ const EditProfile = ({ navigation }: AppScreenProps<'EditProfile'>) => {
     }
     isOpeningGallery.current = true;
     try {
-      const options: Options = {
-        mediaType: 'photo',
-        width: 500,
-        height: 500,
-        cropping: true,
-        cropperCircleOverlay: true,
-        cropperToolbarColor: colors.primaryMain,
-        cropperToolbarWidgetColor: colors.neutral10,
-        cropperActiveWidgetColor: colors.neutral10,
-      };
-      const selectedImageAsset = await openPicker(options);
-      console.log('selectedImageAsset', selectedImageAsset);
-      setProfilePic(selectedImageAsset.path);
+      const items = await openPicker({ aspect: [1, 1] });
+
+      let image = items[0];
+      if (!image) return;
+
+      image = await openCropper({
+        imageUri: image.path,
+        shape: "circle",
+        aspectRatio: 1 / 1,
+      });
+
+
+      setProfilePic(image.path);
+      // if (!result.canceled) {
+      //   setProfilePic(result.assets[0].uri);
+      // }
     } catch (error: unknown) {
-      console.log('error while open image crop picker', error);
+      console.log("error while open image crop picker", error);
     } finally {
       isOpeningGallery.current = false;
     }
   };
   const updateProfileData = () => {
-    mutate({ data: { name: name, profileImg: profilePic ?? '', bio: bio } });
+    mutate({ data: { name: name, profileImg: profilePic ?? "", bio: bio } });
   };
 
   return (
@@ -88,13 +93,13 @@ const EditProfile = ({ navigation }: AppScreenProps<'EditProfile'>) => {
           </Pressable>
         </Pressable>
         <AppTextInput
-          label={'Name'}
+          label={"Name"}
           value={name}
           onChangeText={setName}
           placeholder="Enter your name"
         />
         <AppTextInput
-          label={'Bio'}
+          label={"Bio"}
           value={bio}
           placeholder="Enter about you"
           onChangeText={setBio}
@@ -117,15 +122,15 @@ export default EditProfile;
 
 const styles = StyleSheet.create({
   container: { flex: 1, paddingHorizontal: 22, paddingVertical: 18 },
-  profileContainer: { alignSelf: 'center', marginBottom: 12 },
+  profileContainer: { alignSelf: "center", marginBottom: 12 },
   profile: {
     height: 116,
     width: 116,
     borderRadius: 116 / 2,
-    alignSelf: 'center',
+    alignSelf: "center",
   },
   editContainer: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 0,
     right: 0,
     padding: 8,

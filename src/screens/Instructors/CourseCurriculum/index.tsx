@@ -8,7 +8,8 @@ import {
   View,
 } from "react-native";
 import { useTheme } from "@react-navigation/native";
-import Collapsible from "react-native-fast-collapsible";
+import { Collapsible } from 'react-native-fast-collapsible';
+
 
 import { CreateNewCourseStackScreenProps } from "@/typings/navigation";
 import {
@@ -21,16 +22,16 @@ import { EditIcon, PlusCircleIcon, TrashIcon } from "@/assets";
 import { textStyles } from "@/styles";
 import { formatTime } from "@/utils";
 import { LessonBottomSheetRef } from "@/components/LessonBottomSheet";
-import type { Video } from "react-native-image-crop-picker";
 import ReanimatedSwipeable, {
   SwipeableMethods,
 } from "react-native-gesture-handler/ReanimatedSwipeable";
 import { useCreateCourseState } from "@/contexts/CreateCourseContext";
+import type { ImagePickerAsset } from "expo-image-picker";
 
 export interface ILocalLesson {
   id: string;
   title: string;
-  video: Video;
+  video: ImagePickerAsset;
 }
 
 export interface ILocalModule {
@@ -47,7 +48,7 @@ const LessonListItem = ({
   onDeletePress,
 }: {
   title: string;
-  video: Video;
+  video: ImagePickerAsset;
   onEditPress: () => void;
   onDeletePress: () => void;
 }) => {
@@ -187,7 +188,7 @@ const LessonList = React.memo(
   }) => {
     const { colors } = useTheme();
     return (
-      <Collapsible collapsed={collapsed} style={styles.lessonListContainer}>
+      <Collapsible isVisible={collapsed} style={styles.lessonListContainer}>
         <>
           {lessons.length ? (
             lessons.map((lesson) => (

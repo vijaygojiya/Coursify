@@ -1,14 +1,14 @@
-import { ILocalModule } from '@/screens/Instructors/CourseCurriculum';
-import React, { useState } from 'react';
-import { ImageOrVideo } from 'react-native-image-crop-picker';
+import { ILocalModule } from "@/screens/Instructors/CourseCurriculum";
+import type { ImagePickerAsset } from "expo-image-picker";
+import React, { useState } from "react";
 
 export const CreateCourseContext = React.createContext<{
-  coverImg: ImageOrVideo | null;
-  promoVideo: ImageOrVideo | null;
+  coverImg: ImagePickerAsset | null;
+  promoVideo: ImagePickerAsset | null;
   title: string;
   shortDescription: string;
-  setCoverImage: React.Dispatch<React.SetStateAction<ImageOrVideo | null>>;
-  setPromoVideo: React.Dispatch<React.SetStateAction<ImageOrVideo | null>>;
+  setCoverImage: React.Dispatch<React.SetStateAction<ImagePickerAsset | null>>;
+  setPromoVideo: React.Dispatch<React.SetStateAction<ImagePickerAsset | null>>;
   setTitle: React.Dispatch<React.SetStateAction<string>>;
   setShortDescription: React.Dispatch<React.SetStateAction<string>>;
   modules: ILocalModule[];
@@ -18,11 +18,11 @@ export const CreateCourseContext = React.createContext<{
 } | null>(null);
 
 function CreateCourseProvider({ children }: { children: React.ReactNode }) {
-  const [coverImg, setCoverImage] = useState<ImageOrVideo | null>(null);
-  const [promoVideo, setPromoVideo] = useState<ImageOrVideo | null>(null);
-  const [title, setTitle] = useState('');
-  const [shortDescription, setShortDescription] = useState('');
-  const [level, setLevel] = useState('');
+  const [coverImg, setCoverImage] = useState<ImagePickerAsset | null>(null);
+  const [promoVideo, setPromoVideo] = useState<ImagePickerAsset | null>(null);
+  const [title, setTitle] = useState("");
+  const [shortDescription, setShortDescription] = useState("");
+  const [level, setLevel] = useState("");
 
   const [modules, setModules] = useState<ILocalModule[]>([]);
 
@@ -41,7 +41,7 @@ function CreateCourseProvider({ children }: { children: React.ReactNode }) {
       level,
       setLevel,
     }),
-    [coverImg, level, modules, promoVideo, shortDescription, title],
+    [coverImg, level, modules, promoVideo, shortDescription, title]
   );
 
   return (
@@ -57,7 +57,7 @@ export function useCreateCourseState() {
   const context = React.useContext(CreateCourseContext);
   if (!context) {
     throw new Error(
-      'useCreateCourseState must be used within a useCreateCourseState',
+      "useCreateCourseState must be used within a useCreateCourseState"
     );
   }
   return context;

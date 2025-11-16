@@ -1,25 +1,25 @@
-import { StyleSheet } from 'react-native';
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import { StyleSheet } from "react-native";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import {
   AppButton,
   AppTextInput,
   FileSelector,
   OptionSheet,
   PlaceholderInput,
-} from '@/components';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
-import { BottomSheetModal } from '@gorhom/bottom-sheet';
-import { courseBasicInfoSchema, extractFirstErrors } from '@/utils';
-import { ZodError } from 'zod';
-import { CreateNewCourseStackScreenProps } from '@/typings/navigation';
-import Routes from '@/navigation/Routes';
-import { useCreateCourseState } from '@/contexts/CreateCourseContext';
+} from "@/components";
+import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import { extractFirstErrors } from "@/utils";
+import { ZodError } from "zod";
+import { CreateNewCourseStackScreenProps } from "@/typings/navigation";
+import Routes from "@/navigation/Routes";
+import { useCreateCourseState } from "@/contexts/CreateCourseContext";
 
-type keys = 'title' | 'shortDescription' | 'level' | 'coverImg' | 'promoVideo';
+type keys = "title" | "shortDescription" | "level" | "coverImg" | "promoVideo";
 
 const CourseOverview = ({
   navigation,
-}: CreateNewCourseStackScreenProps<'CourseOverview'>) => {
+}: CreateNewCourseStackScreenProps<"CourseOverview">) => {
   const {
     coverImg,
     setCoverImage,
@@ -34,11 +34,11 @@ const CourseOverview = ({
   } = useCreateCourseState();
 
   const [errors, setErrors] = useState<Record<keys, string>>({
-    title: '',
-    shortDescription: '',
-    level: '',
-    coverImg: '',
-    promoVideo: '',
+    title: "",
+    shortDescription: "",
+    level: "",
+    coverImg: "",
+    promoVideo: "",
   });
 
   const levelOptionSheetRef = useRef<BottomSheetModal>(null);
@@ -49,14 +49,14 @@ const CourseOverview = ({
 
   const onNextBtnPress = useCallback(() => {
     try {
-      courseBasicInfoSchema.parse({
-        title,
-        shortDescription,
-        ...(level ? { level } : {}),
+      // courseBasicInfoSchema.parse({
+      //   title,
+      //   shortDescription,
+      //   ...(level ? { level } : {}),
 
-        ...(promoVideo ? { promoVideo } : {}),
-        ...(coverImg ? { coverImg } : {}),
-      });
+      //   ...(promoVideo ? { promoVideo } : {}),
+      //   ...(coverImg ? { coverImg } : {}),
+      // });
       navigation.navigate(Routes.CourseCurriculum);
     } catch (error) {
       if (error instanceof ZodError) {
@@ -104,17 +104,7 @@ const CourseOverview = ({
         placeholder="Select an image to represent your course"
         file={coverImg}
         onFileSelected={setCoverImage}
-        options={{
-          mediaType: 'photo',
-          cropping: true,
-          width: 1600,
-          height: 900,
-          cropperToolbarTitle: 'Crop Cover Image',
-          cropperCircleOverlay: false,
-          compressImageQuality: 0.8,
-          includeBase64: false,
-          forceJpg: true,
-        }}
+        options={{}}
         onRemoveFile={() => {
           setCoverImage(null);
         }}
@@ -122,10 +112,10 @@ const CourseOverview = ({
       />
       <FileSelector
         label="Promo Video"
-        placeholder={'Upload 60s course intro video\n(MP4, max 60 sec)'}
+        placeholder={"Upload 60s course intro video\n(MP4, max 60 sec)"}
         file={promoVideo}
         onFileSelected={setPromoVideo}
-        options={{ mediaType: 'video' }}
+        options={{ type: "video" }}
         onRemoveFile={() => {
           setPromoVideo(null);
         }}
@@ -133,17 +123,17 @@ const CourseOverview = ({
       />
       <AppButton
         title="Next"
-        disabled={!isAllFiledEnter}
+        // disabled={!isAllFiledEnter}
         onPress={onNextBtnPress}
       />
       <OptionSheet
         configList={[
-          { name: 'Beginner' },
-          { name: 'Intermediate' },
-          { name: 'Advanced' },
+          { name: "Beginner" },
+          { name: "Intermediate" },
+          { name: "Advanced" },
         ]}
         ref={levelOptionSheetRef}
-        onItemSelect={name => {
+        onItemSelect={(name) => {
           setLevel(name);
         }}
       />

@@ -1,33 +1,32 @@
-import {Image, Pressable, Text, View} from 'react-native';
-import React, {useCallback, useRef} from 'react';
-import styles from './styles';
-import {useTheme} from '@react-navigation/native';
-import {TrashIcon, UploadIcon} from '@/assets';
-import {textStyles} from '@/styles';
-import {openPicker, Options} from 'react-native-image-crop-picker';
-import {getVideoThumbnail} from '@/utils';
-import {ImageOrVideo} from 'react-native-image-crop-picker';
+import { Image, Pressable, Text, View } from "react-native";
+import React, { useCallback, useRef } from "react";
+import styles from "./styles";
+import { useTheme } from "@react-navigation/native";
+import { TrashIcon, UploadIcon } from "@/assets";
+import { textStyles } from "@/styles";
+
+import * as ImagePicker from "expo-image-picker";
 
 interface FileSelectorPros {
   label: string;
   error?: string;
   placeholder?: string;
-  options?: Partial<Options>;
-  file: ImageOrVideo | null;
-  onFileSelected: (f: ImageOrVideo) => void;
+  options?: Partial<ImagePicker.ImagePickerAsset>;
+  file: ImagePicker.ImagePickerAsset | null;
+  onFileSelected: (f: ImagePicker.ImagePickerAsset) => void;
   onRemoveFile?: () => void;
 }
 
 const FileSelector = ({
   label,
-  error = '',
-  placeholder = '',
+  error = "",
+  placeholder = "",
   options = {},
   file,
   onRemoveFile,
   onFileSelected,
 }: FileSelectorPros) => {
-  const {colors} = useTheme();
+  const { colors } = useTheme();
 
   const isOpeningGallery = useRef(false);
 
@@ -37,22 +36,30 @@ const FileSelector = ({
     }
     isOpeningGallery.current = true;
     try {
-      const finalOptions: Options = {
+      const finalOptions = {
         cropperToolbarColor: colors.primaryMain,
         cropperToolbarWidgetColor: colors.neutral10,
         cropperActiveWidgetColor: colors.neutral10,
         ...options,
       };
-      const selectedImageAsset = await openPicker(finalOptions);
-      if (options.mediaType === 'video') {
-        const thumbnail = await getVideoThumbnail(selectedImageAsset.path);
-        console.log('==>', thumbnail);
-        onFileSelected({...selectedImageAsset, thumbnail});
-      } else {
-        onFileSelected(selectedImageAsset);
-      }
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ["images", "videos"],
+        allowsEditing: true,
+        aspect: [1, 1],
+        quality: 1,
+      });
+
+      // const item = result.assets[0]
+
+      // if (options.mediaType === "video") {
+      //   const thumbnail = await getVideoThumbnail(selectedImageAsset.path);
+      //   console.log("==>", thumbnail);
+      //   onFileSelected({ ...selectedImageAsset, thumbnail });
+      // } else {
+      //   onFileSelected(selectedImageAsset);
+      // }
     } catch (gError: unknown) {
-      console.log('error while open image crop picker', gError);
+      console.log("error while open image crop picker", gError);
     } finally {
       isOpeningGallery.current = false;
     }
@@ -62,10 +69,12 @@ const FileSelector = ({
     <Pressable
       disabled={!!file}
       onPress={openGallery}
-      style={[styles.container]}>
+      style={[styles.container]}
+    >
       <Text
         numberOfLines={1}
-        style={[styles.labelText, {color: colors.neutral80}]}>
+        style={[styles.labelText, { color: colors.neutral80 }]}
+      >
         {label}
       </Text>
       <View
@@ -75,25 +84,24 @@ const FileSelector = ({
             borderColor: colors.border,
             backgroundColor: colors.neutral10,
           },
-        ]}>
+        ]}
+      >
         {file ? (
           <View style={styles.fileContainer}>
             <Image
               source={{
-                uri:
-                  'thumbnail' in file
-                    ? file?.thumbnail?.path || file.path
-                    : file.path,
+                uri: file.uri,
               }}
-              style={{height: 44, width: 54, borderRadius: 12}}
+              style={{ height: 44, width: 54, borderRadius: 12 }}
             />
             <Text
               style={[
                 textStyles.bodySmall,
-                {flex: 1},
-                {color: colors.neutral80},
-              ]}>
-              {file.filename}
+                { flex: 1 },
+                { color: colors.neutral80 },
+              ]}
+            >
+              {file.fileName}
             </Text>
             <Pressable
               onPress={onRemoveFile}
@@ -102,7 +110,8 @@ const FileSelector = ({
                 borderColor: colors.dangerMain,
                 padding: 4,
                 borderRadius: 4,
-              }}>
+              }}
+            >
               <TrashIcon height={18} width={18} stroke={colors.dangerMain} />
             </Pressable>
           </View>
@@ -115,17 +124,19 @@ const FileSelector = ({
                 borderRadius: 12,
                 borderWidth: 1,
                 borderColor: colors.border,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
               <UploadIcon stroke={colors.neutral60} />
             </View>
             <Text
               style={[
                 textStyles.bodyMedium,
-                {textAlign: 'center', flex: 1},
-                {color: colors.neutral60},
-              ]}>
+                { textAlign: "center", flex: 1 },
+                { color: colors.neutral60 },
+              ]}
+            >
               {placeholder}
             </Text>
           </View>
@@ -133,7 +144,8 @@ const FileSelector = ({
       </View>
       <Text
         numberOfLines={2}
-        style={[styles.error, {color: colors.dangerMain}]}>
+        style={[styles.error, { color: colors.dangerMain }]}
+      >
         {error}
       </Text>
     </Pressable>
