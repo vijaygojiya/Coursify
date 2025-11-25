@@ -1,5 +1,5 @@
-import { Pressable, Text, TextInput, View } from 'react-native';
-import React, { useCallback, useRef, useState } from 'react';
+import { Pressable, Text, TextInput, View } from "react-native";
+import React, { useCallback, useRef, useState } from "react";
 import {
   ChevronIcon,
   EyeCloseIcon,
@@ -7,27 +7,24 @@ import {
   LockIcon,
   MainIcon,
   UserIcon,
-} from '@/assets';
-import { authErrorRegex, signupSchema, zodErrorSimplify } from '@/utils';
-import { ZodError } from 'zod';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
-import styles from './styles';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useTheme } from '@react-navigation/native';
-import { AppButton, AppTextInput } from '@/components';
-import { AppScreenProps } from '@/typings/navigation';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import {
-  createUser,
-  createUserInFirebase,
-  getCurrentUserInfo,
-} from '@/services/firebase';
-import { toast } from 'sonner-native';
+} from "@/assets";
+import { signupSchema, zodErrorSimplify } from "@/utils";
+import { ZodError } from "zod";
+import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
+import styles from "./styles";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useTheme } from "@react-navigation/native";
+import { AppButton, AppTextInput } from "@/components";
+import { AppScreenProps } from "@/typings/navigation";
+import { useMutation } from "@tanstack/react-query";
+import { signUpWithEmail } from "@/services/supabase";
+import { toast } from "sonner-native";
+import { isAuthError } from "@supabase/supabase-js";
 
 const defaultValue = {
-  name: '',
-  email: '',
-  password: '',
+  name: "",
+  email: "",
+  password: "",
 };
 type inputKeys = keyof typeof defaultValue;
 
@@ -38,24 +35,23 @@ const LeftIcons = {
 };
 
 const Labels = {
-  name: 'Name',
-  email: 'Email',
-  password: 'Password',
+  name: "Name",
+  email: "Email",
+  password: "Password",
 };
 const Placeholders = {
-  name: 'Enter your full name',
-  email: 'Enter your email',
-  password: 'Enter your password',
+  name: "Enter your full name",
+  email: "Enter your email",
+  password: "Enter your password",
 };
 
 const inputConfigs: inputKeys[] = Object.keys(defaultValue) as inputKeys[];
 
-const SignUp = ({ navigation }: AppScreenProps<'SignUp'>) => {
+const SignUp = ({ navigation }: AppScreenProps<"SignUp">) => {
   const [isSecureTextEntry, setSecureTextEntry] = useState(true);
 
   const [inputs, setInputs] = useState(defaultValue);
   const [errors, setErrors] = useState(defaultValue);
-  const queryClient = useQueryClient();
 
   const { top, bottom } = useSafeAreaInsets();
   const { colors } = useTheme();
@@ -65,30 +61,13 @@ const SignUp = ({ navigation }: AppScreenProps<'SignUp'>) => {
     password: null,
     name: null,
   });
-  const { mutate: createUserMutate, isPending: isLoading } = useMutation({
-    mutationFn: createUser,
-    onSuccess: () => {
-      queryClient.prefetchQuery({
-        queryKey: ['currentUser'],
-        queryFn: getCurrentUserInfo,
-      });
-    },
-  });
+
   const { mutate, isPending } = useMutation({
-    mutationFn: createUserInFirebase,
-    onSuccess: user => {
-      createUserMutate({
-        email: inputs.email,
-        firebaseId: user.uid,
-        name: inputs.name,
-      });
-    },
-    onError: error => {
-      if (authErrorRegex.test(error.message)) {
-        const message = error.message.split(authErrorRegex)[1];
-        toast.error(message.trim());
-      } else {
-        toast.error('Something went wrong!');
+    mutationFn: signUpWithEmail,
+    onSuccess: (user) => {},
+    onError: (error) => {
+      if (isAuthError(error)) {
+        toast.error(error.message);
       }
     },
   });
@@ -98,7 +77,7 @@ const SignUp = ({ navigation }: AppScreenProps<'SignUp'>) => {
       signupSchema.parse(inputs);
       mutate(inputs);
     } catch (error) {
-      console.log('------error', JSON.stringify(error, null, 8));
+      console.log("------error", JSON.stringify(error, null, 8));
       if (error instanceof ZodError) {
         const validationErrors = zodErrorSimplify<typeof defaultValue>(error);
         setErrors(validationErrors);
@@ -108,15 +87,15 @@ const SignUp = ({ navigation }: AppScreenProps<'SignUp'>) => {
 
   const handleSubmitEditing = useCallback(
     (key: inputKeys) => {
-      if (key === 'email') {
+      if (key === "email") {
         inputRefs.current.password?.focus();
-      } else if (key === 'name') {
+      } else if (key === "name") {
         inputRefs.current.email?.focus();
       } else {
         handleSubmit();
       }
     },
-    [handleSubmit],
+    [handleSubmit]
   );
 
   const handelAlreadyHaveAccount = useCallback(() => {
@@ -142,30 +121,30 @@ const SignUp = ({ navigation }: AppScreenProps<'SignUp'>) => {
         disableScrollOnKeyboardHide={true}
       >
         <Text style={[styles.appTitle, { color: colors.neutral100 }]}>
-          Create new account{'\n'}
+          Create new account{"\n"}
           <Text style={{ color: colors.primary }}>Coursify</Text>
         </Text>
         {inputConfigs.map((inputKey, index) => {
-          const isPassword = inputKey === 'password';
+          const isPassword = inputKey === "password";
           const LeftIcon = LeftIcons[inputKey];
           return (
             <AppTextInput
               key={`login-form-field-${index}`}
-              ref={ref => {
+              ref={(ref) => {
                 const temp = inputRefs.current;
                 inputRefs.current = { ...temp, [inputKey]: ref };
               }}
               value={inputs[inputKey]}
               returnKeyType={
-                index + 1 === inputConfigs.length ? 'done' : 'next'
+                index + 1 === inputConfigs.length ? "done" : "next"
               }
               onSubmitEditing={() => {
                 handleSubmitEditing(inputKey);
               }}
               error={errors[inputKey]}
-              onChangeText={text => {
-                setInputs(prev => ({ ...prev, [inputKey]: text }));
-                setErrors(prev => ({ ...prev, [inputKey]: '' }));
+              onChangeText={(text) => {
+                setInputs((prev) => ({ ...prev, [inputKey]: text }));
+                setErrors((prev) => ({ ...prev, [inputKey]: "" }));
               }}
               leftIcon={<LeftIcon />}
               rightIcon={
@@ -180,7 +159,7 @@ const SignUp = ({ navigation }: AppScreenProps<'SignUp'>) => {
               secureTextEntry={isPassword && isSecureTextEntry}
               onRightIconPress={() => {
                 if (isPassword) {
-                  setSecureTextEntry(v => !v);
+                  setSecureTextEntry((v) => !v);
                 }
               }}
               label={Labels[inputKey]}
@@ -192,7 +171,7 @@ const SignUp = ({ navigation }: AppScreenProps<'SignUp'>) => {
         <AppButton
           onPress={handleSubmit}
           title="Sign Up"
-          isLoading={isPending || isLoading}
+          isLoading={isPending}
         />
         <View style={styles.spacer} />
         <Pressable
@@ -200,7 +179,7 @@ const SignUp = ({ navigation }: AppScreenProps<'SignUp'>) => {
           onPress={handelAlreadyHaveAccount}
         >
           <Text style={[styles.footerText, { color: colors.text }]}>
-            Already have an account?{' '}
+            Already have an account?{" "}
             <Text style={[styles.createAccountText, { color: colors.primary }]}>
               Login
             </Text>

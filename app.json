@@ -24,18 +24,11 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.coursify"
+      "package": "com.coursify",
+      "permissions": ["android.permission.RECORD_AUDIO"]
     },
     "plugins": [
-      [
-        "expo-splash-screen",
-        {
-          "backgroundColor": "#ffffff",
-          "image": "./assets/splash-icon.png",
-          "imageWidth": 128,
-          "resizeMode": "contain"
-        }
-      ],
+      ["react-native-bootsplash", { "assetsDir": "assets/bootsplash" }],
       [
         "expo-font",
         {
@@ -48,16 +41,16 @@
         }
       ],
       "@react-native-firebase/app",
-      "@react-native-firebase/auth",
       [
         "expo-build-properties",
         {
           "ios": {
             "useFrameworks": "static",
             "buildReactNativeFromSource": true,
-            "forceStaticLinking": ["RNFBApp", "RNFBAuth", "RNFBFirestore"]
+            "forceStaticLinking": ["RNFBApp", "RNFBFirestore"]
           },
           "android": {
+            "usesCleartextTraffic": true,
             "extraMavenRepos": [
               "../../node_modules/@notifee/react-native/android/libs"
             ]
@@ -77,6 +70,11 @@
         }
       ],
       "expo-system-ui"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "ec7016ab-779a-4890-9bd5-82f0644e6b3d"
+      }
+    }
   }
 }

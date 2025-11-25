@@ -1,19 +1,28 @@
-import { getCurrentUserInfo } from "@/services/firebase/userServices";
-import { IUser } from "@/typings/types";
+import { useAuth } from "@/contexts/AuthContext";
+import { fetchProfile, UserProfile } from "@/services/supabase";
+import { useIsFocused } from "@react-navigation/native";
 
 import { useQuery, UseQueryOptions } from "@tanstack/react-query";
 
 const useCurrentUser = (
-  queryConfig: Omit<UseQueryOptions<IUser | null>, "queryKey" | "select"> = {}
+  queryConfig: Omit<
+    UseQueryOptions<UserProfile | null>,
+    "queryKey" | "select"
+  > = {}
 ) => {
-  // const isFocused = useIsFocused();
+  const { session } = useAuth();
+  const isFocused = useIsFocused();
   const result = useQuery({
-    // subscribed: isFocused,
-    queryKey: ["currentUser"],
-    queryFn: getCurrentUserInfo,
-    enabled: false,
+    subscribed: isFocused,
+    queryKey: [session?.user.id, "profile"],
+    queryFn: ({ queryKey: [userId] }) => {
+      console.log("fetching-user-profile");
+      return fetchProfile(userId as string);
+    },
+    enabled: !!session?.user.id,
     ...queryConfig,
   });
+  console.log("current-user-api--->>>>~~~~~~~>", result.data);
   return result;
 };
 

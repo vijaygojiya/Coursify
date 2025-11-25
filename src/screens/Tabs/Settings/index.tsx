@@ -12,7 +12,7 @@ import {
   deleteUser,
   fireAuth,
   signOut,
-} from '@/services/firebase';
+} from '@/services/supabase';
 import { AppFonts } from '@/styles';
 import { SVGsNames } from '@/typings/common';
 import { storage } from '@/utils/persister';

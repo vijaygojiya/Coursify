@@ -8,25 +8,44 @@ import { useMutation } from "@tanstack/react-query";
 import { AppScreenProps } from "@/typings/navigation";
 import { EditIcon } from "@/assets";
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
-import { updateCurrentUserInfo } from "@/services/firebase";
-import { openPicker } from "@/utils/picker.shared";
-import { openCropper } from "@/utils/picker";
+import { uploadAvatarSimple } from "@/services/supabase/storageServices";
+import { updateProfile, UserProfile } from "@/services/supabase";
 
 const EditProfile = ({ navigation }: AppScreenProps<"EditProfile">) => {
-  const { data: user, refetch } = useCurrentUser();
+  const { data: user } = useCurrentUser({ enabled: false });
 
   const [name, setName] = useState(user?.name ?? "");
   const [bio, setBio] = useState(user?.bio ?? "");
-  const [profilePic, setProfilePic] = useState(user?.profileImg);
+  const [profilePic, setProfilePic] = useState(user?.avatar_url);
+  const [imageResult, setImgResult] =
+    useState<ImagePicker.ImagePickerAsset | null>(null);
 
   const isOpeningGallery = useRef(false);
 
   const { mutate, isPending } = useMutation({
-    mutationFn: updateCurrentUserInfo,
-    onSuccess: () => {
-      refetch().then(() => {
-        navigation.goBack();
-      });
+    mutationFn: updateProfile,
+    onMutate: async (newProfile, ctx) => {
+      // optimistic update
+
+      await ctx.client.cancelQueries({ queryKey: [newProfile.id, "profile"] });
+      const previous = ctx.client.getQueryData<UserProfile | null>([
+        newProfile.id,
+        "profile",
+      ]);
+      ctx.client.setQueryData([newProfile.id, "profile"], (old: any) => ({
+        ...(old ?? {}),
+        ...newProfile,
+      }));
+      return { previous };
+    },
+    onError: (_, x, old, ctx) => {
+      if (old?.previous) {
+        ctx.client.setQueryData([x.id, "profile"], old.previous);
+      }
+    },
+    onSettled: (res, err, variables, _, ctx) => {
+      ctx.client.invalidateQueries({ queryKey: [variables.id, "profile"] });
+      navigation.goBack();
     },
   });
 
@@ -38,19 +57,32 @@ const EditProfile = ({ navigation }: AppScreenProps<"EditProfile">) => {
     }
     isOpeningGallery.current = true;
     try {
-      const items = await openPicker({ aspect: [1, 1] });
-
-      let image = items[0];
-      if (!image) return;
-
-      image = await openCropper({
-        imageUri: image.path,
-        shape: "circle",
-        aspectRatio: 1 / 1,
+      const result = await ImagePicker.launchImageLibraryAsync({
+        exif: false,
+        mediaTypes: ["images"],
+        allowsEditing: false,
+        quality: 1,
+        selectionLimit: 1,
+        legacy: true,
+        preferredAssetRepresentationMode:
+          ImagePicker.UIImagePickerPreferredAssetRepresentationMode.Automatic,
       });
+      if (result.assets) {
+        let image = result.assets[0];
+        console.log("====>>>>", JSON.stringify(image, null, 8));
+        setImgResult(image);
+        setProfilePic(image.uri);
+      }
+      // const items = await openPicker({ aspect: [1, 1] });
 
+      // if (!image) return;
 
-      setProfilePic(image.path);
+      // image = await openCropper({
+      //   imageUri: image.path,
+      //   shape: "circle",
+      //   aspectRatio: 1 / 1,
+      // });
+
       // if (!result.canceled) {
       //   setProfilePic(result.assets[0].uri);
       // }
@@ -60,8 +92,28 @@ const EditProfile = ({ navigation }: AppScreenProps<"EditProfile">) => {
       isOpeningGallery.current = false;
     }
   };
-  const updateProfileData = () => {
-    mutate({ data: { name: name, profileImg: profilePic ?? "", bio: bio } });
+  const updateProfileData = async () => {
+    if (!user) {
+      return;
+    }
+    if (imageResult) {
+      //
+      const res = await uploadAvatarSimple(user.id, imageResult);
+      mutate({
+        id: user.id,
+        name,
+        bio,
+        avatar_url: res,
+      });
+    } else {
+      // update profile
+    }
+    mutate({
+      id: user.id,
+      name,
+      bio,
+    });
+    // mutate({ data: { name: name, profileImg: profilePic ?? "", bio: bio } });
   };
 
   return (

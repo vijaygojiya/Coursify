@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { AppNavigator } from "./navigation";
 import {
   initialWindowMetrics,
@@ -7,16 +7,13 @@ import {
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Toaster } from "sonner-native";
 import { KeyboardProvider } from "react-native-keyboard-controller";
-import {
-  focusManager,
-  QueryClient,
-  QueryClientProvider,
-} from "@tanstack/react-query";
-import { configureGoogleSignin } from "./services/firebase";
+import { focusManager } from "@tanstack/react-query";
+import { configureGoogleSignin } from "./services/supabase";
 import { AppStateStatus, Platform, StatusBar } from "react-native";
 import { useAppState, useOnlineManager } from "./hooks";
-import * as Splash from "expo-splash-screen";
-Splash.preventAutoHideAsync();
+import { AuthProvider } from "./contexts";
+import { QueryProvider } from "./utils";
+import { AnimatedBootSplash } from "./components";
 
 function onAppStateChange(status: AppStateStatus) {
   // React Query already supports in web browser refetch on window focus by default
@@ -25,22 +22,10 @@ function onAppStateChange(status: AppStateStatus) {
   }
 }
 
-export const queryClient = new QueryClient({
-  defaultOptions: {
-    mutations: {
-      retry: false,
-    },
-    queries: {
-      refetchOnWindowFocus: false,
-      structuralSharing: false,
-      retry: false,
-    },
-  },
-});
-
 const App = () => {
   //
   useOnlineManager();
+  const [visible, setVisible] = useState(true);
 
   useAppState(onAppStateChange);
 
@@ -49,17 +34,26 @@ const App = () => {
   }, []);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-        <GestureHandlerRootView>
-          <KeyboardProvider>
-            <StatusBar barStyle="dark-content" />
-            <AppNavigator />
-            <Toaster />
-          </KeyboardProvider>
-        </GestureHandlerRootView>
-      </SafeAreaProvider>
-    </QueryClientProvider>
+    <QueryProvider>
+      <AuthProvider>
+        <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+          <GestureHandlerRootView>
+            <KeyboardProvider>
+              <StatusBar barStyle="dark-content" />
+              <AppNavigator />
+              {visible && (
+                <AnimatedBootSplash
+                  onAnimationEnd={() => {
+                    setVisible(false);
+                  }}
+                />
+              )}
+              <Toaster />
+            </KeyboardProvider>
+          </GestureHandlerRootView>
+        </SafeAreaProvider>
+      </AuthProvider>
+    </QueryProvider>
   );
 };
 

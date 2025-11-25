@@ -21,14 +21,7 @@ import {
 import { AppRoutes } from ".";
 import CreateCourseNavigator from "./CreateCourseNavigator";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
-import * as Splash from "expo-splash-screen";
-import {
-  FirebaseAuthTypes,
-  onAuthStateChanged,
-} from "@react-native-firebase/auth";
-import { useCurrentUser } from "@/hooks";
-import { FullScreenLoader } from "@/components";
-import { fireAuth } from "@/services/firebase";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Stack = createNativeStackNavigator<
   AppStackParamsList & InstructorStackParamsList
@@ -39,32 +32,18 @@ const appScreenOption: NativeStackNavigationOptions = {
 };
 
 const AppNavigator = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(!!fireAuth.currentUser?.email);
-  const { data, isLoading } = useCurrentUser({ enabled: Boolean(isLoggedIn) });
+  const { session } = useAuth();
 
-  const handleAuthStateChanged = useCallback(
-    function (_user: FirebaseAuthTypes.User | null) {
-      setIsLoggedIn(Boolean(_user));
-    },
-    [setIsLoggedIn]
+  const isInstructor = useMemo(
+    () => session?.user.user_metadata?.role === "instructor",
+    [session?.user.user_metadata?.role]
   );
 
-  useEffect(() => {
-    const subscriber = onAuthStateChanged(fireAuth, handleAuthStateChanged);
-    return subscriber; // unsubscribe on unmount
-  }, [handleAuthStateChanged]);
-
-  const onNavigationReady = useCallback(() => {
-    Splash.hideAsync();
-  }, []);
-
-  const isInstructor = useMemo(() => data?.role === "instructor", [data?.role]);
-
   return (
-    <NavigationContainer onReady={onNavigationReady} theme={lightTheme}>
+    <NavigationContainer theme={lightTheme}>
       <BottomSheetModalProvider>
         <Stack.Navigator screenOptions={appScreenOption}>
-          {isLoggedIn ? (
+          {session ? (
             isInstructor ? (
               <Stack.Screen
                 component={CreateCourseNavigator}
@@ -110,7 +89,7 @@ const AppNavigator = () => {
           )}
         </Stack.Navigator>
       </BottomSheetModalProvider>
-      <FullScreenLoader loading={isLoading} />
+      {/* <FullScreenLoader loading={isLoading} /> */}
     </NavigationContainer>
   );
 };
