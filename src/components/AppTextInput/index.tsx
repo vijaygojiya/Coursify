@@ -43,12 +43,13 @@ const AppTextInput = forwardRef<TextInput, AppTextInputProps>(
         <View style={[styles.rowContainer, { borderColor: colors.border }]}>
           {leftIcon}
           <TextInput
+
             autoCapitalize="none"
             autoCorrect={false}
             ref={ref}
             placeholderTextColor={colors.neutral60}
             cursorColor={colors.primary}
-            underlineColorAndroid={colors.primary}
+            // underlineColorAndroid={colors.primary}
             selectionColor={colors.primary}
             style={[styles.textInput, { color: colors.neutral90 }, style]}
             {...rest}

@@ -13,7 +13,6 @@ module.exports = function (api) {
           root: ["./src"],
         },
       ],
-      "@babel/plugin-transform-export-namespace-from",
       "react-native-worklets/plugin",
     ],
   };

@@ -36,6 +36,7 @@ const EditProfile = ({ navigation }: AppScreenProps<"EditProfile">) => {
         ...(old ?? {}),
         ...newProfile,
       }));
+      navigation.goBack();
       return { previous };
     },
     onError: (_, x, old, ctx) => {
@@ -45,7 +46,6 @@ const EditProfile = ({ navigation }: AppScreenProps<"EditProfile">) => {
     },
     onSettled: (res, err, variables, _, ctx) => {
       ctx.client.invalidateQueries({ queryKey: [variables.id, "profile"] });
-      navigation.goBack();
     },
   });
 
@@ -106,13 +106,13 @@ const EditProfile = ({ navigation }: AppScreenProps<"EditProfile">) => {
         avatar_url: res,
       });
     } else {
-      // update profile
+      mutate({
+        id: user.id,
+        name,
+        bio,
+      });
     }
-    mutate({
-      id: user.id,
-      name,
-      bio,
-    });
+
     // mutate({ data: { name: name, profileImg: profilePic ?? "", bio: bio } });
   };
 

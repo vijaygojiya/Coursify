@@ -1,7 +1,6 @@
 import { useAuth } from "@/contexts/AuthContext";
 import { fetchProfile, UserProfile } from "@/services/supabase";
 import { useIsFocused } from "@react-navigation/native";
-
 import { useQuery, UseQueryOptions } from "@tanstack/react-query";
 
 const useCurrentUser = (
@@ -16,13 +15,11 @@ const useCurrentUser = (
     subscribed: isFocused,
     queryKey: [session?.user.id, "profile"],
     queryFn: ({ queryKey: [userId] }) => {
-      console.log("fetching-user-profile");
       return fetchProfile(userId as string);
     },
     enabled: !!session?.user.id,
     ...queryConfig,
   });
-  console.log("current-user-api--->>>>~~~~~~~>", result.data);
   return result;
 };
 

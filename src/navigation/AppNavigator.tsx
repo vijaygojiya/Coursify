@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import {
   createNativeStackNavigator,
@@ -18,10 +18,10 @@ import {
   AppStackParamsList,
   InstructorStackParamsList,
 } from "@/typings/navigation";
-import { AppRoutes } from ".";
 import CreateCourseNavigator from "./CreateCourseNavigator";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { useAuth } from "@/contexts/AuthContext";
+import Routes from "./Routes";
 
 const Stack = createNativeStackNavigator<
   AppStackParamsList & InstructorStackParamsList
@@ -47,22 +47,22 @@ const AppNavigator = () => {
             isInstructor ? (
               <Stack.Screen
                 component={CreateCourseNavigator}
-                name={AppRoutes.AddNewCourse}
+                name={Routes.AddNewCourse}
                 options={{ headerShown: true, title: "Create New Course" }}
               />
             ) : (
               <>
                 <Stack.Screen
-                  name={AppRoutes.Dashboard}
+                  name={Routes.Dashboard}
                   component={TabNavigator}
                 />
                 <Stack.Screen
-                  name={AppRoutes.EditProfile}
+                  name={Routes.EditProfile}
                   component={EditProfileScreen}
                   options={{ headerShown: true, title: "Edit Profile" }}
                 />
                 <Stack.Screen
-                  name={AppRoutes.CourseList}
+                  name={Routes.CourseList}
                   component={CourseListScreen}
                   options={({ route }) => {
                     return {
@@ -72,7 +72,7 @@ const AppNavigator = () => {
                   }}
                 />
                 <Stack.Screen
-                  name={AppRoutes.CourseDetail}
+                  name={Routes.CourseDetail}
                   component={CourseDetailScreen}
                 />
               </>
@@ -80,11 +80,11 @@ const AppNavigator = () => {
           ) : (
             <>
               <Stack.Screen
-                name={AppRoutes.Onboarding}
+                name={Routes.Onboarding}
                 component={OnboardingScreen}
               />
-              <Stack.Screen name={AppRoutes.Login} component={LoginScreen} />
-              <Stack.Screen name={AppRoutes.SignUp} component={SignUpScreen} />
+              <Stack.Screen name={Routes.Login} component={LoginScreen} />
+              <Stack.Screen name={Routes.SignUp} component={SignUpScreen} />
             </>
           )}
         </Stack.Navigator>

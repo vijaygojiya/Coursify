@@ -33,9 +33,8 @@ export async function updateProfile(
     .eq("id", updates.id)
     .select()
     .single();
-  console.log("====>>>>", error);
+
   if (error) throw error;
-  console.log("data====>>>>", data);
 
   return data as UserProfile;
 }

@@ -12,12 +12,11 @@
       "userInterfaceStyle": "light",
       "backgroundColor": "#ffffff",
       "supportsTablet": true,
-      "bundleIdentifier": "com.coursify",
-      "googleServicesFile": "./configs/GoogleService-Info.plist"
+      "bundleIdentifier": "com.coursify"
     },
     "android": {
       "userInterfaceStyle": "light",
-      "googleServicesFile": "./configs/google-services.json",
+
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#0CA190"
@@ -40,27 +39,12 @@
           ]
         }
       ],
-      "@react-native-firebase/app",
       [
         "expo-build-properties",
         {
-          "ios": {
-            "useFrameworks": "static",
-            "buildReactNativeFromSource": true,
-            "forceStaticLinking": ["RNFBApp", "RNFBFirestore"]
-          },
           "android": {
-            "usesCleartextTraffic": true,
-            "extraMavenRepos": [
-              "../../node_modules/@notifee/react-native/android/libs"
-            ]
+            "usesCleartextTraffic": true
           }
-        }
-      ],
-      [
-        "@react-native-google-signin/google-signin",
-        {
-          "iosUrlScheme": "com.googleusercontent.apps.1014904992083-n7qdaul3pvou9pb0hmqj02e471aorvp1"
         }
       ],
       [
