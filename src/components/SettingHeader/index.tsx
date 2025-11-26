@@ -16,7 +16,7 @@ const SettingHeader = () => {
   return (
     <View style={styles.profileContainer}>
       <Image
-        source={{ uri: user?.avatar_url }}
+        source={{ uri: user?.avatar_url ?? undefined }}
         style={[styles.profileImage, { backgroundColor: colors.neutral50 }]}
       />
       <View style={styles.infoContainer}>

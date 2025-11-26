@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { AppNavigator } from "./navigation";
 import {
   initialWindowMetrics,
   SafeAreaProvider,
@@ -14,6 +13,7 @@ import { useAppState, useOnlineManager } from "./hooks";
 import { AuthProvider } from "./contexts";
 import { QueryProvider } from "./utils";
 import { AnimatedBootSplash } from "./components";
+import AppNavigator from "./navigation/AppNavigator";
 
 function onAppStateChange(status: AppStateStatus) {
   // React Query already supports in web browser refetch on window focus by default

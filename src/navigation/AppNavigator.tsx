@@ -21,7 +21,9 @@ import {
 import CreateCourseNavigator from "./CreateCourseNavigator";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { useAuth } from "@/contexts/AuthContext";
-import Routes from "./Routes";
+import { AppRoutes } from ".";
+
+
 
 const Stack = createNativeStackNavigator<
   AppStackParamsList & InstructorStackParamsList
@@ -46,24 +48,24 @@ const AppNavigator = () => {
           {session ? (
             isInstructor ? (
               <Stack.Screen
-                component={CreateCourseNavigator}
-                name={Routes.AddNewCourse}
+                getComponent={() => CreateCourseNavigator}
+                name={AppRoutes.AddNewCourse}
                 options={{ headerShown: true, title: "Create New Course" }}
               />
             ) : (
               <>
                 <Stack.Screen
-                  name={Routes.Dashboard}
-                  component={TabNavigator}
+                  name={AppRoutes.Dashboard}
+                  getComponent={() => TabNavigator}
                 />
                 <Stack.Screen
-                  name={Routes.EditProfile}
-                  component={EditProfileScreen}
+                  name={AppRoutes.EditProfile}
+                  getComponent={() => EditProfileScreen}
                   options={{ headerShown: true, title: "Edit Profile" }}
                 />
                 <Stack.Screen
-                  name={Routes.CourseList}
-                  component={CourseListScreen}
+                  name={AppRoutes.CourseList}
+                  getComponent={() => CourseListScreen}
                   options={({ route }) => {
                     return {
                       headerShown: true,
@@ -72,19 +74,19 @@ const AppNavigator = () => {
                   }}
                 />
                 <Stack.Screen
-                  name={Routes.CourseDetail}
-                  component={CourseDetailScreen}
+                  name={AppRoutes.CourseDetail}
+                  getComponent={() => CourseDetailScreen}
                 />
               </>
             )
           ) : (
             <>
               <Stack.Screen
-                name={Routes.Onboarding}
-                component={OnboardingScreen}
+                name={AppRoutes.Onboarding}
+                getComponent={() => OnboardingScreen}
               />
-              <Stack.Screen name={Routes.Login} component={LoginScreen} />
-              <Stack.Screen name={Routes.SignUp} component={SignUpScreen} />
+              <Stack.Screen name={AppRoutes.Login} getComponent={() => LoginScreen} />
+              <Stack.Screen name={AppRoutes.SignUp} getComponent={() => SignUpScreen} />
             </>
           )}
         </Stack.Navigator>

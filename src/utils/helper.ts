@@ -26,7 +26,7 @@ export const zodErrorSimplify = <T>(error: ZodError) => {
   return errors as T;
 };
 
-export const getFirstName = (fullName?: string) => {
+export const getFirstName = (fullName?: string | null) => {
   if (!fullName) {
     return fullName;
   }

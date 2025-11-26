@@ -59,17 +59,17 @@ const TopTabNavigator = ({}: BottomTabScreensProps<'Learn'>) => {
       }}>
       <TopTab.Screen
         name="Inprogress"
-        component={HomeScree}
+        getComponent={() => HomeScree}
         options={{tabBarIcon: renderProgressIcon}}
       />
       <TopTab.Screen
         name="Favorite"
-        component={HomeScree}
+        getComponent={() => HomeScree}
         options={{tabBarIcon: renderFavIcon}}
       />
       <TopTab.Screen
         name="Downloaded"
-        component={HomeScree}
+        getComponent={() => HomeScree}
         options={{tabBarIcon: renderDownloadIcon}}
       />
     </TopTab.Navigator>

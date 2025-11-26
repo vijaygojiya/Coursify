@@ -65,24 +65,24 @@ const BottomNavigator = ({}: AppScreenProps<'Dashboard'>) => {
     <Tab.Navigator screenOptions={screenOptions}>
       <Tab.Screen
         name={Routes.Explore}
-        component={ExploreScreen}
+        getComponent={() => ExploreScreen}
         options={{ tabBarButton: exploreTabBarButton }}
       />
       <Tab.Screen
         name={Routes.Search}
-        component={SearchScreen}
+        getComponent={() => SearchScreen}
         options={{ tabBarButton: searchTabBarButton }}
       />
       <Tab.Screen
         name={Routes.Learn}
-        component={TopTabNavigator}
+        getComponent={() => TopTabNavigator}
         options={{
           tabBarButton: renderLeanTabBarButton,
         }}
       />
       <Tab.Screen
         name={Routes.Settings}
-        component={SettingsScreen}
+        getComponent={() => SettingsScreen}
         options={{
           tabBarButton: renderSettingsTabBarButton,
         }}
