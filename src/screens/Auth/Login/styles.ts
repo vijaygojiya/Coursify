@@ -1,18 +1,18 @@
-import {AppFonts, textStyles} from '@/styles';
-import {StyleSheet} from 'react-native';
+import { AppFonts, textStyles } from "@/styles";
+import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  content: {flexGrow: 1, paddingHorizontal: 16},
-  appTitle: {...textStyles.headlineMedium, marginVertical: 8},
-  forgotPasswordContainer: {alignSelf: 'flex-end', marginBottom: 18},
+  content: { flexGrow: 1, paddingHorizontal: 16 },
+  appTitle: { ...textStyles.headlineMedium, marginVertical: 8 },
+  forgotPasswordContainer: { alignSelf: "flex-end", marginBottom: 18 },
   forgotPassword: textStyles.bodyMedium,
-  footerText: {...textStyles.bodyMedium, textAlign: 'center'},
+  footerText: { ...textStyles.bodyMedium, textAlign: "center" },
   createAccountText: {
     fontFamily: AppFonts.medium,
   },
   orRowContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     columnGap: 10,
     marginVertical: 18,
   },
@@ -25,9 +25,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   socialIconContainer: {
-    flexDirection: 'row',
-    alignContent: 'center',
-    justifyContent: 'center',
+    flexDirection: "row",
+    alignContent: "center",
+    justifyContent: "center",
     columnGap: 18,
     marginVertical: 8,
   },

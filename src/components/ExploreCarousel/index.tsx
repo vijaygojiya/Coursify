@@ -1,12 +1,12 @@
-import {View, useWindowDimensions} from 'react-native';
-import React from 'react';
+import { View, useWindowDimensions } from "react-native";
+import React from "react";
 import Animated, {
   useAnimatedRef,
   useDerivedValue,
   useScrollViewOffset,
-} from 'react-native-reanimated';
-import CarouselIndicator from '../CarouselIndicator';
-import CarouselItem from '../CarouselItem';
+} from "react-native-reanimated";
+import CarouselIndicator from "../CarouselIndicator";
+import CarouselItem from "../CarouselItem";
 
 const ExploreCarousel = () => {
   const animatedRef = useAnimatedRef<Animated.ScrollView>();
@@ -24,14 +24,15 @@ const ExploreCarousel = () => {
         bounces={false}
         overScrollMode="never"
         ref={animatedRef}
-        decelerationRate={'normal'}
+        decelerationRate={"normal"}
         scrollEventThrottle={16}
         pagingEnabled={true}
         horizontal
-        showsHorizontalScrollIndicator={false}>
+        showsHorizontalScrollIndicator={false}
+      >
         {[1, 2, 3].map((_, index) => {
           return (
-            <CarouselItem key={index + '-explore-carouse-item'} index={index} />
+            <CarouselItem key={index + "-explore-carouse-item"} index={index} />
           );
         })}
       </Animated.ScrollView>

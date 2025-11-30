@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   itemContainer: {
@@ -7,18 +7,18 @@ const styles = StyleSheet.create({
   },
   linearGradient: {
     borderRadius: 12,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
+    justifyContent: "flex-end",
+    alignItems: "center",
     flex: 1,
   },
   itemImage: {
-    height: '100%',
-    width: '100%',
+    height: "100%",
+    width: "100%",
   },
   imageContainer: {
     elevation: 8,
     borderRadius: 12,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
 });
 export default styles;

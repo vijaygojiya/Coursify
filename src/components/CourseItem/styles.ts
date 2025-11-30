@@ -1,10 +1,10 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
     padding: 8,
     borderRadius: 12,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOpacity: 0.1,
     shadowRadius: 10,
     elevation: 4,
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     aspectRatio: 16 / 9,
     borderTopStartRadius: 12,
     borderTopEndRadius: 12,
-    width: '100%',
+    width: "100%",
     marginBottom: 8,
   },
 });

@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from "react-native";
 
 export const DOT_SIZE = 8;
 export const DOT_SPACING = 8;

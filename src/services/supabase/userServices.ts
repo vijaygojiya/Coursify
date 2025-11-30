@@ -25,7 +25,7 @@ export async function fetchProfile(userId: string) {
 }
 
 export async function updateProfile(
-  updates: Partial<UserProfile> & { id: string }
+  updates: Partial<UserProfile> & { id: string },
 ) {
   const { data, error } = await supabase
     .from("profiles")

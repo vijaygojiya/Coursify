@@ -38,7 +38,7 @@ const AnimatedBootSplash = ({ onAnimationEnd }: Props) => {
           if (finished) {
             scheduleOnRN(onAnimationEnd);
           }
-        }
+        },
       );
 
       // Logo animation (fade + scale + soft slide up)

@@ -2,6 +2,7 @@ import {
   findNodeHandle,
   NativeSyntheticEvent,
   TextInputFocusEventData,
+  TextInput as RNTextInput,
 } from "react-native";
 import React, {
   forwardRef,
@@ -10,7 +11,6 @@ import React, {
   useImperativeHandle,
   useRef,
 } from "react";
-import { TextInput as RNTextInput } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { useBottomSheetInternal } from "@gorhom/bottom-sheet";
 import AppTextInput, { AppTextInputProps } from "../AppTextInput";
@@ -34,13 +34,13 @@ const BottomSheetAppTextInput = forwardRef<
         onFocus(args);
       }
     },
-    [onFocus, animatedKeyboardState]
+    [onFocus, animatedKeyboardState],
   );
   const handleOnBlur = useCallback(
     (args: NativeSyntheticEvent<TextInputFocusEventData>) => {
       const keyboardState = animatedKeyboardState.get();
       const currentFocusedInput = findNodeHandle(
-        RNTextInput.State.currentlyFocusedInput()
+        RNTextInput.State.currentlyFocusedInput(),
       );
 
       /**
@@ -65,7 +65,7 @@ const BottomSheetAppTextInput = forwardRef<
         onBlur(args);
       }
     },
-    [onBlur, animatedKeyboardState, textInputNodesRef]
+    [onBlur, animatedKeyboardState, textInputNodesRef],
   );
 
   //#region effects
@@ -114,4 +114,5 @@ const BottomSheetAppTextInput = forwardRef<
   );
 });
 
+BottomSheetAppTextInput.displayName = "BottomSheetAppTextInput";
 export default BottomSheetAppTextInput;

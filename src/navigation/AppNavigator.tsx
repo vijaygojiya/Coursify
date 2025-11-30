@@ -23,8 +23,6 @@ import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { useAuth } from "@/contexts/AuthContext";
 import { AppRoutes } from ".";
 
-
-
 const Stack = createNativeStackNavigator<
   AppStackParamsList & InstructorStackParamsList
 >();
@@ -38,7 +36,7 @@ const AppNavigator = () => {
 
   const isInstructor = useMemo(
     () => session?.user.user_metadata?.role === "instructor",
-    [session?.user.user_metadata?.role]
+    [session?.user.user_metadata?.role],
   );
 
   return (
@@ -85,8 +83,14 @@ const AppNavigator = () => {
                 name={AppRoutes.Onboarding}
                 getComponent={() => OnboardingScreen}
               />
-              <Stack.Screen name={AppRoutes.Login} getComponent={() => LoginScreen} />
-              <Stack.Screen name={AppRoutes.SignUp} getComponent={() => SignUpScreen} />
+              <Stack.Screen
+                name={AppRoutes.Login}
+                getComponent={() => LoginScreen}
+              />
+              <Stack.Screen
+                name={AppRoutes.SignUp}
+                getComponent={() => SignUpScreen}
+              />
             </>
           )}
         </Stack.Navigator>

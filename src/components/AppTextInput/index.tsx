@@ -29,7 +29,7 @@ const AppTextInput = forwardRef<TextInput, AppTextInputProps>(
       error = "",
       ...rest
     },
-    ref
+    ref,
   ) => {
     const { colors } = useTheme();
     return (
@@ -43,7 +43,6 @@ const AppTextInput = forwardRef<TextInput, AppTextInputProps>(
         <View style={[styles.rowContainer, { borderColor: colors.border }]}>
           {leftIcon}
           <TextInput
-
             autoCapitalize="none"
             autoCorrect={false}
             ref={ref}
@@ -70,7 +69,8 @@ const AppTextInput = forwardRef<TextInput, AppTextInputProps>(
         </Text>
       </View>
     );
-  }
+  },
 );
+AppTextInput.displayName = "AppTextInput";
 
 export default memo(AppTextInput);

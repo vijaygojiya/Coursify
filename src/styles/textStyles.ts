@@ -1,10 +1,10 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from "react-native";
 
 export const AppFonts = {
-  medium: 'Poppins-Medium',
-  regular: 'Poppins-Regular',
-  semiBold: 'Poppins-SemiBold',
-  bold: 'Poppins-Bold',
+  medium: "Poppins-Medium",
+  regular: "Poppins-Regular",
+  semiBold: "Poppins-SemiBold",
+  bold: "Poppins-Bold",
 };
 
 export const textStyles = StyleSheet.create({

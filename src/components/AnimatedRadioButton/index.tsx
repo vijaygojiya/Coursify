@@ -1,6 +1,6 @@
-import {useTheme} from '@react-navigation/native';
-import React from 'react';
-import {Pressable} from 'react-native';
+import { useTheme } from "@react-navigation/native";
+import React from "react";
+import { Pressable } from "react-native";
 import Animated, {
   interpolateColor,
   useAnimatedStyle,
@@ -8,9 +8,9 @@ import Animated, {
   useSharedValue,
   withSpring,
   withTiming,
-} from 'react-native-reanimated';
-import Svg, {Path} from 'react-native-svg';
-import styles from './styles';
+} from "react-native-reanimated";
+import Svg, { Path } from "react-native-svg";
+import styles from "./styles";
 
 export interface IProps {
   isChecked?: boolean;
@@ -19,8 +19,8 @@ export interface IProps {
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
-const AnimatedRadioButton = ({isChecked, onPress}: IProps) => {
-  const {colors} = useTheme();
+const AnimatedRadioButton = ({ isChecked, onPress }: IProps) => {
+  const { colors } = useTheme();
   const scall = useSharedValue(1);
   const anim = useDerivedValue(() => {
     return withTiming(isChecked ? 1 : 0);
@@ -28,7 +28,7 @@ const AnimatedRadioButton = ({isChecked, onPress}: IProps) => {
 
   const animStyle = useAnimatedStyle(() => {
     return {
-      transform: [{scale: scall.value}],
+      transform: [{ scale: scall.value }],
       backgroundColor: interpolateColor(
         anim.value,
         [0, 1],
@@ -52,7 +52,8 @@ const AnimatedRadioButton = ({isChecked, onPress}: IProps) => {
       onPressOut={() => {
         scall.value = withSpring(1);
       }}
-      style={[styles.container, animStyle]}>
+      style={[styles.container, animStyle]}
+    >
       <Svg width={16} height={16} fill="none">
         <Path
           fill="#fff"

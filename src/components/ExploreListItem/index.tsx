@@ -1,14 +1,14 @@
-import { Image, Pressable, Text, View } from 'react-native';
-import React, { useMemo } from 'react';
+import { Image, Pressable, Text, View } from "react-native";
+import React, { useMemo } from "react";
 
-import { useNavigation, useTheme } from '@react-navigation/native';
+import { useNavigation, useTheme } from "@react-navigation/native";
 
-import { textStyles } from '@/styles';
-import { StarFillIcon } from '@/assets';
-import { getRandomImage } from '@/utils';
-import styles from './styles';
-import type { ICourse } from '@/typings/types';
-import Routes from '@/navigation/Routes';
+import { textStyles } from "@/styles";
+import { StarFillIcon } from "@/assets";
+import { getRandomImage } from "@/utils";
+import styles from "./styles";
+import type { ICourse } from "@/typings/types";
+import Routes from "@/navigation/Routes";
 
 interface ExploreListItemProps extends ICourse {
   index: number;

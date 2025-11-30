@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import React, { useCallback, useMemo, useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import {
   AppButton,
   AppTextInput,
@@ -9,7 +9,7 @@ import {
 } from "@/components";
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
-import { extractFirstErrors } from "@/utils";
+import { zodErrorSimplify } from "@/utils";
 import { ZodError } from "zod";
 import { CreateNewCourseStackScreenProps } from "@/typings/navigation";
 import Routes from "@/navigation/Routes";
@@ -43,9 +43,9 @@ const CourseOverview = ({
 
   const levelOptionSheetRef = useRef<BottomSheetModal>(null);
 
-  const isAllFiledEnter = useMemo(() => {
-    return title && shortDescription && !!promoVideo && !!coverImg && level;
-  }, [title, shortDescription, promoVideo, coverImg, level]);
+  // const _isAllFiledEnter = useMemo(() => {
+  //   return title && shortDescription && !!promoVideo && !!coverImg && level;
+  // }, [title, shortDescription, promoVideo, coverImg, level]);
 
   const onNextBtnPress = useCallback(() => {
     try {
@@ -60,11 +60,11 @@ const CourseOverview = ({
       navigation.navigate(Routes.CourseCurriculum);
     } catch (error) {
       if (error instanceof ZodError) {
-        const validationErrors = extractFirstErrors(error);
+        const validationErrors = zodErrorSimplify(error);
         setErrors(validationErrors);
       }
     }
-  }, [coverImg, level, navigation, promoVideo, shortDescription, title]);
+  }, [navigation]);
 
   return (
     <KeyboardAwareScrollView

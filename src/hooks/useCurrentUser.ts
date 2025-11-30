@@ -7,7 +7,7 @@ const useCurrentUser = (
   queryConfig: Omit<
     UseQueryOptions<UserProfile | null>,
     "queryKey" | "select"
-  > = {}
+  > = {},
 ) => {
   const { session } = useAuth();
   const isFocused = useIsFocused();

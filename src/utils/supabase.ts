@@ -27,7 +27,7 @@ export const supabase = createClient(
       detectSessionInUrl: false,
       lock: processLock,
     },
-  }
+  },
 );
 
 // Tells Supabase Auth to continuously refresh the session automatically

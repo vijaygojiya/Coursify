@@ -1,5 +1,5 @@
-import {textStyles} from '@/styles';
-import {StyleSheet} from 'react-native';
+import { textStyles } from "@/styles";
+import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
@@ -22,15 +22,15 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     borderWidth: 1.5,
     borderRadius: 8,
-    borderStyle: 'dashed',
+    borderStyle: "dashed",
   },
   error: {
     ...textStyles.bodySmall,
     marginTop: 4,
   },
   fileContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     columnGap: 6,
     marginHorizontal: 28,
   },

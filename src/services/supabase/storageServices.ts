@@ -4,7 +4,7 @@ import mime from "mime";
 
 export async function uploadAvatarSimple(
   userId: string,
-  file: ImagePicker.ImagePickerAsset
+  file: ImagePicker.ImagePickerAsset,
 ) {
   try {
     const mimeType = file.mimeType ?? mime.getType(file.uri) ?? "image/jpeg";

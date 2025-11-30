@@ -38,11 +38,13 @@ const Placeholders = {
 
 const inputConfigs: inputKeys[] = Object.keys(defaultValue) as inputKeys[];
 
+type IError = Record<inputKeys, string>;
+
 const Login = ({ navigation }: AppScreenProps<"Login">) => {
   const [isSecureTextEntry, setSecureTextEntry] = useState(true);
 
   const [inputs, setInputs] = useState(defaultValue);
-  const [errors, setErrors] = useState(defaultValue);
+  const [errors, setErrors] = useState<Partial<IError>>({});
 
   const { bottom, top } = useSafeAreaInsets();
   const { colors } = useTheme();
@@ -67,7 +69,7 @@ const Login = ({ navigation }: AppScreenProps<"Login">) => {
       mutate(inputs);
     } catch (error) {
       if (error instanceof ZodError) {
-        const validationErrors = zodErrorSimplify<typeof defaultValue>(error);
+        const validationErrors = zodErrorSimplify(error);
         setErrors(validationErrors);
       }
     }
@@ -81,7 +83,7 @@ const Login = ({ navigation }: AppScreenProps<"Login">) => {
         handleSubmit();
       }
     },
-    [handleSubmit]
+    [handleSubmit],
   );
 
   const handleDontHaveAccount = useCallback(() => {
@@ -186,7 +188,7 @@ const Login = ({ navigation }: AppScreenProps<"Login">) => {
         onPress={handleDontHaveAccount}
       >
         <Text style={[styles.footerText, { color: colors.text }]}>
-          Don't have an account?{"  "}
+          Don&apos;t have an account?{"  "}
           <Text style={[styles.createAccountText, { color: colors.primary }]}>
             create new account.
           </Text>

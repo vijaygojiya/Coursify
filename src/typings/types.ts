@@ -4,9 +4,9 @@ export interface IUser {
   name: string;
   profileImg?: string;
   bio?: string;
-  role: 'instructor' | 'student';
+  role: "instructor" | "student";
   rating?: number;
-  interest: Array<string>;
+  interest: string[];
 }
 
 export interface Lesson {

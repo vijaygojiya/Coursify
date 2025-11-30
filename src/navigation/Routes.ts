@@ -1,22 +1,22 @@
 const Routes = Object.freeze({
   //Auth
-  Onboarding: 'Onboarding',
-  Login: 'Login',
-  SignUp: 'SignUp',
-  Dashboard: 'Dashboard',
+  Onboarding: "Onboarding",
+  Login: "Login",
+  SignUp: "SignUp",
+  Dashboard: "Dashboard",
 
-  Explore: 'Explore',
-  Search: 'Search',
-  Learn: 'Learn',
-  Settings: 'Settings',
+  Explore: "Explore",
+  Search: "Search",
+  Learn: "Learn",
+  Settings: "Settings",
 
-  CourseList: 'CourseList',
-  EditProfile: 'EditProfile',
+  CourseList: "CourseList",
+  EditProfile: "EditProfile",
 
   //instructor routes
-  AddNewCourse: 'AddNewCourse',
-  CourseCurriculum: 'CourseCurriculum',
-  CourseDetail: 'CourseDetail',
+  AddNewCourse: "AddNewCourse",
+  CourseCurriculum: "CourseCurriculum",
+  CourseDetail: "CourseDetail",
 });
 
 export default Routes;

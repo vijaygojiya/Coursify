@@ -1,12 +1,12 @@
-import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { CreateCourseStackParamsList } from '@/typings/navigation';
+import React from "react";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { CreateCourseStackParamsList } from "@/typings/navigation";
 import {
   CourseCurriculumScreen,
   CourseOverviewScreen,
   CoursePreviewScreen,
-} from '@/screens';
-import { CreateCourseProvider } from '@/contexts';
+} from "@/screens";
+import { CreateCourseProvider } from "@/contexts";
 
 const Stack = createNativeStackNavigator<CreateCourseStackParamsList>();
 

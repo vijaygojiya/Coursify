@@ -1,5 +1,5 @@
-import {AppFonts} from '@/styles';
-import {StyleSheet} from 'react-native';
+import { AppFonts } from "@/styles";
+import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
   },
   image: {
     aspectRatio: 16 / 9,
-    width: '100%',
+    width: "100%",
     borderRadius: 8,
   },
   title: {
@@ -19,8 +19,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   footerContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   spacer: {
     flex: 1,

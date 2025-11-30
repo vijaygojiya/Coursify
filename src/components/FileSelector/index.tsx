@@ -36,21 +36,19 @@ const FileSelector = ({
     }
     isOpeningGallery.current = true;
     try {
-      const finalOptions = {
-        cropperToolbarColor: colors.primaryMain,
-        cropperToolbarWidgetColor: colors.neutral10,
-        cropperActiveWidgetColor: colors.neutral10,
-        ...options,
-      };
-      const result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ["images", "videos"],
-        allowsEditing: true,
-        aspect: [1, 1],
-        quality: 1,
-      });
-
+      // const finalOptions = {
+      //   cropperToolbarColor: colors.primaryMain,
+      //   cropperToolbarWidgetColor: colors.neutral10,
+      //   cropperActiveWidgetColor: colors.neutral10,
+      //   ...options,
+      // };
+      // const result = await ImagePicker.launchImageLibraryAsync({
+      //   mediaTypes: ["images", "videos"],
+      //   allowsEditing: true,
+      //   aspect: [1, 1],
+      //   quality: 1,
+      // });
       // const item = result.assets[0]
-
       // if (options.mediaType === "video") {
       //   const thumbnail = await getVideoThumbnail(selectedImageAsset.path);
       //   console.log("==>", thumbnail);
@@ -63,7 +61,7 @@ const FileSelector = ({
     } finally {
       isOpeningGallery.current = false;
     }
-  }, [colors.neutral10, colors.primaryMain, onFileSelected, options]);
+  }, []);
 
   return (
     <Pressable

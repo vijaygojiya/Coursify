@@ -1,10 +1,10 @@
-import {IUser} from './types';
+import { IUser } from "./types";
 
 export interface ILesson {
   id: string;
   title: string;
   position: number;
-  contentType: 'video';
+  contentType: "video";
   videoUrl: string;
   thumbnail: string;
   duration: number;
@@ -12,18 +12,18 @@ export interface ILesson {
 
 export interface IModule {
   title: string;
-  lessons: Array<ILesson>;
+  lessons: ILesson[];
 }
 
 export interface ICourse {
   title: string;
-  status: 'draft' | 'published' | 'archived';
+  status: "draft" | "published" | "archived";
   description: string;
   category: string;
-  level: 'beginner' | 'intermediate' | 'advanced';
+  level: "beginner" | "intermediate" | "advanced";
   isFree: boolean;
   thumbnailUrl?: string;
-  modules: Array<IModule>;
+  modules: IModule[];
 }
 
 interface IReview {
@@ -33,9 +33,9 @@ interface IReview {
 }
 
 export interface TCourse {
-  instructor: Omit<IUser, 'role'> & {role: 'instructor'};
+  instructor: Omit<IUser, "role"> & { role: "instructor" };
   avgRating: number;
-  reviews: Array<IReview>;
+  reviews: IReview[];
   isFav: boolean;
   isEnrolled: boolean;
 }

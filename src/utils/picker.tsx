@@ -1,39 +1,41 @@
-import ExpoImageCropTool, {type OpenCropperOptions} from 'expo-image-crop-tool'
-import {type ImagePickerOptions, launchCameraAsync} from 'expo-image-picker'
+import ExpoImageCropTool, {
+  type OpenCropperOptions,
+} from "expo-image-crop-tool";
+import { type ImagePickerOptions, launchCameraAsync } from "expo-image-picker";
 
 export {
   openPicker,
   openUnifiedPicker,
   type PickerImage as RNImage,
-} from './picker.shared'
+} from "./picker.shared";
 
 export async function openCamera(customOpts: ImagePickerOptions) {
   const opts: ImagePickerOptions = {
-    mediaTypes: 'images',
+    mediaTypes: "images",
     ...customOpts,
-  }
-  const res = await launchCameraAsync(opts)
+  };
+  const res = await launchCameraAsync(opts);
 
   if (!res || !res.assets) {
-    throw new Error('Camera was closed before taking a photo')
+    throw new Error("Camera was closed before taking a photo");
   }
 
-  const asset = res?.assets[0]
+  const asset = res?.assets[0];
 
   return {
     path: asset.uri,
-    mime: asset.mimeType ?? 'image/jpeg',
+    mime: asset.mimeType ?? "image/jpeg",
     size: asset.fileSize ?? 0,
     width: asset.width,
     height: asset.height,
-  }
+  };
 }
 
 export async function openCropper(opts: OpenCropperOptions) {
   const item = await ExpoImageCropTool.openCropperAsync({
     ...opts,
-    format: 'jpeg',
-  })
+    format: "jpeg",
+  });
 
   return {
     path: item.path,
@@ -41,5 +43,5 @@ export async function openCropper(opts: OpenCropperOptions) {
     size: item.size,
     width: item.width,
     height: item.height,
-  }
+  };
 }

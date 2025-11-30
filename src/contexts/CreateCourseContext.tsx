@@ -41,7 +41,7 @@ function CreateCourseProvider({ children }: { children: React.ReactNode }) {
       level,
       setLevel,
     }),
-    [coverImg, level, modules, promoVideo, shortDescription, title]
+    [coverImg, level, modules, promoVideo, shortDescription, title],
   );
 
   return (
@@ -57,7 +57,7 @@ export function useCreateCourseState() {
   const context = React.useContext(CreateCourseContext);
   if (!context) {
     throw new Error(
-      "useCreateCourseState must be used within a useCreateCourseState"
+      "useCreateCourseState must be used within a useCreateCourseState",
     );
   }
   return context;

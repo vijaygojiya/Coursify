@@ -1,10 +1,10 @@
-import {AppFonts} from '@/styles';
-import {StyleSheet} from 'react-native';
+import { AppFonts } from "@/styles";
+import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     columnGap: 8,
     paddingVertical: 16,
     borderBottomWidth: StyleSheet.hairlineWidth,

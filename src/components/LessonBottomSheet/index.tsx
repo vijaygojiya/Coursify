@@ -28,7 +28,7 @@ const LessonBottomSheet = forwardRef<
       moduleData: {
         moduleTitle: string;
         moduleId: string;
-      }
+      },
     ) => void;
   }
 >(({ onSave }, ref) => {
@@ -71,7 +71,7 @@ const LessonBottomSheet = forwardRef<
         {
           moduleTitle: moduleTitle,
           moduleId: moduleId.current ?? getUniqueId(),
-        }
+        },
       );
     }
     bottomSheetRef.current?.close();
@@ -79,7 +79,7 @@ const LessonBottomSheet = forwardRef<
 
   const renderHandle = useCallback(
     () => <AppSheetHandleComponent title="Add new lesson" />,
-    []
+    [],
   );
 
   const onChange = useCallback((index: number) => {
@@ -133,4 +133,5 @@ const LessonBottomSheet = forwardRef<
   );
 });
 
+LessonBottomSheet.displayName = "LessonBottomSheet";
 export default LessonBottomSheet;

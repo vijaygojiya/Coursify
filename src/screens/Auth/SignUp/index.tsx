@@ -95,7 +95,7 @@ const SignUp = ({ navigation }: AppScreenProps<"SignUp">) => {
         handleSubmit();
       }
     },
-    [handleSubmit]
+    [handleSubmit],
   );
 
   const handelAlreadyHaveAccount = useCallback(() => {

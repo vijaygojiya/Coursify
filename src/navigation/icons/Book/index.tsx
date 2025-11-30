@@ -1,24 +1,23 @@
-
-import { BookOpenFillIcon } from '@/assets';
-import React from 'react';
+import { BookOpenFillIcon } from "@/assets";
+import React from "react";
 import Animated, {
   useAnimatedStyle,
   useDerivedValue,
   withSpring,
-} from 'react-native-reanimated';
+} from "react-native-reanimated";
 
 interface Props {
   focused: boolean;
   color?: string;
 }
 
-function BookIcon({color = '#001A72', focused, ...rest}: Props) {
+function BookIcon({ color = "#001A72", focused, ...rest }: Props) {
   const sv = useDerivedValue(() => {
     return focused ? withSpring(180) : 0;
   });
 
   const animatedStyle = useAnimatedStyle(() => ({
-    transform: [{rotateY: `${sv.value}deg`}],
+    transform: [{ rotateY: `${sv.value}deg` }],
   }));
 
   return (

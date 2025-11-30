@@ -8,10 +8,9 @@ import {
   View,
 } from "react-native";
 import { useTheme } from "@react-navigation/native";
-import { Collapsible } from 'react-native-fast-collapsible';
+import { Collapsible } from "react-native-fast-collapsible";
 
-
-import { CreateNewCourseStackScreenProps } from "@/typings/navigation";
+// import { CreateNewCourseStackScreenProps } from "@/typings/navigation";
 import {
   ActionButton,
   AnimatedChevron,
@@ -173,8 +172,10 @@ const ModuleHeader = React.memo(
         </View>
       </Pressable>
     );
-  }
+  },
 );
+
+ModuleHeader.displayName = "ModuleHeader";
 
 const LessonList = React.memo(
   ({
@@ -216,146 +217,147 @@ const LessonList = React.memo(
         </>
       </Collapsible>
     );
-  }
+  },
 );
 
-const CourseCurriculum =
-  ({}: CreateNewCourseStackScreenProps<"CourseCurriculum">) => {
-    const { modules, setModules } = useCreateCourseState();
-    const lessonBottomSheetRef = useRef<LessonBottomSheetRef | null>(null);
+LessonList.displayName = "LessonList";
 
-    const deleteModule = useCallback(
-      (moduleId: string) => {
-        setModules((prev) => prev.filter((m) => m.id !== moduleId));
-      },
-      [setModules]
-    );
+const CourseCurriculum = () => {
+  const { modules, setModules } = useCreateCourseState();
+  const lessonBottomSheetRef = useRef<LessonBottomSheetRef | null>(null);
 
-    const toggleCollapse = useCallback(
-      (moduleId: string) => {
-        setModules((prev) =>
-          prev.map((m) =>
-            m.id === moduleId ? { ...m, collapsed: !m.collapsed } : m
-          )
-        );
-      },
-      [setModules]
-    );
+  const deleteModule = useCallback(
+    (moduleId: string) => {
+      setModules((prev) => prev.filter((m) => m.id !== moduleId));
+    },
+    [setModules],
+  );
 
-    const addLesson = (
-      newLesson: ILocalLesson,
-      { moduleId, moduleTitle }: { moduleId: string; moduleTitle: string }
-    ) => {
-      setModules((prevModules) => {
-        // Copy previous modules to avoid mutation
-        const tempModules = [...prevModules];
-        const moduleIndex = tempModules.findIndex((m) => m.id === moduleId);
+  const toggleCollapse = useCallback(
+    (moduleId: string) => {
+      setModules((prev) =>
+        prev.map((m) =>
+          m.id === moduleId ? { ...m, collapsed: !m.collapsed } : m,
+        ),
+      );
+    },
+    [setModules],
+  );
 
-        // If module exists
-        if (moduleIndex !== -1) {
-          const module = tempModules[moduleIndex];
-          const lessons = [...module.lessons];
-          const lessonIndex = lessons.findIndex((l) => l.id === newLesson.id);
+  const addLesson = (
+    newLesson: ILocalLesson,
+    { moduleId, moduleTitle }: { moduleId: string; moduleTitle: string },
+  ) => {
+    setModules((prevModules) => {
+      // Copy previous modules to avoid mutation
+      const tempModules = [...prevModules];
+      const moduleIndex = tempModules.findIndex((m) => m.id === moduleId);
 
-          if (lessonIndex !== -1) {
-            // Update existing lesson
-            lessons[lessonIndex] = { ...lessons[lessonIndex], ...newLesson };
-          } else {
-            // Add new lesson
-            lessons.push(newLesson);
-          }
+      // If module exists
+      if (moduleIndex !== -1) {
+        const module = tempModules[moduleIndex];
+        const lessons = [...module.lessons];
+        const lessonIndex = lessons.findIndex((l) => l.id === newLesson.id);
 
-          // Update module title and lessons
-          tempModules[moduleIndex] = {
-            ...module,
-            title: moduleTitle,
-            lessons,
-            collapsed: false,
-          };
-
-          return tempModules;
+        if (lessonIndex !== -1) {
+          // Update existing lesson
+          lessons[lessonIndex] = { ...lessons[lessonIndex], ...newLesson };
+        } else {
+          // Add new lesson
+          lessons.push(newLesson);
         }
 
-        // If module doesn't exist, create it with the new lesson
-        return [
-          ...tempModules,
-          {
-            id: moduleId,
-            title: moduleTitle,
-            lessons: [newLesson],
-            collapsed: true,
-          },
-        ];
-      });
-    };
+        // Update module title and lessons
+        tempModules[moduleIndex] = {
+          ...module,
+          title: moduleTitle,
+          lessons,
+          collapsed: false,
+        };
 
-    const renderModuleItem = useCallback(
-      ({ item: module }: { item: ILocalModule; index: number }) => {
-        const totalDuration = module.lessons.reduce(
-          (sum, l) => sum + Number(l.video.duration || 0),
-          0
-        );
+        return tempModules;
+      }
 
-        return (
-          <View key={module.id} style={styles.card}>
-            <ModuleHeader
-              title={module.title}
-              totalDuration={totalDuration}
-              totalLessons={module.lessons.length}
-              collapsed={module.collapsed}
-              onTrashIconPress={() => deleteModule(module.id)}
-              onPlusIconPress={() =>
-                lessonBottomSheetRef.current?.present({
-                  title: module.title,
-                  id: module.id,
-                })
-              }
-              toggleCollapse={() => toggleCollapse(module.id)}
-            />
-            <LessonList
-              collapsed={module.collapsed}
-              lessons={module.lessons}
-              onEditPress={(les) => {
-                lessonBottomSheetRef.current?.present(
-                  { title: module.title, id: module.id },
-                  les
-                );
-              }}
-            />
-          </View>
-        );
-      },
-      [deleteModule, toggleCollapse]
-    );
+      // If module doesn't exist, create it with the new lesson
+      return [
+        ...tempModules,
+        {
+          id: moduleId,
+          title: moduleTitle,
+          lessons: [newLesson],
+          collapsed: true,
+        },
+      ];
+    });
+  };
 
-    return (
-      <View style={styles.container}>
-        <FlatList
-          data={modules}
-          renderItem={renderModuleItem}
-          keyExtractor={(item) => item.id}
-          bounces={false}
-          overScrollMode="never"
-          contentContainerStyle={styles.listContainer}
-          showsVerticalScrollIndicator={false}
-        />
-        <View style={styles.buttonRow}>
-          <AppButton
-            containerStyle={styles.spacer}
-            title="Add Module"
-            onPress={() => lessonBottomSheetRef.current?.present()}
+  const renderModuleItem = useCallback(
+    ({ item: module }: { item: ILocalModule; index: number }) => {
+      const totalDuration = module.lessons.reduce(
+        (sum, l) => sum + Number(l.video.duration || 0),
+        0,
+      );
+
+      return (
+        <View key={module.id} style={styles.card}>
+          <ModuleHeader
+            title={module.title}
+            totalDuration={totalDuration}
+            totalLessons={module.lessons.length}
+            collapsed={module.collapsed}
+            onTrashIconPress={() => deleteModule(module.id)}
+            onPlusIconPress={() =>
+              lessonBottomSheetRef.current?.present({
+                title: module.title,
+                id: module.id,
+              })
+            }
+            toggleCollapse={() => toggleCollapse(module.id)}
           />
-          <AppButton
-            isOutlined
-            containerStyle={styles.spacer}
-            disabled={modules.length === 0}
-            title="Next"
+          <LessonList
+            collapsed={module.collapsed}
+            lessons={module.lessons}
+            onEditPress={(les) => {
+              lessonBottomSheetRef.current?.present(
+                { title: module.title, id: module.id },
+                les,
+              );
+            }}
           />
         </View>
-        <LessonBottomSheet ref={lessonBottomSheetRef} onSave={addLesson} />
+      );
+    },
+    [deleteModule, toggleCollapse],
+  );
+
+  return (
+    <View style={styles.container}>
+      <FlatList
+        data={modules}
+        renderItem={renderModuleItem}
+        keyExtractor={(item) => item.id}
+        bounces={false}
+        overScrollMode="never"
+        contentContainerStyle={styles.listContainer}
+        showsVerticalScrollIndicator={false}
+      />
+      <View style={styles.buttonRow}>
+        <AppButton
+          containerStyle={styles.spacer}
+          title="Add Module"
+          onPress={() => lessonBottomSheetRef.current?.present()}
+        />
+        <AppButton
+          isOutlined
+          containerStyle={styles.spacer}
+          disabled={modules.length === 0}
+          title="Next"
+        />
       </View>
-    );
-  };
+      <LessonBottomSheet ref={lessonBottomSheetRef} onSave={addLesson} />
+    </View>
+  );
+};
 
 export default CourseCurriculum;
 

@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from "react-native";
 
 const containerWith = 70;
 const indicatorWidth = containerWith / 3;
@@ -11,22 +11,22 @@ const styles = StyleSheet.create({
   itemContainer: {
     paddingHorizontal: 10,
     height: 166,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   itemImage: {
-    height: '100%',
-    width: '100%',
+    height: "100%",
+    width: "100%",
     borderRadius: 12,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   indicatorContainer: {
     width: containerWith,
     height: 5,
     borderRadius: 18,
-    alignSelf: 'center',
+    alignSelf: "center",
   },
   indicator: {
-    height: '100%',
+    height: "100%",
     width: indicatorWidth,
     borderRadius: 8,
   },

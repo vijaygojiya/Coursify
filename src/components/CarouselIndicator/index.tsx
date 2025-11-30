@@ -1,17 +1,21 @@
-import React from 'react';
+import React from "react";
 import Animated, {
   Extrapolation,
   SharedValue,
   interpolate,
   useAnimatedStyle,
-} from 'react-native-reanimated';
-import styles from './styles';
-import {useTheme} from '@react-navigation/native';
+} from "react-native-reanimated";
+import styles from "./styles";
+import { useTheme } from "@react-navigation/native";
 
 const containerWith = 70;
 
-const CarouselIndicator = ({animatedX}: {animatedX: SharedValue<number>}) => {
-  const {colors} = useTheme();
+const CarouselIndicator = ({
+  animatedX,
+}: {
+  animatedX: SharedValue<number>;
+}) => {
+  const { colors } = useTheme();
   const anim = useAnimatedStyle(() => {
     return {
       transform: [
@@ -29,9 +33,14 @@ const CarouselIndicator = ({animatedX}: {animatedX: SharedValue<number>}) => {
 
   return (
     <Animated.View
-      style={[styles.indicatorContainer, {backgroundColor: colors.neutral50}]}>
+      style={[styles.indicatorContainer, { backgroundColor: colors.neutral50 }]}
+    >
       <Animated.View
-        style={[styles.indicator, {backgroundColor: colors.primaryPressed}, anim]}
+        style={[
+          styles.indicator,
+          { backgroundColor: colors.primaryPressed },
+          anim,
+        ]}
       />
     </Animated.View>
   );

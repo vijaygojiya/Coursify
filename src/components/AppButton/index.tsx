@@ -6,10 +6,10 @@ import {
   Text,
   TextStyle,
   ViewStyle,
-} from 'react-native';
-import React, {FC} from 'react';
-import styles from './styles';
-import {useTheme} from '@react-navigation/native';
+} from "react-native";
+import React, { FC } from "react";
+import styles from "./styles";
+import { useTheme } from "@react-navigation/native";
 
 interface AppButtonProps extends PressableProps {
   title: string;
@@ -20,7 +20,7 @@ interface AppButtonProps extends PressableProps {
 }
 
 const AppButton: FC<AppButtonProps> = ({
-  title = '',
+  title = "",
   isLoading = false,
   disabled,
   containerStyle = {},
@@ -28,7 +28,7 @@ const AppButton: FC<AppButtonProps> = ({
   isOutlined = false,
   ...rest
 }) => {
-  const {colors} = useTheme();
+  const { colors } = useTheme();
 
   return (
     <Pressable
@@ -42,7 +42,8 @@ const AppButton: FC<AppButtonProps> = ({
         },
         isOutlined ? styles.outlineContainer : {},
         containerStyle,
-      ]}>
+      ]}
+    >
       {isLoading ? (
         <ActivityIndicator
           size={20}
@@ -52,9 +53,10 @@ const AppButton: FC<AppButtonProps> = ({
         <Text
           style={[
             styles.title,
-            {color: isOutlined ? colors.primary : colors.neutral10},
+            { color: isOutlined ? colors.primary : colors.neutral10 },
             titleStyle,
-          ]}>
+          ]}
+        >
           {title}
         </Text>
       )}

@@ -21,7 +21,7 @@ function AuthContextProvider({ children }: { children: React.ReactNode }) {
     () => ({
       session,
     }),
-    [session]
+    [session],
   );
 
   return <AuthContext value={value}>{children}</AuthContext>;

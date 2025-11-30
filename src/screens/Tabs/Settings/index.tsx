@@ -1,79 +1,77 @@
-import { Alert, FlatList, StyleSheet, Text, View } from 'react-native';
-import React from 'react';
-import { useTheme } from '@react-navigation/native';
+import { Alert, FlatList, StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { useTheme } from "@react-navigation/native";
 
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { FullScreenLoader, SettingHeader, SettingItem } from '@/components';
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { FullScreenLoader, SettingHeader, SettingItem } from "@/components";
 
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { BottomTabScreensProps } from '@/typings/navigation';
-import {
-  deleteCurrentUser,
-  deleteUser,
-  fireAuth,
-  signOut,
-} from '@/services/supabase';
-import { AppFonts } from '@/styles';
-import { SVGsNames } from '@/typings/common';
-import { storage } from '@/utils/persister';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { BottomTabScreensProps } from "@/typings/navigation";
+import { signOut } from "@/services/supabase";
+import { AppFonts } from "@/styles";
+import { SVGsNames } from "@/typings/common";
+import { storage } from "@/utils/persister";
 
-const settingsListItems: Array<{
+const settingsListItems: {
   title: string;
   icon: SVGsNames;
   isLogout?: boolean;
   isDelete?: boolean;
   hideArrow?: boolean;
-}> = [
+}[] = [
   {
-    title: 'Notifications',
-    icon: 'NotificationIcon',
+    title: "Notifications",
+    icon: "NotificationIcon",
   },
 
   {
-    title: 'Download Settings',
-    icon: 'DownloadIcon',
+    title: "Download Settings",
+    icon: "DownloadIcon",
   },
   {
-    title: 'Change Language',
-    icon: 'GlobeIcon',
+    title: "Change Language",
+    icon: "GlobeIcon",
   },
   {
-    title: 'Privacy Policy',
-    icon: 'Lock2Icon',
+    title: "Privacy Policy",
+    icon: "Lock2Icon",
   },
   {
-    title: 'Terms and Conditions',
-    icon: 'DocCheckIcon',
+    title: "Terms and Conditions",
+    icon: "DocCheckIcon",
   },
 
   {
-    title: 'Report a Bug',
-    icon: 'WarningCircleIcon',
+    title: "Report a Bug",
+    icon: "WarningCircleIcon",
   },
   {
-    title: 'Send Feedback',
-    icon: 'CommentIcon',
+    title: "Send Feedback",
+    icon: "CommentIcon",
   },
   {
-    title: 'Delete Account',
-    icon: 'TrashIcon',
+    title: "Delete Account",
+    icon: "TrashIcon",
     isDelete: true,
     hideArrow: true,
   },
   {
-    title: 'Logout',
-    icon: 'LogoutIcon',
+    title: "Logout",
+    icon: "LogoutIcon",
     isLogout: true,
     hideArrow: true,
   },
 ];
 
-const Setting = ({}: BottomTabScreensProps<'Settings'>) => {
+const Setting = (_: BottomTabScreensProps<"Settings">) => {
   const { top } = useSafeAreaInsets();
   const { mutate, isPending } = useMutation({
-    mutationFn: deleteUser,
+    mutationFn: () => {
+      //TO:DO
+      return Promise.resolve(true);
+    },
     onSuccess: () => {
-      deleteCurrentUser();
+      // deleteCurrentUser();
       queryClient.removeQueries();
       storage.clearAll();
     },
@@ -87,28 +85,28 @@ const Setting = ({}: BottomTabScreensProps<'Settings'>) => {
     isLogout,
   }: (typeof settingsListItems)[number]) => {
     if (isLogout) {
-      Alert.alert('', 'Are you sure want to logout!', [
+      Alert.alert("", "Are you sure want to logout!", [
         {
-          text: 'Yes',
+          text: "Yes",
           onPress: () => {
             signOut();
             queryClient.removeQueries();
             storage.clearAll();
           },
         },
-        { text: 'No' },
+        { text: "No" },
       ]);
       return;
     }
     if (isDelete) {
-      Alert.alert('', 'Are you sure want to delete your account!', [
+      Alert.alert("", "Are you sure want to delete your account!", [
         {
-          text: 'Yes',
+          text: "Yes",
           onPress: () => {
             mutate();
           },
         },
-        { text: 'No' },
+        { text: "No" },
       ]);
       return;
     }
@@ -165,6 +163,6 @@ const styles = StyleSheet.create({
     marginTop: 48,
     fontFamily: AppFonts.regular,
     fontSize: 12,
-    alignSelf: 'center',
+    alignSelf: "center",
   },
 });

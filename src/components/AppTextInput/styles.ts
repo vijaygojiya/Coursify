@@ -1,5 +1,5 @@
-import {textStyles} from '@/styles';
-import {StyleSheet} from 'react-native';
+import { textStyles } from "@/styles";
+import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
@@ -19,8 +19,8 @@ const styles = StyleSheet.create({
   },
   rowContainer: {
     paddingHorizontal: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     borderWidth: 1,
     borderRadius: 8,
   },

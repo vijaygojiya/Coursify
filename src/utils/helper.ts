@@ -1,29 +1,21 @@
-import { ZodError } from "zod";
+import * as z from "zod";
 import { randomCourseImage, randomUserImage } from "./constant";
 import * as VideoThumbnails from "expo-video-thumbnails";
 
 import { v4 as uuidv4 } from "uuid";
 
-export const zodErrorSimplify = <T>(error: ZodError) => {
-  const errors = error.errors
-    .map((err) => {
-      return {
-        field: err.path.join("."),
-      };
-    })
-    .reduce((acc, curr, idx) => {
-      const acct = acc as T;
-      const field = curr.field as T as keyof T;
-      const isAlreadyHaveError = Boolean(acct?.[field]);
-      if (isAlreadyHaveError) {
-        return acc;
-      }
-      return {
-        ...acc,
-        [field]: `${error.errors[idx]?.message ?? ""}`,
-      };
-    }, {});
-  return errors as T;
+export const zodErrorSimplify = <T>(error: z.ZodError<T>) => {
+  const flattened = z.flattenError(error);
+  const simplified: Partial<Record<keyof T, string>> = {};
+
+  for (const key in flattened.fieldErrors) {
+    const messages = flattened.fieldErrors[key];
+    if (messages && messages.length > 0) {
+      simplified[key as keyof T] = messages[0]; // take first error
+    }
+  }
+
+  return simplified;
 };
 
 export const getFirstName = (fullName?: string | null) => {
@@ -40,32 +32,6 @@ export const getRandomImage = (index: number) => {
 export const getRandomUserImage = (index: number) => {
   return randomUserImage + "?" + Date.now() + index;
 };
-
-export function extractFirstErrors(error: ZodError): Record<string, string> {
-  console.log("error", error);
-  const fieldErrors = error.formErrors.fieldErrors;
-
-  const result: Record<string, string> = {};
-
-  for (const key in fieldErrors) {
-    const value = fieldErrors[key];
-
-    if (Array.isArray(value) && value.length) {
-      // Direct error on the field
-      result[key] = value[0];
-    } else if (typeof value === "object" && value !== null) {
-      // Nested error, get first nested error
-      for (const nestedKey in value) {
-        if (Array.isArray(value[nestedKey]) && value[nestedKey].length) {
-          result[key] = value[nestedKey][0];
-          break;
-        }
-      }
-    }
-  }
-
-  return result;
-}
 
 export const getVideoThumbnail = (url: string, timeStamp = 10000) => {
   return VideoThumbnails.getThumbnailAsync(url, { time: timeStamp });

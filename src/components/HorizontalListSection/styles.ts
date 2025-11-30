@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   listContainer: {
@@ -11,13 +11,13 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     paddingStart: 18,
     paddingEnd: 8,
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
-  titleContainer: {flex: 1},
+  titleContainer: { flex: 1 },
   seeAllContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
 });
 
